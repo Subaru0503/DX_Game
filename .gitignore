@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.idb
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -17,11 +18,13 @@
 mono_crash.*
 
 # Build results
-[Dd]ebug/
+[Dd]ebug/*
+!Debug/DirectXTex.lib
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
-x64/
+x64/*
+!x64/Debug/DirectXTex.lib
 x86/
 [Ww][Ii][Nn]32/
 [Aa][Rr][Mm]/
