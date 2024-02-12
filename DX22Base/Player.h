@@ -39,6 +39,8 @@ public:
 
 	// 現在地の取得
 	DirectX::XMFLOAT3 GetPos();
+	// 過去座標の取得
+	DirectX::XMFLOAT3 GetOldPos();
 	// プレイヤーの中心座標取得
 	DirectX::XMFLOAT3 GetCenterPos();
 	// プレイヤーのサイズ取得

@@ -171,6 +171,18 @@
     <ClCompile Include="Collision.cpp">
       <Filter>ソース ファイル\System\Coolision</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionArea.cpp">
+      <Filter>ソース ファイル\System\Coolision\AreaCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="AreaGround.cpp">
+      <Filter>ソース ファイル\System\Coolision\AreaCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="AreaWall.cpp">
+      <Filter>ソース ファイル\System\Coolision\AreaCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionAreaManager.cpp">
+      <Filter>ソース ファイル\System\Coolision\AreaCollision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h">
@@ -256,6 +268,18 @@
     </ClInclude>
     <ClInclude Include="ScenePreArea.h">
       <Filter>ヘッダー ファイル\App\Scene\PreArea</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionArea.h">
+      <Filter>ヘッダー ファイル\System\Collision\AreaCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="AreaGround.h">
+      <Filter>ヘッダー ファイル\System\Collision\AreaCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="AreaWall.h">
+      <Filter>ヘッダー ファイル\System\Collision\AreaCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionAreaManager.h">
+      <Filter>ヘッダー ファイル\System\Collision\AreaCollision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

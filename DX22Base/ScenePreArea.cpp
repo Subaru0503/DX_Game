@@ -20,10 +20,6 @@
 CScenePreArea::CScenePreArea()
 	: m_nMainCamera(CAM_PLAYER)
 {
-	// ステージ座標
-	m_StagePos = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
-	// ステージサイズ
-	m_StageSize = DirectX::XMFLOAT3(20.0f, 2.0f, 40.0f);
 
 	// モデル読み込み
 	m_pStageModel = new Model();
@@ -105,14 +101,15 @@ void CScenePreArea::Update(float tick)
 	//		}
 	//	}
 	//}
-	
-	// 床に当たっているか
-	if (Collision::AreaCheckCollision(m_pPlayer->GetCenterPos(), m_StagePos, m_pPlayer->GetSize(), m_StageSize))
-	{
-		m_pPlayer->SetPosY(m_StagePos.y + 0.5f);	// 床の上に戻す
-		m_pPlayer->ResetGravity();	// 重力リセット
-		m_pPlayer->ResetJumpFlg();	// 着地フラグ上げ
-	}
+
+	m_pCollisionAreaMng->Update();
+	//// 床に当たっているか
+	//if (Collision::AreaCheckCollision(m_pPlayer->GetCenterPos(), m_StagePos, m_pPlayer->GetSize(), m_StageSize))
+	//{
+	//	m_pPlayer->SetPosY(m_StagePos.y + 0.5f);	// 床の上に戻す
+	//	m_pPlayer->ResetGravity();	// 重力リセット
+	//	m_pPlayer->ResetJumpFlg();	// 着地フラグ上げ
+	//}
 
 	if (m_nMainCamera != CAM_PLAYER) return;
 	m_pCamera[CAM_PLAYER]->Update();
@@ -161,7 +158,7 @@ void CScenePreArea::DrawStage(DirectX::XMFLOAT4X4 *mat, VertexShader* vs)
 		DirectX::XMMatrixRotationX(0.0f) *
 		DirectX::XMMatrixRotationY(0.0f) *
 		DirectX::XMMatrixRotationZ(0.0f) *
-		DirectX::XMMatrixTranslation(m_StagePos.x, m_StagePos.y, m_StagePos.z);
+		DirectX::XMMatrixTranslation(0.0f, 0.0f, 0.0f);
 
 	world = DirectX::XMMatrixTranspose(world);
 	DirectX::XMStoreFloat4x4(&mat[0], world);

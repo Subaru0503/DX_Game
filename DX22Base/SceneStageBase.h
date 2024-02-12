@@ -15,8 +15,10 @@
 #include "Shader.h"
 // ----- オブジェクト -----
 #include "Player.h"
-#include "ItemUI.h"
 #include "Collision.h"
+#include "CollisionAreaManager.h"
+// ----- UI -----
+#include "ItemUI.h"
 
 using namespace std;
 
@@ -38,11 +40,10 @@ protected:
 	// 各ゲームデータ用
 	VertexShader* m_pVS;
 	Player* m_pPlayer;
+	CCollisionAreaMng* m_pCollisionAreaMng;
 	ItemUI* m_pUI;
 	//CObjectMng* m_pObjectMng;
 
-	DirectX::XMFLOAT3 m_StagePos;	// ステージ座標
-	DirectX::XMFLOAT3 m_StageSize;	// ステージサイズ
 	Model* m_pStageModel;		// ステージモデル
 
 };

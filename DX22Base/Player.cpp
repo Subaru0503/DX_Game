@@ -313,6 +313,11 @@ DirectX::XMFLOAT3 Player::GetPos()
 	return m_pos;
 }
 
+DirectX::XMFLOAT3 Player::GetOldPos()	// ‰ß‹À•W‚Ìæ“¾
+{
+	return m_oldpos;
+}
+
 DirectX::XMFLOAT3 Player::GetCenterPos()
 {
 	DirectX::XMFLOAT3 m_centerpos;

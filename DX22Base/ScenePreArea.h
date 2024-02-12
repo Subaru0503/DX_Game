@@ -1,3 +1,5 @@
+
+//----インクルードガード----
 #ifndef __CSCENE_PRE_AREA_H__
 #define __CSCENE_PRE_AREA_H__
 

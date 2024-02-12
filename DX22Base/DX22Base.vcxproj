@@ -169,11 +169,15 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AreaGround.cpp" />
+    <ClCompile Include="AreaWall.cpp" />
     <ClCompile Include="CameraBase.cpp" />
     <ClCompile Include="CameraDebug.cpp" />
     <ClCompile Include="CameraEvent.cpp" />
     <ClCompile Include="CameraPlayer.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="CollisionArea.cpp" />
+    <ClCompile Include="CollisionAreaManager.cpp" />
     <ClCompile Include="DirectX.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Field.cpp" />
@@ -201,11 +205,15 @@
     <ClCompile Include="_model.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AreaGround.h" />
+    <ClInclude Include="AreaWall.h" />
     <ClInclude Include="CameraBase.h" />
     <ClInclude Include="CameraDebug.h" />
     <ClInclude Include="CameraEvent.h" />
     <ClInclude Include="CameraPlayer.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="CollisionArea.h" />
+    <ClInclude Include="CollisionAreaManager.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="DirectX.h" />
     <ClInclude Include="Effect.h" />

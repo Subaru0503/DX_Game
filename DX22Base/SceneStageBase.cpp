@@ -17,6 +17,8 @@ CSceneStageBase::CSceneStageBase()
 
 	// ----- ƒf[ƒ^ì¬ -----
 	m_pPlayer = new Player;
+	m_pCollisionAreaMng = new CCollisionAreaMng;
+	m_pCollisionAreaMng->SetPlayer(m_pPlayer);
 	m_pUI = new ItemUI;
 
 }
@@ -27,5 +29,6 @@ CSceneStageBase::~CSceneStageBase()
 	SAFE_DELETE(m_pVS);
 	SAFE_DELETE(m_pUI);
 	SAFE_DELETE(m_pPlayer);
+	SAFE_DELETE(m_pCollisionAreaMng);
 
 }
