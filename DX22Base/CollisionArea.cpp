@@ -36,6 +36,16 @@ CCollisionArea::areaKind CCollisionArea::GetKind()
 	return m_areakind;
 }
 
+int CCollisionArea::GetNextScene()							// 次のシーン情報を返す
+{
+	return m_nNextScene;
+}
+
+int CCollisionArea::GetSceneChange()	// シーンを遷移するフラグ
+{
+	return m_nSceneChangeFlg;
+}
+
 // ========== SetPlayer ==========
 // 引　数：
 // CPlayer* プレイヤーの実体ポインタ

@@ -11,6 +11,7 @@
 // ========== インクルード部 ==========
 // ----- システム -----
 #include "SceneManager.h"
+#include "CameraBase.h"
 #include "Model.h"
 #include "Shader.h"
 // ----- オブジェクト -----
@@ -27,7 +28,15 @@ using namespace std;
 class CSceneStageBase
 {
 public:
-	CSceneStageBase();
+	enum CameraKind
+	{
+		CAM_PLAYER,
+		CAM_DEBUG,
+		CAM_EVENT,
+		MAX_CAMERA // カメラ最大数
+	};
+public:
+	CSceneStageBase(CSceneMng* pSceneMng, int Stage, DirectX::XMFLOAT3 PlayerPos);
 	virtual ~CSceneStageBase();
 	virtual void Update(float tick) = 0;
 	virtual void Draw() = 0;
@@ -39,12 +48,16 @@ protected:
 
 	// 各ゲームデータ用
 	VertexShader* m_pVS;
+	CameraBase* m_pCamera[MAX_CAMERA];
 	Player* m_pPlayer;
+	CSceneMng* m_pSceneMng;
 	CCollisionAreaMng* m_pCollisionAreaMng;
 	ItemUI* m_pUI;
 	//CObjectMng* m_pObjectMng;
 
 	Model* m_pStageModel;		// ステージモデル
+
+	int m_nMainCamera;	// 現在のカメラ
 
 };
 

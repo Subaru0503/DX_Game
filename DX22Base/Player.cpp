@@ -8,9 +8,9 @@
 #define RADIAN (180.0f / 3.14f)
 #define JUMP (1.0f)
 
-Player::Player()	// コンストラクタ
-	: m_pos(0.0f, 0.0f, 0.0f)
-	, m_oldpos(0.0f, 0.0f, 0.0f)
+Player::Player(DirectX::XMFLOAT3 PlayerPos)	// コンストラクタ
+	: m_pos(PlayerPos)
+	, m_oldpos(PlayerPos)
 	, m_size(0.5f, 2.0f, 0.5f)
 	, m_pCamera(nullptr)
 	, m_pTexture{ nullptr, nullptr }
@@ -122,10 +122,14 @@ void Player::Update()
 	if (!m_nEventFlg)
 	{
 		//----プレイヤー移動処理----
-		if (IsKeyPress('W')) { isMove = true; vMove = DirectX::XMVectorSubtract(vMove, vFront); }
-		if (IsKeyPress('S')) { isMove = true; vMove = DirectX::XMVectorAdd(vMove, vFront); }
-		if (IsKeyPress('D')) { isMove = true; vMove = DirectX::XMVectorSubtract(vMove, vSide); }
-		if (IsKeyPress('A')) { isMove = true; vMove = DirectX::XMVectorAdd(vMove, vSide); }
+		if (IsKeyPress('W')) { 
+			isMove = true; vMove = DirectX::XMVectorSubtract(vMove, vFront); }
+		if (IsKeyPress('S')) { 
+			isMove = true; vMove = DirectX::XMVectorAdd(vMove, vFront); }
+		if (IsKeyPress('D')) { 
+			isMove = true; vMove = DirectX::XMVectorSubtract(vMove, vSide); }
+		if (IsKeyPress('A')) { 
+			isMove = true; vMove = DirectX::XMVectorAdd(vMove, vSide); }
 	}
 
 	vMove = DirectX::XMVectorMultiply(vMove, DirectX::XMVectorSet(1.0f, 0.0f, 1.0f, 0.0f));
@@ -143,7 +147,8 @@ void Player::Update()
 
 	m_pos.x += m_Move.x; m_pos.y += m_Move.y + m_fJump; m_pos.z += m_Move.z;	// 座標の更新
 
-	//----プレイヤーの回転角度を計算----
+
+	//---プレイヤーの回転角度を計算
 	float rotationAngle;
 
 	// 移動してたら
@@ -151,21 +156,21 @@ void Player::Update()
 	{
 		// 移動した方向に回転するように調整
 		rotationAngle = atan2(m_Move.x, m_Move.z);
+		//ModelRotate();	// プレイヤーモデルの回転
 		// 移動情報退避
 		m_OldMove = m_Move;
 	}
-	// 移動してなかったら
 	else
 	{
-		// 前回の方向のまま
+		// 向きを固定
 		rotationAngle = atan2(m_OldMove.x, m_OldMove.z);
 	}
 
 	//---プレイヤーの回転行列を更新
 	m_directRad = rotationAngle;
 	m_directAngle = rotationAngle * RADIAN;  // ラジアン角から度数に変換
-	m_directRad = DirectX::XMConvertToRadians(m_directAngle);// / RADIAN;
-	//----プレイヤーの回転角度を計算----
+	m_directRad = DirectX::XMConvertToRadians(m_directAngle);
+
 
 	// イベント中なら終了
 	if (m_nEventFlg) return;
@@ -276,6 +281,49 @@ void Player::Draw()
 	m_pTrail->SetProjection(m_pCamera->GetProjectionMatrix());
 	m_pTrail->SetTexture(m_pTexture[2]);
 	m_pTrail->Draw();
+}
+
+void Player::ModelRotate()	// モデルの回転
+{
+	//----現在の向いてる方向を計算----
+	DirectX::XMFLOAT3 currentPos;
+	currentPos.x = m_oldpos.x + m_OldMove.x;
+	currentPos.y = m_oldpos.y + m_OldMove.y;
+	currentPos.z = m_oldpos.z + m_OldMove.z;
+
+	DirectX::XMVECTOR currentDir = DirectX::XMVectorSubtract(
+		DirectX::XMLoadFloat3(&currentPos),
+		DirectX::XMLoadFloat3(&m_pos)
+	);
+	//----現在の方向を正規化----
+	currentDir = DirectX::XMVector3Normalize(currentDir);
+
+
+	//----新しく向いている方向を計算----
+	DirectX::XMFLOAT3 newPos;
+	newPos.x = m_pos.x + m_Move.x;
+	newPos.y = m_pos.y + m_Move.y;
+	newPos.z = m_pos.z + m_Move.z;
+
+	DirectX::XMVECTOR newDir = DirectX::XMVectorSubtract(
+		DirectX::XMLoadFloat3(&newPos),
+		DirectX::XMLoadFloat3(&m_pos)
+	);
+	//----現在の方向を正規化----
+	newDir = DirectX::XMVector3Normalize(newDir);
+
+
+	//----モデルの回転角度を計算----
+	float ModelRotateAngle;
+	DirectX::XMStoreFloat(&ModelRotateAngle, DirectX::XMVector3AngleBetweenNormals(
+		currentDir,			// 現在のプレイヤーの方向ベクトル
+		newDir				// 新しいプレイヤーの方向ベクトル 
+	));
+
+	//---プレイヤーの回転行列を更新
+	//m_directRad = ModelRotateAngle;
+	m_directAngle = DirectX::XMConvertToDegrees(ModelRotateAngle);  // ラジアン角から度数に変換
+	m_directRad = DirectX::XMConvertToRadians(m_directAngle);		// ラジアン角に変換
 }
 
 void Player::SetCamera(CameraBase * pCamera)

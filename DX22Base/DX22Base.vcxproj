@@ -190,6 +190,8 @@
     <ClCompile Include="MoveEmitter.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Polyline.cpp" />
+    <ClCompile Include="SceneChangeArea.cpp" />
+    <ClCompile Include="ScenePreStage1Area.cpp" />
     <ClCompile Include="SceneStageBase.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneResult.cpp" />
@@ -227,6 +229,8 @@
     <ClInclude Include="MoveEmitter.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Polyline.h" />
+    <ClInclude Include="SceneChangeArea.h" />
+    <ClInclude Include="ScenePreStage1Area.h" />
     <ClInclude Include="SceneStageBase.h" />
     <ClInclude Include="ScenePreArea.h" />
     <ClInclude Include="SceneManager.h" />

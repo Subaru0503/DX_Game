@@ -183,6 +183,12 @@
     <ClCompile Include="CollisionAreaManager.cpp">
       <Filter>ソース ファイル\System\Coolision\AreaCollision</Filter>
     </ClCompile>
+    <ClCompile Include="ScenePreStage1Area.cpp">
+      <Filter>ソース ファイル\App\Scene\PreStageArea</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneChangeArea.cpp">
+      <Filter>ソース ファイル\System\Coolision\AreaCollision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h">
@@ -279,6 +285,12 @@
       <Filter>ヘッダー ファイル\System\Collision\AreaCollision</Filter>
     </ClInclude>
     <ClInclude Include="CollisionAreaManager.h">
+      <Filter>ヘッダー ファイル\System\Collision\AreaCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="ScenePreStage1Area.h">
+      <Filter>ヘッダー ファイル\App\Scene\PreStageArea</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneChangeArea.h">
       <Filter>ヘッダー ファイル\System\Collision\AreaCollision</Filter>
     </ClInclude>
   </ItemGroup>

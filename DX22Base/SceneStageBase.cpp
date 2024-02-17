@@ -7,7 +7,8 @@
 
 #include "SceneStageBase.h"
 
-CSceneStageBase::CSceneStageBase()
+CSceneStageBase::CSceneStageBase(CSceneMng* pSceneMng, int Stage, DirectX::XMFLOAT3 PlayerPos)
+	: m_pSceneMng(pSceneMng)
 {
 	// ----- 頂点シェーダー読み込み -----
 	m_pVS = new VertexShader();
@@ -16,8 +17,8 @@ CSceneStageBase::CSceneStageBase()
 	}
 
 	// ----- データ作成 -----
-	m_pPlayer = new Player;
-	m_pCollisionAreaMng = new CCollisionAreaMng;
+	m_pPlayer = new Player(PlayerPos);
+	m_pCollisionAreaMng = new CCollisionAreaMng(Stage);
 	m_pCollisionAreaMng->SetPlayer(m_pPlayer);
 	m_pUI = new ItemUI;
 

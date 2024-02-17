@@ -5,6 +5,7 @@ CAreaWall::CAreaWall(float posX, float posY, float posZ, float scaleX, float sca
 {
 	m_pos = DirectX::XMFLOAT3(posX, posY, posZ);
 	m_scale = DirectX::XMFLOAT3(scaleX, scaleY, scaleZ);
+	m_areakind = wall;
 }
 
 // 当たったらプレイヤーの位置を補正する

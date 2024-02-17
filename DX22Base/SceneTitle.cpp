@@ -71,7 +71,7 @@ void CSceneTitle::Update()
 		if (IsKeyTrigger(VK_RETURN)) {
 			//m_pSoundMng->playSound(CSoundMng::SystemSE::Tstrat);
 			//animestart = true;
-			m_pSceneMng->SetNextScene(CSceneMng::SceneKind::SCENE_STAGE1, 1);
+			m_pSceneMng->SetNextScene(CSceneMng::SceneKind::SCENE_GAME, 1);
 		}
 	}
 

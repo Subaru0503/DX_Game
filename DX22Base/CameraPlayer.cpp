@@ -3,15 +3,16 @@
 #include "CameraPlayer.h"
 #include "Input.h"
 
-CameraPlayer::CameraPlayer(Player* pPlayer)	// コンストラクタ
+CameraPlayer::CameraPlayer(Player* pPlayer, float radXZ, float radY, float radius)	// コンストラクタ
 	: m_pPlayer(pPlayer)
-	, m_radXZ(DirectX::XMConvertToRadians(0.0f))
-	, m_radY(DirectX::XMConvertToRadians(40.0f))
-	, m_oldradXZ(DirectX::XMConvertToRadians(0.0f))
-	, m_oldradY(DirectX::XMConvertToRadians(40.0f))
+	, m_radXZ(DirectX::XMConvertToRadians(radXZ))
+	, m_radY(DirectX::XMConvertToRadians(radY))
+	, m_oldradXZ(DirectX::XMConvertToRadians(radXZ))
+	, m_oldradY(DirectX::XMConvertToRadians(radY))
 {
 	m_look = m_pPlayer->GetPos();	// 注視点をプレイヤーの位置にする
-	const float Radius = 8.0f;
+	const float Radius = radius;
+	m_fRadius = radius;
 
 	// 角度と距離、注視点からカメラの位置を計算
 	m_pos.x = cos(m_radY) * sin(m_radXZ) * Radius + m_look.x;
@@ -40,7 +41,7 @@ void CameraPlayer::Update()	// 更新
 	if (IsKeyPress(VK_LEFT)) { m_radXZ += Speed; }
 	if (IsKeyPress(VK_RIGHT)) { m_radXZ -= Speed; }
 
-	const float Radius = 8.0f;
+	const float Radius = m_fRadius;
 
 	// 角度と距離、注視点からカメラの位置を計算
 	m_pos.x = cos(m_radY) * sin(m_radXZ) * Radius + m_look.x;

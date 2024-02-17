@@ -7,17 +7,13 @@
 
 // ========== インクルード部 ========== 
 #include "CollisionAreaManager.h"
-
+#include "SceneManager.h"
 
 // ========== コンストラクタ ==========
-CCollisionAreaMng::CCollisionAreaMng()
+CCollisionAreaMng::CCollisionAreaMng(int stage)
+	: m_nNextScene(0)
 {
-	m_areaList.push_back(new CAreaGround(0.0f, 0.0f, 0.0f, 20.0f, 2.0f, 40.0f));	// 床
-	m_areaList.push_back(new CAreaWall(11.0f, 5.0f, 0.0f, 2.0f, 10.0f, 40.0f));		// 長い壁
-	m_areaList.push_back(new CAreaWall(-11.0f, 5.0f, 0.0f, 2.0f, 10.0f, 40.0f));	// 長い壁
-	m_areaList.push_back(new CAreaWall(0.8f, 5.0f, 11.0f, 8.6f, 10.0f, 2.0f));		// 通路が2つある方の真ん中の壁
-	m_areaList.push_back(new CAreaWall(-6.2f, 5.0f, -11.0f, 7.0f, 10.0f, 2.0f));	// 通路が1つある方のステージ1側の壁
-	m_areaList.push_back(new CAreaWall(6.2f, 5.0f, -11.0f, 7.0f, 10.0f, 2.0f));		// 通路が1つある方のステージ3側の壁
+	SetCollision(stage);	// 当たり判定セット
 }
 
 // ========== デストラクタ ==========
@@ -41,6 +37,13 @@ void CCollisionAreaMng::Update()
 		// ----- 対　プレイヤー -----
 		pArea->SetPlayer(m_pPlayer);		// Player情報設定
 		pArea->Update();					// 当たり判定処理
+
+		// シーンを遷移するか
+		if (pArea->GetKind() == CCollisionArea::areaKind::SceneChange
+			&& pArea->GetSceneChange())
+		{
+			m_nNextScene = pArea->GetNextScene();
+		}
 	}
 }
 
@@ -63,4 +66,32 @@ void CCollisionAreaMng::SetPlayer(Player * pPlayer)
 list<CCollisionArea*>* CCollisionAreaMng::GetAreaList()
 {
 	return &m_areaList;
+}
+
+int CCollisionAreaMng::GetNextScene()			// 次のシーン情報を返す
+{
+	return m_nNextScene;
+}
+
+void CCollisionAreaMng::SetCollision(int stage)	// 当たり判定セット
+{
+	
+	switch (stage)
+	{
+	case CSceneMng::SceneKind::SCENE_GAME:
+		m_areaList.push_back(new CAreaGround(0.0f, 0.0f, 0.0f, 20.0f, 2.0f, 40.0f));	// 床
+		m_areaList.push_back(new CAreaWall(11.0f, 5.0f, 0.0f, 2.0f, 10.0f, 40.0f));		// 長い壁
+		m_areaList.push_back(new CAreaWall(-11.0f, 5.0f, 0.0f, 2.0f, 10.0f, 40.0f));	// 長い壁
+		m_areaList.push_back(new CAreaWall(0.8f, 5.0f, 11.0f, 8.6f, 10.0f, 2.0f));		// 通路が2つある方の真ん中の壁
+		m_areaList.push_back(new CAreaWall(-6.2f, 5.0f, -11.0f, 7.0f, 10.0f, 2.0f));	// 通路が1つある方のステージ1側の壁
+		m_areaList.push_back(new CAreaWall(6.2f, 5.0f, -11.0f, 7.0f, 10.0f, 2.0f));		// 通路が1つある方のステージ3側の壁
+		m_areaList.push_back(new CSceneChangeArea(-6.2f, 5.0f, 15.0f, 7.0f, 10.0f, 6.0f,
+			(int)CSceneMng::SceneKind::SCENE_PRE_STAGE1_AREA));	// シーン遷移する場所
+		break;
+	case CSceneMng::SceneKind::SCENE_PRE_STAGE1_AREA:
+		m_areaList.push_back(new CAreaGround(0.0f, 0.0f, 0.0f, 40.0f, 2.0f, 60.0f));	// 床
+		//m_areaList.push_back(new CAreaGround(0.0f, 0.0f, 0.0f, 20.0f, 2.0f, 20.0f));	// 床
+		break;
+	}
+
 }

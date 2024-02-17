@@ -17,11 +17,14 @@
 class Player
 {
 public:
-	Player();	// コンストラクタ
+	Player(DirectX::XMFLOAT3 PlayerPos);	// コンストラクタ
 	~Player();	// デストラクタ
 
 	void Update();	// 更新
 	void Draw();	// 描画
+
+	// モデルの回転
+	void ModelRotate();
 
 	//　カメラの設定
 	void SetCamera(CameraBase* pCamera);

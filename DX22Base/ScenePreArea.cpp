@@ -17,10 +17,10 @@
 #define SCREEN_WIDTH (1280)
 #define SCREEN_HEIGHT (720)
 
-CScenePreArea::CScenePreArea()
-	: m_nMainCamera(CAM_PLAYER)
+CScenePreArea::CScenePreArea(CSceneMng* pSceneMng, int Stage)
+	: CSceneStageBase(pSceneMng, Stage, DirectX::XMFLOAT3(-5.0f, 0.0f, 0.0f))
 {
-
+	m_nMainCamera = CAM_PLAYER;
 	// モデル読み込み
 	m_pStageModel = new Model();
 	if (!m_pStageModel->Load("Assets/Model/Stage/Stage.fbx", 1.0f, Model::XFlip))
@@ -31,7 +31,7 @@ CScenePreArea::CScenePreArea()
 
 	m_pStageModel->SetVertexShader(m_pVS);
 	m_pPlayer->SetEventFlg(false);	// イベントフラグ下げ
-	m_pCamera[CAM_PLAYER] = new CameraPlayer(m_pPlayer);
+	m_pCamera[CAM_PLAYER] = new CameraPlayer(m_pPlayer, 90.0f, 40.0f, 8.0f);
 	m_pCamera[CAM_DEBUG] = new CameraDebug();
 	m_pCamera[CAM_EVENT] = nullptr;
 	//CameraEvent *pEvent = new CameraEvent();
@@ -102,7 +102,12 @@ void CScenePreArea::Update(float tick)
 	//	}
 	//}
 
+	// エリアに当たり判定
 	m_pCollisionAreaMng->Update();
+	if (m_pCollisionAreaMng->GetNextScene())	// 次のシーンがセットされていたら
+	{
+		m_pSceneMng->SetNextScene(CSceneMng::SceneKind(m_pCollisionAreaMng->GetNextScene()), 1);
+	}
 	//// 床に当たっているか
 	//if (Collision::AreaCheckCollision(m_pPlayer->GetCenterPos(), m_StagePos, m_pPlayer->GetSize(), m_StageSize))
 	//{

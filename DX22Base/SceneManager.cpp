@@ -7,10 +7,10 @@
 
 // ========== インクルード部 ==========
 #include "SceneManager.h"
-#include "SceneTitle.h"
-#include "ScenePreArea.h"
-//#include "SceneStage2.h"
-#include "SceneResult.h"
+#include "SceneTitle.h"				// タイトル
+#include "ScenePreArea.h"			// ゲームシーン
+#include "ScenePreStage1Area.h"		// ステージ1前エリア
+#include "SceneResult.h"			// リザルト
 
 // ========== 定数・マクロ定義 ==========
 
@@ -23,7 +23,6 @@ CSceneMng::CSceneMng()
 	, m_nClear(0)
 {
 	m_pTitle = new CSceneTitle(this);
-	//m_pStage2 = new SceneStage2(this, 3);
 }
 
 // ========== デストラクタ ==========
@@ -34,8 +33,8 @@ CSceneMng::~CSceneMng()
 	switch (m_scene)
 	{
 	case SCENE_TITLE:	SAFE_DELETE(m_pTitle);	break;
-	case SCENE_STAGE1:	SAFE_DELETE(m_pScenePreArea);  break;
-	//case SCENE_STAGE2:	SAFE_DELETE(m_pStage2); break;
+	case SCENE_GAME:	SAFE_DELETE(m_pScenePreArea);  break;
+	case SCENE_PRE_STAGE1_AREA:	SAFE_DELETE(m_pPreStage1); break;
 	case SCENE_STAGE3:
 	case SCENE_RESULT:	SAFE_DELETE(m_pResult); break;
 	default: break;
@@ -61,8 +60,8 @@ void CSceneMng::Update(float tick)
 	switch (m_scene)
 	{
 	case SCENE_TITLE:	m_pTitle->Update();			break;
-	case SCENE_STAGE1:	m_pScenePreArea->Update(tick); 	break;
-	//case SCENE_STAGE2:	m_pStage2->Update(tick);	break;
+	case SCENE_GAME:	m_pScenePreArea->Update(tick); 	break;
+	case SCENE_PRE_STAGE1_AREA: m_pPreStage1->Update(tick);	break;
 	case SCENE_STAGE3:
 	case SCENE_RESULT:	m_pResult->Update();	break;
 	default: break;
@@ -78,8 +77,8 @@ void CSceneMng::Draw()
 	switch (m_scene)
 	{
 	case SCENE_TITLE:	m_pTitle->Draw();	break;
-	case SCENE_STAGE1:	m_pScenePreArea->Draw();	break;
-	//case SCENE_STAGE2:	m_pStage2->Draw(); break;
+	case SCENE_GAME:	m_pScenePreArea->Draw();	break;
+	case SCENE_PRE_STAGE1_AREA: m_pPreStage1->Draw();	break;
 	case SCENE_STAGE3:
 	case SCENE_RESULT:	m_pResult->Draw();	break;
 	default: break;
@@ -105,7 +104,7 @@ void CSceneMng::SetNextScene(SceneKind scene, int Deth)
 	//// ----- フェード -----
 	//switch (m_nextScene)
 	//{
-	//case SCENE_STAGE1:
+	//case SCENE_GAME:
 	//case SCENE_STAGE2:
 	//case SCENE_STAGE3:
 	//	m_pFade->Start(FADE_OUT, FADE_OUT_TIME, Fade::TIPS);	break;
@@ -125,7 +124,7 @@ void CSceneMng::SceneSwap()
 {
 	//switch (m_scene)	// 遊んだステージの情報を格納
 	//{
-	//case SCENE_STAGE1:	m_oldPlayStage = SCENE_STAGE1;	break;
+	//case SCENE_GAME:	m_oldPlayStage = SCENE_GAME;	break;
 	//case SCENE_STAGE2:	m_oldPlayStage = SCENE_STAGE2;	break;
 	//case SCENE_STAGE3:	m_oldPlayStage = SCENE_STAGE3;	break;
 	//}
@@ -136,8 +135,8 @@ void CSceneMng::SceneSwap()
 	case SCENE_TITLE:
 		m_pTitle = new CSceneTitle(this);	// シーン遷移処理呼び出しのためSceneMng*受け渡し
 		break;
-	case SCENE_STAGE1: m_pScenePreArea = new CScenePreArea();  break;
-	//case SCENE_STAGE2: m_pStage2 = new SceneStage2(this, 3); break;
+	case SCENE_GAME: m_pScenePreArea = new CScenePreArea(this, SCENE_GAME);  break;
+	case SCENE_PRE_STAGE1_AREA: m_pPreStage1 = new CScenePreStage1Area(this, SCENE_PRE_STAGE1_AREA);	break;
 	case SCENE_STAGE3:
 	case SCENE_RESULT:
 		m_pResult = new CSceneResult(this, m_nResetNo, m_nClear);
@@ -149,8 +148,8 @@ void CSceneMng::SceneSwap()
 	switch (m_scene)
 	{
 	case SCENE_TITLE:	SAFE_DELETE(m_pTitle);	break;
-	case SCENE_STAGE1:	SAFE_DELETE(m_pScenePreArea); break;
-	//case SCENE_STAGE2:	SAFE_DELETE(m_pStage2); break;
+	case SCENE_GAME:	SAFE_DELETE(m_pScenePreArea); break;
+	case SCENE_PRE_STAGE1_AREA: SAFE_DELETE(m_pPreStage1);	break;
 	case SCENE_STAGE3:
 	case SCENE_RESULT:	SAFE_DELETE(m_pResult);	m_nResetNo = 0; m_nClear = 0; break;
 	default: break;
