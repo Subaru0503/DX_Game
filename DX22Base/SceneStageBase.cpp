@@ -17,9 +17,14 @@ CSceneStageBase::CSceneStageBase(CSceneMng* pSceneMng, int Stage, DirectX::XMFLO
 	}
 
 	// ----- データ作成 -----
+	m_pObjectMng = new CObjectMng;
 	m_pPlayer = new Player(PlayerPos);
+	m_pObjectMng->SetPlayer(m_pPlayer);
 	m_pCollisionAreaMng = new CCollisionAreaMng(Stage);
 	m_pCollisionAreaMng->SetPlayer(m_pPlayer);
+	m_pCollision = new Collision();
+	m_pCollision->SetPlayer(m_pPlayer);
+	m_pCollision->SetObjectManager(m_pObjectMng);
 	m_pUI = new ItemUI;
 
 }
@@ -29,7 +34,9 @@ CSceneStageBase::~CSceneStageBase()
 	// ----- データが存在したら削除 -----
 	SAFE_DELETE(m_pVS);
 	SAFE_DELETE(m_pUI);
+	SAFE_DELETE(m_pObjectMng);
 	SAFE_DELETE(m_pPlayer);
 	SAFE_DELETE(m_pCollisionAreaMng);
+	SAFE_DELETE(m_pCollision);
 
 }

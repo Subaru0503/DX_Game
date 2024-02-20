@@ -1,17 +1,16 @@
 
 //----インクルードガード----
-#ifndef __CSCENE_PRE_AREA_H__
-#define __CSCENE_PRE_AREA_H__
+#ifndef __CSCENE_GAME_H__
+#define __CSCENE_GAME_H__
 
 //----インクルード部----
 #include "SceneStageBase.h"
-#include "Field.h"
 
-class CScenePreArea : public CSceneStageBase
+class CSceneGame : public CSceneStageBase
 {
 public:
-	CScenePreArea(CSceneMng* pSceneMng, int Stage);
-	~CScenePreArea();
+	CSceneGame(CSceneMng* pSceneMng, int Stage);
+	~CSceneGame();
 	void Update(float tick);
 	void Draw();
 
@@ -20,7 +19,6 @@ private:
 
 private:
 	//CameraEvent* pEvent;
-	Field *m_pField;
 };
 
-#endif // __CSCENE_PRE_AREA_H__
+#endif // __CSCENE_GAME_H__

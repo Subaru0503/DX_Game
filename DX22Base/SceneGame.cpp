@@ -6,7 +6,7 @@
 //=================================================================
 
 //----インクルード部----
-#include "ScenePreArea.h"
+#include "SceneGame.h"
 #include "Geometory.h"
 #include "CameraPlayer.h"
 #include "CameraDebug.h"
@@ -17,33 +17,49 @@
 #define SCREEN_WIDTH (1280)
 #define SCREEN_HEIGHT (720)
 
-CScenePreArea::CScenePreArea(CSceneMng* pSceneMng, int Stage)
+CSceneGame::CSceneGame(CSceneMng* pSceneMng, int Stage)
 	: CSceneStageBase(pSceneMng, Stage, DirectX::XMFLOAT3(-5.0f, 0.0f, 0.0f))
 {
 	m_nMainCamera = CAM_PLAYER;
 	// モデル読み込み
-	m_pStageModel = new Model();
-	if (!m_pStageModel->Load("Assets/Model/Stage/Stage.fbx", 1.0f, Model::XFlip))
+	// 地面
+	m_pStageModel[0] = new Model();
+	if (!m_pStageModel[0]->Load("Assets/Model/Stage/fruitsStage.fbx", 1.0f, Model::XFlip))
 	{
 		//----エラーメッセージ表示----
 		MessageBox(NULL, "ステージモデル読み込み失敗", "Error", MB_OK);
 	}
 
-	m_pStageModel->SetVertexShader(m_pVS);
+	// 川
+	m_pStageModel[1] = new Model();
+	if (!m_pStageModel[1]->Load("Assets/Model/river/river.fbx", 1.0f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "川モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	m_pStageModel[2] = new Model();
+	if (!m_pStageModel[2]->Load("Assets/Model/river/river.fbx", 1.0f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "川モデル読み込み失敗", "Error", MB_OK);
+	}
 	m_pPlayer->SetEventFlg(false);	// イベントフラグ下げ
-	m_pCamera[CAM_PLAYER] = new CameraPlayer(m_pPlayer, 90.0f, 40.0f, 8.0f);
+	m_pCamera[CAM_PLAYER] = new CameraPlayer(m_pPlayer, 90.0f, 40.0f, 12.0f);
 	m_pCamera[CAM_DEBUG] = new CameraDebug();
 	m_pCamera[CAM_EVENT] = nullptr;
 	//CameraEvent *pEvent = new CameraEvent();
 	m_pPlayer->SetCamera(m_pCamera[CAM_PLAYER]);
 	//pEvent->SetEvent(DirectX::XMFLOAT3(0.0f, 1.0f, 6.0f), DirectX::XMFLOAT3(0.0f, 3.0f, 0.0f), 4.0f);
 	//m_pCamera[CAM_EVENT] = pEvent;
-	m_pField = new Field();
 }
 
-CScenePreArea::~CScenePreArea()
+CSceneGame::~CSceneGame()
 {
-	SAFE_DELETE(m_pStageModel);
+	for (int i = 0; i < MAX_STADE_MODEL; i++)
+	{
+		SAFE_DELETE(m_pStageModel[i]);
+	}
 	for (int i = 0; i < MAX_CAMERA; i++)
 	{
 		if (m_pCamera[i])
@@ -52,10 +68,9 @@ CScenePreArea::~CScenePreArea()
 			m_pCamera[i] = nullptr;
 		}
 	}
-	SAFE_DELETE(m_pField);
 }
 
-void CScenePreArea::Update(float tick)
+void CSceneGame::Update(float tick)
 {
 	if (m_nMainCamera == CAM_EVENT)
 	{
@@ -78,6 +93,7 @@ void CScenePreArea::Update(float tick)
 	// レイの作成
 	//Collision::Ray ray;
 	m_pPlayer->Update();
+	m_pObjectMng->Update(tick);
 	//ray.start = m_pPlayer->GetPos();
 	//ray.start.y += 1.0f;
 	//ray.direction = DirectX::XMFLOAT3(0.0f, -1.0f, 0.0f);
@@ -108,6 +124,7 @@ void CScenePreArea::Update(float tick)
 	{
 		m_pSceneMng->SetNextScene(CSceneMng::SceneKind(m_pCollisionAreaMng->GetNextScene()), 1);
 	}
+	m_pCollision->Update();
 	//// 床に当たっているか
 	//if (Collision::AreaCheckCollision(m_pPlayer->GetCenterPos(), m_StagePos, m_pPlayer->GetSize(), m_StageSize))
 	//{
@@ -121,7 +138,7 @@ void CScenePreArea::Update(float tick)
 	m_pUI->Update();
 }
 
-void CScenePreArea::Draw()
+void CSceneGame::Draw()
 {
 	RenderTarget* pRTV = GetDefaultRTV();
 	DepthStencil* pDSV = GetDefaultDSV();
@@ -142,6 +159,9 @@ void CScenePreArea::Draw()
 
 	//----プレイヤーの描画----
 	m_pPlayer->Draw();
+
+	//----オブジェクトの描画----
+	m_pObjectMng->Draw(mat);
 	//----フィールドの描画----
 	//m_pField->Draw();
 
@@ -154,22 +174,46 @@ void CScenePreArea::Draw()
 }
 
 // ステージを描画する
-void CScenePreArea::DrawStage(DirectX::XMFLOAT4X4 *mat, VertexShader* vs)
+void CSceneGame::DrawStage(DirectX::XMFLOAT4X4 *mat, VertexShader* vs)
 {
 	DirectX::XMMATRIX world;
 
-	//---Geometory用の変換行列を計算
-	world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
-		DirectX::XMMatrixRotationX(0.0f) *
-		DirectX::XMMatrixRotationY(0.0f) *
-		DirectX::XMMatrixRotationZ(0.0f) *
-		DirectX::XMMatrixTranslation(0.0f, 0.0f, 0.0f);
+	for (int i = 0; i < MAX_STADE_MODEL; i++)
+	{
+		switch (i)
+		{
+		case 0:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(0.0f) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(0.0f, 0.0f, 0.0f);
+			break;
+		case 1:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(0.0f) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(0.0f, -1.5f, 16.8f);
+			break;
+		case 2:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(0.0f) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(0.0f, -1.5f, -16.8f);
+			break;
+		}
 
-	world = DirectX::XMMatrixTranspose(world);
-	DirectX::XMStoreFloat4x4(&mat[0], world);
+		world = DirectX::XMMatrixTranspose(world);
+		DirectX::XMStoreFloat4x4(&mat[0], world);
 
-	//---変換行列を設定
-	vs->WriteBuffer(0, mat);
-	m_pStageModel->SetVertexShader(vs);
-	m_pStageModel->Draw();
+		//---変換行列を設定
+		vs->WriteBuffer(0, mat);
+		m_pStageModel[i]->SetVertexShader(vs);
+		m_pStageModel[i]->Draw();
+	}
 }

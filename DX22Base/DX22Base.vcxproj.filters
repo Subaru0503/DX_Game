@@ -49,15 +49,6 @@
     <Filter Include="ソース ファイル\App\Scene">
       <UniqueIdentifier>{a97ea378-46d4-4960-9e47-53f660331f14}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\App\Scene\PreArea">
-      <UniqueIdentifier>{57a5f0cd-7228-41b4-9d56-6995068050a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\App\Scene\Stage">
-      <UniqueIdentifier>{c53d01f5-cad2-4f2d-8aec-554c8ec44c97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\App\Scene\PreStageArea">
-      <UniqueIdentifier>{c4ba54b3-0feb-4414-8d87-a6187adffe4a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\System\Coolision">
       <UniqueIdentifier>{0a410ed4-cb5d-40d0-9001-ecc1bd05a00b}</UniqueIdentifier>
     </Filter>
@@ -70,14 +61,17 @@
     <Filter Include="ヘッダー ファイル\System\Collision\AreaCollision">
       <UniqueIdentifier>{266d4154-938f-4d84-b0e4-c71433c584d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\App\Scene\PreArea">
-      <UniqueIdentifier>{9945cd2b-c7c4-4a95-8ac9-3a02555008f9}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\Object">
+      <UniqueIdentifier>{8a0e9413-6169-4202-b0b3-62565ab6d452}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\App\Scene\Stage">
-      <UniqueIdentifier>{64b0f419-d823-4ae7-b9e4-a930ca3af656}</UniqueIdentifier>
+    <Filter Include="ヘッダー ファイル\Object">
+      <UniqueIdentifier>{99a70ecc-a839-4336-8fc5-1b5807b38ef2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\App\Scene\PreStageArea">
-      <UniqueIdentifier>{55a008dc-1124-4562-9002-ee2ec4f9adc4}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\Object\Fruits">
+      <UniqueIdentifier>{d7c092db-cbd9-4c36-8a90-4ae5d2bc7b26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\Fruits">
+      <UniqueIdentifier>{88f50d7e-0b6f-4473-aafa-6722a9e0eb1c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +132,6 @@
     <ClCompile Include="TrailEffect.cpp">
       <Filter>ソース ファイル\System</Filter>
     </ClCompile>
-    <ClCompile Include="Field.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="CameraEvent.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
@@ -165,9 +156,6 @@
     <ClCompile Include="SceneStageBase.cpp">
       <Filter>ソース ファイル\App\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="ScenePreArea.cpp">
-      <Filter>ソース ファイル\App\Scene\PreArea</Filter>
-    </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>ソース ファイル\System\Coolision</Filter>
     </ClCompile>
@@ -183,11 +171,29 @@
     <ClCompile Include="CollisionAreaManager.cpp">
       <Filter>ソース ファイル\System\Coolision\AreaCollision</Filter>
     </ClCompile>
-    <ClCompile Include="ScenePreStage1Area.cpp">
-      <Filter>ソース ファイル\App\Scene\PreStageArea</Filter>
-    </ClCompile>
     <ClCompile Include="SceneChangeArea.cpp">
       <Filter>ソース ファイル\System\Coolision\AreaCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGame.cpp">
+      <Filter>ソース ファイル\App\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="WaterMelon.cpp">
+      <Filter>ソース ファイル\Object\Fruits</Filter>
+    </ClCompile>
+    <ClCompile Include="Apple.cpp">
+      <Filter>ソース ファイル\Object\Fruits</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -242,9 +248,6 @@
     <ClInclude Include="TrailEffect.h">
       <Filter>ヘッダー ファイル\System</Filter>
     </ClInclude>
-    <ClInclude Include="Field.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="CameraEvent.h">
       <Filter>ヘッダー ファイル\Camera</Filter>
     </ClInclude>
@@ -272,9 +275,6 @@
     <ClInclude Include="Collision.h">
       <Filter>ヘッダー ファイル\System\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="ScenePreArea.h">
-      <Filter>ヘッダー ファイル\App\Scene\PreArea</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionArea.h">
       <Filter>ヘッダー ファイル\System\Collision\AreaCollision</Filter>
     </ClInclude>
@@ -287,11 +287,29 @@
     <ClInclude Include="CollisionAreaManager.h">
       <Filter>ヘッダー ファイル\System\Collision\AreaCollision</Filter>
     </ClInclude>
-    <ClInclude Include="ScenePreStage1Area.h">
-      <Filter>ヘッダー ファイル\App\Scene\PreStageArea</Filter>
-    </ClInclude>
     <ClInclude Include="SceneChangeArea.h">
       <Filter>ヘッダー ファイル\System\Collision\AreaCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>ヘッダー ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGame.h">
+      <Filter>ヘッダー ファイル\App\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="WaterMelon.h">
+      <Filter>ヘッダー ファイル\Object\Fruits</Filter>
+    </ClInclude>
+    <ClInclude Include="Apple.h">
+      <Filter>ヘッダー ファイル\Object\Fruits</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

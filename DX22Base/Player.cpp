@@ -2,6 +2,8 @@
 #include "Player.h"
 #include "Input.h"
 #include "Sprite.h"
+//----オブジェクト----
+#include "Object.h"
 
 //----定数・マクロ定義----
 #define GRAVITY (0.15f)
@@ -22,6 +24,8 @@ Player::Player(DirectX::XMFLOAT3 PlayerPos)	// コンストラクタ
 	, m_nLand(0)					// ジャンプフラグ
 	, m_fJump(0.0f)					// ジャンプ量
 	, m_nEventFlg(true)
+	, m_PrevItem((int)Object::Kind::NONE)
+	, m_nScore(0)
 {
 	m_pModel = new Model();
 	if (!m_pModel->Load("Assets/Model/3Dモデルデータ/もこ田めめめ/MokotaMememe.pmx", 1.0f, Model::XFlip))
@@ -134,7 +138,7 @@ void Player::Update()
 
 	vMove = DirectX::XMVectorMultiply(vMove, DirectX::XMVectorSet(1.0f, 0.0f, 1.0f, 0.0f));
 	vMove = DirectX::XMVector3Normalize(vMove);	// 移動ベクトルの正規化
-	vMove = DirectX::XMVectorScale(vMove, 0.1f);	// 移動速度
+	vMove = DirectX::XMVectorScale(vMove, 0.23f);	// 移動速度
 
 	DirectX::XMStoreFloat3(&m_Move, vMove);	// XMFLOAT3に変換
 
@@ -341,6 +345,26 @@ void Player::ResetJumpFlg()	// ジャンプフラグ下げ関数
 	m_nLand = 1;
 }
 
+void Player::AddScore(int kind, int add)
+{
+	// ひとつ目のアイテムだったら
+	if (m_PrevItem == (int)Object::Kind::NONE)
+	{
+		m_PrevItem = kind;	// データを取っておく
+		return;	// 以降の処理をしない
+	}
+	// 種類が揃っていたら
+	else if (m_PrevItem == kind)
+	{
+		m_nScore += add;
+	}
+	// 色が揃っていたら
+	// ゴミを拾ってしまっていたら
+
+	// 前に取ったアイテム情報を初期化
+	m_PrevItem = (int)Object::Kind::NONE;
+}
+
 void Player::SetPos(DirectX::XMFLOAT3 pos)
 {
 	m_pos = pos;
@@ -378,4 +402,9 @@ DirectX::XMFLOAT3 Player::GetCenterPos()
 DirectX::XMFLOAT3 Player::GetSize()
 {
 	return m_size;
+}
+
+int Player::GetScore()
+{
+	return m_nScore;
 }

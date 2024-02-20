@@ -4,6 +4,8 @@
 
 //----インクルード部----
 #include <DirectXMath.h>
+#include "Player.h"
+#include "ObjectManager.h"
 //#include "Shader.h"
 //#include "CameraBase.h"
 //#include "Model.h"
@@ -44,6 +46,8 @@ public:
 		DirectX::XMFLOAT3 p[3];	// 三角形の頂点座標
 	};
 public:
+	void Update();	// オブジェクトとの当たり判定
+
 	// 面とレイの当たり判定
 	static Result CheckRayPlane(Ray ray, Plane plane);
 
@@ -54,5 +58,12 @@ public:
 	static int InsideCheckPoint(DirectX::XMFLOAT3 pos1, DirectX::XMFLOAT3 pos2, DirectX::XMFLOAT3 size1, DirectX::XMFLOAT3 size2);
 
 	static int AreaCheckCollision(DirectX::XMFLOAT3 pos1, DirectX::XMFLOAT3 pos2, DirectX::XMFLOAT3 size1, DirectX::XMFLOAT3 size2);
+
+	void SetPlayer(Player* player);			// Player情報設定
+	void SetObjectManager(CObjectMng* objMng);	// ObjectMng設定
+
+private:
+	Player* m_pPlayer;							// Playerポインタ格納用
+	CObjectMng* m_pObjMng;						// ObjectMngポインタ格納用
 };
 #endif			// __COLLISION_H__

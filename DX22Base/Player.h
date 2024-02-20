@@ -9,6 +9,7 @@
 #include "CameraBase.h"
 #include "Model.h"
 #include "Texture.h"
+//----エフェクト----
 #include "MoveEmitter.h"
 #include "Effect.h"
 #include "TrailEffect.h"
@@ -35,6 +36,8 @@ public:
 	// ジャンプフラグリセット
 	void ResetJumpFlg();
 
+	// スコア加算
+	void AddScore(int kind, int add);
 	// 現在地の設定
 	void SetPos(DirectX::XMFLOAT3 pos);
 	void SetPosY(float height);				// 高さ補正
@@ -48,6 +51,8 @@ public:
 	DirectX::XMFLOAT3 GetCenterPos();
 	// プレイヤーのサイズ取得
 	DirectX::XMFLOAT3 GetSize();
+	// スコア取得
+	int GetScore();
 
 private:
 	Model* m_pModel;
@@ -73,5 +78,8 @@ private:
 	float m_fJump;	// ジャンプ量
 
 	int m_nEventFlg;	// イベントフラグ
+
+	int m_PrevItem;	// ひとつ目に手に入れたアイテム
+	int m_nScore;		// スコア
 };
 #endif		// __PLAYER_H__

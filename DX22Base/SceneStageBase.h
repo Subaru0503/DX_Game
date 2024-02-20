@@ -15,6 +15,8 @@
 #include "Model.h"
 #include "Shader.h"
 // ----- オブジェクト -----
+#include "ObjectManager.h"
+//#include "Object.h"
 #include "Player.h"
 #include "Collision.h"
 #include "CollisionAreaManager.h"
@@ -23,6 +25,8 @@
 
 using namespace std;
 
+//----定数・マクロ定義----
+#define MAX_STADE_MODEL (3)
 
 // ========== クラス ==========
 class CSceneStageBase
@@ -50,12 +54,14 @@ protected:
 	VertexShader* m_pVS;
 	CameraBase* m_pCamera[MAX_CAMERA];
 	Player* m_pPlayer;
+	CObjectMng* m_pObjectMng;
 	CSceneMng* m_pSceneMng;
 	CCollisionAreaMng* m_pCollisionAreaMng;
+	Collision* m_pCollision;
 	ItemUI* m_pUI;
 	//CObjectMng* m_pObjectMng;
 
-	Model* m_pStageModel;		// ステージモデル
+	Model* m_pStageModel[MAX_STADE_MODEL];		// ステージモデル
 
 	int m_nMainCamera;	// 現在のカメラ
 

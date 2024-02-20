@@ -1,6 +1,46 @@
 //----インクルード部----
 #include "Collision.h"
 
+//----オブジェクトとの当たり判定----
+void Collision::Update()
+{
+	// =-=-= 初期化 =-=-=
+// ----- オブジェクトのポインタリストを取得 -----
+	list<Object*>*  ObjectList = m_pObjMng->GetObjectList();
+
+	//----当たり判定----
+	for (Object* pObj : *ObjectList)	// 全てのオブジェクトと当たり判定を取る
+	{
+		switch (pObj->GetKind())		// オブジェクトの種類に応じた形で当たり判定を取る
+		{
+			// ----- 矩形　対　矩形 -----
+		case Object::NONE:	break;
+		case Object::TREE:				// 木
+
+			//---当たり判定を取る----
+			if (InsideCheckPoint(m_pPlayer->GetPos(),
+				pObj->GetPos(), m_pPlayer->GetSize(), pObj->GetScale()))
+			{
+				DirectX::XMFLOAT3 newPlayerpos = m_pPlayer->GetOldPos();		// 過去座標に戻す
+				newPlayerpos.y = m_pPlayer->GetPos().y;							// Y座標は戻さない
+				m_pPlayer->SetPos(newPlayerpos);								// 補正
+			}
+			break;
+		case Object::WATER_MELON:
+		case Object::APPLE:
+			//---当たり判定を取る----
+			if (InsideCheckPoint(m_pPlayer->GetPos(),
+				pObj->GetPos(), m_pPlayer->GetSize(), pObj->GetScale()))
+			{
+				pObj->SetDelete();	// 削除フラグを立てる
+				pObj->SetCreate();	// 生成フラグを立てる
+				m_pPlayer->AddScore(pObj->GetKind(), pObj->GetScore());
+			}
+			break;
+		}
+	}
+}
+
 // 面とレイの当たり判定
 Collision::Result Collision::CheckRayPlane(Ray ray, Plane plane)
 {
@@ -129,4 +169,24 @@ int Collision::AreaCheckCollision(DirectX::XMFLOAT3 pos1, DirectX::XMFLOAT3 pos2
 	}
 
 	return result.hit;
+}
+
+// ========== SetPlayer ==========
+// 引　数：CPlayer*	プレイヤーの実体のポインタ
+// 戻り値：なし
+// Player情報を設定する
+// ==============================
+void Collision::SetPlayer(Player* player)
+{
+	m_pPlayer = player;
+}
+
+// ========== SetObjectManager ==========
+// 引　数：CObjectMng*	オブジェクトMngの実体のポインタ
+// 戻り値：なし
+// ObjectMng情報を設定する
+// ======================================
+void Collision::SetObjectManager(CObjectMng* objMng)
+{
+	m_pObjMng = objMng;
 }
