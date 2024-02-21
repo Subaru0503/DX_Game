@@ -137,6 +137,11 @@ int Object::GetKind()
 	return m_nKind;
 }
 
+int Object::GetColor()				// オブジェクトの色の種類を返す
+{
+	return m_nColor;
+}
+
 DirectX::XMFLOAT3 Object::GetScale()
 {
 	return m_scale;

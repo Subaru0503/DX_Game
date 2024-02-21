@@ -24,8 +24,11 @@ CTree::CTree(float posX, float posY, float posZ,
 	// オブジェクトの種類の設定
 	m_nKind = Object::TREE;
 
-	// フルーツフラグを立てる
+	// フルーツフラグを下げる
 	m_nFruits = false;
+
+	// 色の設定
+	m_nColor = Object::NONE;
 
 	m_pModel = new Model();
 	if (!m_pModel->Load("Assets/Model/Tree/Tree.fbx", 1.0f, Model::Flip::XFlip))	// モデルデータ読み込み

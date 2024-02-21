@@ -11,8 +11,11 @@
 // ----- ステージ -----
 #include "Tree.h"				// 木
 // フルーツ
-#include "Apple.h"
-#include "WaterMelon.h"
+#include "Apple.h"				// リンゴ
+#include "Banana.h"				// バナナ
+#include "Lemon.h"				// レモン
+#include "WaterMelon.h"			// スイカ
+#include "Can.h"				// 空き缶
 
 // オブジェクトリスト用
 #include <list>
@@ -38,7 +41,7 @@ public:
 	//void SetSuction(Suction* suction);
 	//void SetSound(CSoundMng* sound);
 	void SetObject();						// 初期オブジェクトセット
-	void FruitsObjectSet(float posX, float posZ);		// フルーツオブジェクトセット
+	void FruitsObjectSet(DirectX::XMFLOAT3 pos);		// 新しくフルーツオブジェクト生成
 	void SetTime(int time);					// 時間セット
 	void SetPlayer(Player* pPlayer);
 private:

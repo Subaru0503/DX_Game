@@ -60,7 +60,7 @@ void CObjectMng::Update(float tick)	// 更新
 
 		if (pObj->GetCreate())	// 生成フラグが立っていら
 		{
-			FruitsObjectSet(pObj->GetPos().x, pObj->GetPos().z);	// 新しくフルーツをセットする
+			FruitsObjectSet(pObj->GetPos());	// 新しくフルーツをセットする
 		}
 		if (pObj->GetDelete()) {	// 削除フラグが立っていたら
 			delete pObj;					// メモリを解放
@@ -131,17 +131,14 @@ void CObjectMng::SetObject()			// 初期オブジェクトセット
 		TreePos.x += Deltapos.x;
 		TreePos.z *= Deltapos.z;
 	}
-	//m_ObjectList.push_back(new CTree(-10.0f, 3.0f, -5.0f, 1.0f, 6.0f, 1.0f));
-	//m_ObjectList.push_back(new CTree(-3.0f, 3.0f, 5.0f, 1.0f, 6.0f, 1.0f));
-	//m_ObjectList.push_back(new CTree(4.0f, 3.0f, -5.0f, 1.0f, 6.0f, 1.0f));
-	//m_ObjectList.push_back(new CTree(11.0f, 3.0f, 5.0f, 1.0f, 6.0f, 1.0f));
+
 	// 乱数初期化
 	srand((unsigned int)time(NULL));
 	int	random;	// 乱数格納用
 	//----木の数分最初のフルーツを用意する----
 	for (int i = 0; i < MAX_TREE; i++)
 	{
-		random = (rand() + (int)(FruitsPos.x + FruitsPos.y + FruitsPos.z)) % ((int)Object::Kind::MAX_FRUITS);
+		random = (rand() + (int)(FruitsPos.x + FruitsPos.y + FruitsPos.z)) % ((int)Object::Kind::MAX_FALL);
 
 		// 生成
 		switch (random)
@@ -149,40 +146,55 @@ void CObjectMng::SetObject()			// 初期オブジェクトセット
 		case Object::Kind::APPLE:	// リンゴ
 			m_ObjectList.push_back(new CApple(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
 			break;
+		case Object::Kind::BANANA:	// バナナ
+			m_ObjectList.push_back(new CBanana(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
+			break;
+		case Object::Kind::LEMON:	// レモン
+			m_ObjectList.push_back(new CLemon(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
+			break;
 		case Object::Kind::WATER_MELON:		// スイカ
 			m_ObjectList.push_back(new CWaterMelon(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
+			break;
+		default:
+			i--;
+			continue;
 			break;
 		}
 
 		// 座標変化
 		FruitsPos.x += Deltapos.x;
+		//FruitsPos.y += Deltapos.y;
 		FruitsPos.z *= Deltapos.z;
 	}
 
-	//m_ObjectList.push_back(new CWaterMelon(-3.0f, 6.0f, 3.0f, 1.0f, 1.0f, 1.0f));
-	//m_ObjectList.push_back(new CWaterMelon(3.0f, 6.0f, -3.0f, 1.0f, 1.0f, 1.0f));
-	//m_ObjectList.push_back(new CWaterMelon(10.0f, 6.0f, 3.0f, 1.0f, 1.0f, 1.0f));
 }
 
-void CObjectMng::FruitsObjectSet(float posX, float posZ)		// フルーツオブジェクトセット
+void CObjectMng::FruitsObjectSet(DirectX::XMFLOAT3 pos)		// 新しくフルーツオブジェクト生成
 {
 	// 乱数初期化
 	srand((unsigned int)time(NULL));
 	int	random;	// 乱数格納用
-	random = rand() % ((int)Object::Kind::MAX_FRUITS);
+	random = (rand() + (int)(pos.x + 6.0f + pos.z)) % ((int)Object::Kind::MAX_FALL);
 
 	// 生成
 	switch (random)
 	{
 	case Object::Kind::APPLE:	// リンゴ
-		m_ObjectList.push_back(new CApple(posX, 6.0f, posZ, 1.0f, 1.0f, 1.0f));
+		m_ObjectList.push_back(new CApple(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
+		break;
+	case Object::Kind::BANANA:	// バナナ
+		m_ObjectList.push_back(new CBanana(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
+		break;
+	case Object::Kind::LEMON:	// レモン
+		m_ObjectList.push_back(new CLemon(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
 		break;
 	case Object::Kind::WATER_MELON:		// スイカ
-		m_ObjectList.push_back(new CWaterMelon(posX, 6.0f, posZ, 1.0f, 1.0f, 1.0f));
+		m_ObjectList.push_back(new CWaterMelon(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
+		break;
+	case Object::Kind::CAN:		// 空き缶
+		m_ObjectList.push_back(new CCan(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
 		break;
 	}
-	// スイカ
-	//m_ObjectList.push_back(new CWaterMelon(posX, 6.0f, posZ, 1.0f, 1.0f, 1.0f));
 }
 
 void CObjectMng::SetTime(int time)

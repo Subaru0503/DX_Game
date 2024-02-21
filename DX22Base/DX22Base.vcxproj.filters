@@ -195,6 +195,15 @@
     <ClCompile Include="Apple.cpp">
       <Filter>ソース ファイル\Object\Fruits</Filter>
     </ClCompile>
+    <ClCompile Include="Banana.cpp">
+      <Filter>ソース ファイル\Object\Fruits</Filter>
+    </ClCompile>
+    <ClCompile Include="Lemon.cpp">
+      <Filter>ソース ファイル\Object\Fruits</Filter>
+    </ClCompile>
+    <ClCompile Include="Can.cpp">
+      <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h">
@@ -310,6 +319,15 @@
     </ClInclude>
     <ClInclude Include="Apple.h">
       <Filter>ヘッダー ファイル\Object\Fruits</Filter>
+    </ClInclude>
+    <ClInclude Include="Banana.h">
+      <Filter>ヘッダー ファイル\Object\Fruits</Filter>
+    </ClInclude>
+    <ClInclude Include="Lemon.h">
+      <Filter>ヘッダー ファイル\Object\Fruits</Filter>
+    </ClInclude>
+    <ClInclude Include="Can.h">
+      <Filter>ヘッダー ファイル\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

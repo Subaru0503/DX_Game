@@ -172,10 +172,12 @@
     <ClCompile Include="Apple.cpp" />
     <ClCompile Include="AreaGround.cpp" />
     <ClCompile Include="AreaWall.cpp" />
+    <ClCompile Include="Banana.cpp" />
     <ClCompile Include="CameraBase.cpp" />
     <ClCompile Include="CameraDebug.cpp" />
     <ClCompile Include="CameraEvent.cpp" />
     <ClCompile Include="CameraPlayer.cpp" />
+    <ClCompile Include="Can.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="CollisionArea.cpp" />
     <ClCompile Include="CollisionAreaManager.cpp" />
@@ -184,6 +186,7 @@
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="ItemUI.cpp" />
+    <ClCompile Include="Lemon.cpp" />
     <ClCompile Include="MeshBuffer.cpp" />
     <ClCompile Include="Geometory.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -214,10 +217,12 @@
     <ClInclude Include="Apple.h" />
     <ClInclude Include="AreaGround.h" />
     <ClInclude Include="AreaWall.h" />
+    <ClInclude Include="Banana.h" />
     <ClInclude Include="CameraBase.h" />
     <ClInclude Include="CameraDebug.h" />
     <ClInclude Include="CameraEvent.h" />
     <ClInclude Include="CameraPlayer.h" />
+    <ClInclude Include="Can.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionArea.h" />
     <ClInclude Include="CollisionAreaManager.h" />
@@ -227,6 +232,7 @@
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="ItemUI.h" />
+    <ClInclude Include="Lemon.h" />
     <ClInclude Include="MeshBuffer.h" />
     <ClInclude Include="Geometory.h" />
     <ClInclude Include="Main.h" />

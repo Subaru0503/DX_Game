@@ -26,15 +26,19 @@ void Collision::Update()
 				m_pPlayer->SetPos(newPlayerpos);								// 補正
 			}
 			break;
-		case Object::WATER_MELON:
 		case Object::APPLE:
+		case Object::BANANA:
+		case Object::LEMON:
+		case Object::WATER_MELON:
+		case Object::CAN:
+
 			//---当たり判定を取る----
 			if (InsideCheckPoint(m_pPlayer->GetPos(),
 				pObj->GetPos(), m_pPlayer->GetSize(), pObj->GetScale()))
 			{
 				pObj->SetDelete();	// 削除フラグを立てる
 				pObj->SetCreate();	// 生成フラグを立てる
-				m_pPlayer->AddScore(pObj->GetKind(), pObj->GetScore());
+				m_pPlayer->AddScore(pObj->GetKind(), pObj->GetColor(), pObj->GetScore());	// スコアの処理
 			}
 			break;
 		}

@@ -37,7 +37,7 @@ public:
 	void ResetJumpFlg();
 
 	// スコア加算
-	void AddScore(int kind, int add);
+	void AddScore(int kind, int color, int add);
 	// 現在地の設定
 	void SetPos(DirectX::XMFLOAT3 pos);
 	void SetPosY(float height);				// 高さ補正
@@ -79,7 +79,10 @@ private:
 
 	int m_nEventFlg;	// イベントフラグ
 
-	int m_PrevItem;	// ひとつ目に手に入れたアイテム
-	int m_nScore;		// スコア
+	int m_nPrevItem;		// ひとつ目に手に入れたアイテム
+	int m_nPrevScore;		// ひとつ目に手に入れたアイテムのスコア
+	int m_nLastScore;		// 最後に手に入れたアイテム(フルーツ)のスコア情報
+	int m_nPrevColor;		// ひとつ目に手に入れたアイテムの色
+	int m_nScore;			// スコア
 };
 #endif		// __PLAYER_H__

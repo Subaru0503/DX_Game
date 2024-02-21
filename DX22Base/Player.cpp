@@ -24,7 +24,10 @@ Player::Player(DirectX::XMFLOAT3 PlayerPos)	// コンストラクタ
 	, m_nLand(0)					// ジャンプフラグ
 	, m_fJump(0.0f)					// ジャンプ量
 	, m_nEventFlg(true)
-	, m_PrevItem((int)Object::Kind::NONE)
+	, m_nPrevItem((int)Object::Kind::NONE)
+	, m_nPrevScore(0)
+	, m_nLastScore(0)
+	, m_nPrevColor((int)Object::Color::NO)
 	, m_nScore(0)
 {
 	m_pModel = new Model();
@@ -345,24 +348,60 @@ void Player::ResetJumpFlg()	// ジャンプフラグ下げ関数
 	m_nLand = 1;
 }
 
-void Player::AddScore(int kind, int add)
+void Player::AddScore(int kind, int color, int add)	// スコア加算
 {
 	// ひとつ目のアイテムだったら
-	if (m_PrevItem == (int)Object::Kind::NONE)
+	if (m_nPrevItem == (int)Object::Kind::NONE)
 	{
-		m_PrevItem = kind;	// データを取っておく
+		// データを取っておく
+		m_nPrevItem = kind;		// 種類
+		m_nPrevScore = add;		// スコア
+		m_nPrevColor = color;	// 色
 		return;	// 以降の処理をしない
 	}
 	// 種類が揃っていたら
-	else if (m_PrevItem == kind)
+	else if (m_nPrevItem == kind)
 	{
-		m_nScore += add;
+		m_nScore += add;	// スコア加算
+		m_nLastScore = add;	// スコアのデータを取っておく
 	}
 	// 色が揃っていたら
+	else if (m_nPrevColor == color)
+	{
+		// 加算するスコアを計算
+		int ScoreAdd;
+		ScoreAdd = add / 100.0f * 10;
+		if (ScoreAdd >= 50)	// 50以上なら
+		{
+			ScoreAdd = 40;
+		}
+		m_nScore += ScoreAdd;		// スコア加算
+		m_nLastScore = ScoreAdd;	// スコアのデータを取っておく
+	}
 	// ゴミを拾ってしまっていたら
+	else if(m_nPrevItem == (int)Object::Kind::CAN || kind == (int)Object::Kind::CAN)
+	{
+		if (m_nPrevItem == kind)	// 二つともゴミだったら最後に
+		{
+			m_nScore -= m_nLastScore * add;	// スコア減算
+		}
+		// 一つだけゴミなら直前に取った物のスコア分引く
+		else if(m_nPrevItem == (int)Object::Kind::CAN)
+		{
+			m_nScore -= m_nPrevScore;	// スコア減算
+		}
+		else
+		{
+			m_nScore -= add;// スコア減算
+		}
+		if (m_nScore < 0)	// スコアが0より低くなってたら
+		{
+			m_nScore = 0;
+		}
+	}
 
 	// 前に取ったアイテム情報を初期化
-	m_PrevItem = (int)Object::Kind::NONE;
+	m_nPrevItem = (int)Object::Kind::NONE;
 }
 
 void Player::SetPos(DirectX::XMFLOAT3 pos)

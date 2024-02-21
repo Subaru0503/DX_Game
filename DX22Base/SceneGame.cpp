@@ -120,10 +120,6 @@ void CSceneGame::Update(float tick)
 
 	// エリアに当たり判定
 	m_pCollisionAreaMng->Update();
-	if (m_pCollisionAreaMng->GetNextScene())	// 次のシーンがセットされていたら
-	{
-		m_pSceneMng->SetNextScene(CSceneMng::SceneKind(m_pCollisionAreaMng->GetNextScene()), 1);
-	}
 	m_pCollision->Update();
 	//// 床に当たっているか
 	//if (Collision::AreaCheckCollision(m_pPlayer->GetCenterPos(), m_StagePos, m_pPlayer->GetSize(), m_StageSize))

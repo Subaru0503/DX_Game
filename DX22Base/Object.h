@@ -21,13 +21,27 @@ public:
 	enum Kind
 	{
 		NONE = -1,			// 未設定
+		// 木から落ちる物
 		// フルーツ
 		APPLE,			// リンゴ
+		BANANA,			// バナナ
+		LEMON,			// レモン
 		WATER_MELON,	// スイカ
-		MAX_FRUITS,		// フルーツ最大数
+		// ゴミ
+		CAN,			// 空き缶
+		MAX_FALL,		// 落下物最大数
 
 		// オブジェクト
 		TREE,			// 木
+	};
+
+	// フルーツの色
+	enum Color
+	{
+		NO,			// 未設定
+		RED,		// 赤
+		YELLOW,		// 黄
+		GREEN,		// 緑
 	};
 private:
 	// 線分を描画する際の頂点情報構造体
@@ -62,6 +76,7 @@ public:
 	//void DrawLines();	// 線分を描画する処理
 
 	int GetKind();					// オブジェクトの種類番号を返す
+	int GetColor();					// オブジェクトの色の種類を返す
 	DirectX::XMFLOAT3 GetScale();	// スケールを返す
 	bool GetDelete();				// 削除フラグを返す
 	void SetDelete();				// 削除フラグを立てる
@@ -136,6 +151,7 @@ protected:
 	float m_gravity;					// 重力
 	int m_nKind;						// オブジェクトの種類
 	int m_nFruits;						// フルーツフラグ
+	int m_nColor;						// フルーツの色の種類
 	bool m_bDelete;						// 削除フラグ
 	int m_nCreate;						// 生成フラグ
 	int m_nScore;						// ゲットできるスコア

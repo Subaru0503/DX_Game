@@ -27,6 +27,9 @@ CWaterMelon::CWaterMelon(float posX, float posY, float posZ,
 	// フルーツフラグを立てる
 	m_nFruits = true;
 
+	// 色の設定
+	m_nColor = Object::GREEN;
+
 	// スコア設定
 	m_nScore = 500;
 
