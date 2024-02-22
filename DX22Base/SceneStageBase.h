@@ -23,6 +23,7 @@
 // ----- UI -----
 #include "ItemUI.h"
 #include "ScoreUI.h"
+#include "TimeUI.h"
 
 using namespace std;
 
@@ -61,7 +62,7 @@ protected:
 	Collision* m_pCollision;
 	ItemUI* m_pUI;
 	CScoreUI* m_pScoreUI;
-	//CObjectMng* m_pObjectMng;
+	CTimeUI* m_pTimeUI;
 
 	Model* m_pStageModel[MAX_STADE_MODEL];		// ステージモデル
 

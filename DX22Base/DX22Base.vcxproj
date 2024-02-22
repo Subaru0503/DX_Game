@@ -207,6 +207,7 @@
     <ClCompile Include="Startup.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="SceneGame.cpp" />
+    <ClCompile Include="TimeUI.cpp" />
     <ClCompile Include="TrailEffect.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="ScoreUI.cpp" />
@@ -253,6 +254,7 @@
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TimeUI.h" />
     <ClInclude Include="TrailEffect.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="ScoreUI.h" />

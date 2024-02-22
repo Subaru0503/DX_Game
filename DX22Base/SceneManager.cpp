@@ -98,7 +98,11 @@ void CSceneMng::SetNextScene(SceneKind scene, int Deth)
 	// ----- フェード -----
 	switch (m_nextScene)
 	{
+	case SCENE_TITLE:
+		m_pFade->Start(FADE_OUT, FADE_OUT_TIME, Fade::BLACK);	break;
 	case SCENE_GAME:
+		m_pFade->Start(FADE_OUT, FADE_OUT_TIME, Fade::BLACK);	break;
+	case SCENE_RESULT:
 		m_pFade->Start(FADE_OUT, FADE_OUT_TIME, Fade::BLACK);	break;
 	}
 }
@@ -141,11 +145,11 @@ void CSceneMng::SceneSwap()
 
 	switch (m_nextScene)
 	{
-	//case SCENE_TITLE:
-	//	if (m_scene == SCENE_ENDING || m_scene == SCENE_OPENING) {
-	//		m_pFade->Start(FADE_IN, FADE_IN_TIME, Fade::WHITE);	break;
-	//	}
+	case SCENE_TITLE:
+		m_pFade->Start(FADE_IN, FADE_IN_TIME, Fade::BLACK);	break;
 	case SCENE_GAME:
+		m_pFade->Start(FADE_IN, FADE_IN_TIME, Fade::BLACK);	break;
+	case SCENE_RESULT:
 		m_pFade->Start(FADE_IN, FADE_IN_TIME, Fade::BLACK);	break;
 	default: break;
 	}

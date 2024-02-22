@@ -72,6 +72,12 @@ CSceneGame::~CSceneGame()
 
 void CSceneGame::Update(float tick)
 {
+	// 経過時間が制限時間を超えていたら
+	if (m_pTimeUI->GetElapsedTime() >= m_pTimeUI->GetTimeLimit())
+	{
+		m_pSceneMng->SetNextScene(CSceneMng::SceneKind::SCENE_RESULT, 1);	// リザルトシーンへ
+		return;	// 以降のシートを処理しない
+	}
 	if (m_nMainCamera == CAM_EVENT)
 	{
 		m_pCamera[CAM_EVENT]->Update();
@@ -132,7 +138,9 @@ void CSceneGame::Update(float tick)
 
 	if (m_nMainCamera != CAM_PLAYER) return;
 	m_pCamera[CAM_PLAYER]->Update();
-	m_pUI->Update();
+	//----UI----
+	//m_pUI->Update();
+	m_pTimeUI->Update();	// 時間更新
 }
 
 void CSceneGame::Draw()
@@ -167,8 +175,9 @@ void CSceneGame::Draw()
 	//----UI描画----
 	pRTV = GetDefaultRTV();
 	SetRenderTargets(1, &pRTV, nullptr);
-	m_pUI->Draw();
+	//m_pUI->Draw();
 	m_pScoreUI->Draw();	// スコア描画
+	m_pTimeUI->Draw();	// 時間描画
 }
 
 // ステージを描画する

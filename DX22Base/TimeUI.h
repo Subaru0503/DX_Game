@@ -1,6 +1,6 @@
 //----インクルードガード----
-#ifndef ___SCORE_UI_H___
-#define ___SCORE_UI_H___
+#ifndef ___TIME_UI_H___
+#define ___TIME_UI_H___
 
 //----インクルード部----
 #include <DirectXMath.h>
@@ -8,14 +8,14 @@
 #include "Texture.h"
 
 //----定数・マクロ定義----
-#define MAX_UI (1)
-#define DIGIT_SCORE			(5)	//エフェクトの数（配列の数）
-#define ANIM_SCORE_FRAME	(2)		//アニメーション一コマフレーム数
-#define ANIM_SCORE_SPLIT_X	(5)		//画像分割数（横）
-#define ANIM_SCORE_SPLIT_Y	(3)		//画像分割数（縦）
+#define MAX_TIME_UI (5)
+#define DIGIT_TIME			(2)	//エフェクトの数（配列の数）
+#define ANIM_TIME_FRAME	(2)		//アニメーション一コマフレーム数
+#define ANIM_TIME_SPLIT_X	(5)		//画像分割数（横）
+#define ANIM_TIME_SPLIT_Y	(3)		//画像分割数（縦）
 
 //----クラス定義----
-class CScoreUI
+class CTimeUI
 {
 
 public:
@@ -27,7 +27,7 @@ public:
 		DirectX::XMFLOAT2 sizeTexCoord;	//テクスチャサイズ（右下）
 		int		frame;			//アニメーション管理フレーム
 		int		currentAnimNo;	//アニメーションコマ番号（左上から０～）
-	}ST_SCORE_PARAM;		//パラメータの構造体
+	}ST_TIME_PARAM;		//パラメータの構造体
 
 	typedef struct
 	{
@@ -39,24 +39,26 @@ public:
 	}ST_ADDMANEY_PARAM;		//パラメータの構造体
 
 public:
-	CScoreUI(int Score);		// コンストラクタ
-	~CScoreUI();				// デストラクタ
+	CTimeUI();		// コンストラクタ
+	~CTimeUI();				// デストラクタ
 	void Update();				// 更新
 	void Draw();				// 描画
-	void UpdateScoretexCoord();	// 表示スコア更新
-	void SetScore(int score);	// スコアセット
+	void UpdateTimetexCoord();	// 表示時間更新
+	float GetTimeLimit();		// 制限時間情報を返す
+	float GetElapsedTime();		// 経過時間情報を返す
 
 private:
-	ST_SCORE_PARAM m_score[DIGIT_SCORE + 1];
-	unsigned int m_TextureScore;
-	int m_nScore;
+	ST_TIME_PARAM m_time[DIGIT_TIME + 1];
+	unsigned int m_TextureTime;
+	float m_fTimeLimit;			// 制限時間
+	float m_fElapsedTime;			// 経過時間
 	//int m_nAddMoney;
 	float m_Left, m_Right, m_Bottom, m_Top, m_near, m_far;
 	float m_basePosX, m_basePosY;
 	float m_fAlpha;
-	Texture* m_pTexture[MAX_UI];
+	Texture* m_pTexture[MAX_TIME_UI];
 
 };
 
 
-#endif // !___SCORE_UI_H___
+#endif // !___TIME_UI_H___

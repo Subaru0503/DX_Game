@@ -17,7 +17,7 @@ CScoreUI::CScoreUI(int Score)	// コンストラクタ
 	, m_Top(0.0f)
 	, m_near(1.0f)
 	, m_far(10.0f)
-	, m_pTexture{ nullptr, nullptr, nullptr,nullptr,nullptr }
+	, m_pTexture{ nullptr }
 	//, m_bAdd(false)
 	, m_fAlpha(1.0f)
 	, m_nScore(Score)

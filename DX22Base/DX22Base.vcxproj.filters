@@ -225,6 +225,9 @@
     <ClCompile Include="ScoreUI.cpp">
       <Filter>ソース ファイル\System\UI</Filter>
     </ClCompile>
+    <ClCompile Include="TimeUI.cpp">
+      <Filter>ソース ファイル\System\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -351,6 +354,9 @@
       <Filter>ヘッダー ファイル\System\UI</Filter>
     </ClInclude>
     <ClInclude Include="ScoreUI.h">
+      <Filter>ヘッダー ファイル\System\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeUI.h">
       <Filter>ヘッダー ファイル\System\UI</Filter>
     </ClInclude>
   </ItemGroup>
