@@ -26,6 +26,7 @@ CSceneStageBase::CSceneStageBase(CSceneMng* pSceneMng, int Stage, DirectX::XMFLO
 	m_pCollision->SetPlayer(m_pPlayer);
 	m_pCollision->SetObjectManager(m_pObjectMng);
 	m_pUI = new ItemUI;
+	m_pScoreUI = new CScoreUI(m_pPlayer->GetScore());
 
 }
 
@@ -34,6 +35,7 @@ CSceneStageBase::~CSceneStageBase()
 	// ----- ÉfÅ[É^Ç™ë∂ç›ÇµÇΩÇÁçÌèú -----
 	SAFE_DELETE(m_pVS);
 	SAFE_DELETE(m_pUI);
+	SAFE_DELETE(m_pScoreUI);
 	SAFE_DELETE(m_pObjectMng);
 	SAFE_DELETE(m_pPlayer);
 	SAFE_DELETE(m_pCollisionAreaMng);

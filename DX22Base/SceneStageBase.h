@@ -22,6 +22,7 @@
 #include "CollisionAreaManager.h"
 // ----- UI -----
 #include "ItemUI.h"
+#include "ScoreUI.h"
 
 using namespace std;
 
@@ -59,6 +60,7 @@ protected:
 	CCollisionAreaMng* m_pCollisionAreaMng;
 	Collision* m_pCollision;
 	ItemUI* m_pUI;
+	CScoreUI* m_pScoreUI;
 	//CObjectMng* m_pObjectMng;
 
 	Model* m_pStageModel[MAX_STADE_MODEL];		// ステージモデル

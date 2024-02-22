@@ -92,8 +92,9 @@ void CSceneGame::Update(float tick)
 
 	// レイの作成
 	//Collision::Ray ray;
-	m_pPlayer->Update();
-	m_pObjectMng->Update(tick);
+	m_pPlayer->Update();							// プレイヤー更新
+	m_pObjectMng->Update(tick);						// オブジェクトマネージャー更新
+	m_pScoreUI->SetScore(m_pPlayer->GetScore());	// スコア更新
 	//ray.start = m_pPlayer->GetPos();
 	//ray.start.y += 1.0f;
 	//ray.direction = DirectX::XMFLOAT3(0.0f, -1.0f, 0.0f);
@@ -167,6 +168,7 @@ void CSceneGame::Draw()
 	pRTV = GetDefaultRTV();
 	SetRenderTargets(1, &pRTV, nullptr);
 	m_pUI->Draw();
+	m_pScoreUI->Draw();	// スコア描画
 }
 
 // ステージを描画する

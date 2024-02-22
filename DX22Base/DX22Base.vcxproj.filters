@@ -73,6 +73,24 @@
     <Filter Include="ヘッダー ファイル\Object\Fruits">
       <UniqueIdentifier>{88f50d7e-0b6f-4473-aafa-6722a9e0eb1c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Player">
+      <UniqueIdentifier>{11f904a3-db00-4e9e-a620-ee7e732bdebd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Player">
+      <UniqueIdentifier>{d0edb946-4620-4c5b-a94f-4cc27acea5fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\System\UI">
+      <UniqueIdentifier>{27d4e552-a8e8-48c9-9879-6823e6540cb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\System\Effect">
+      <UniqueIdentifier>{0efcfa47-716a-49ea-af33-260058c14d26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System\Effect">
+      <UniqueIdentifier>{3b9224e2-b649-4f5e-8ed4-7d48d87b6ce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System\UI">
+      <UniqueIdentifier>{2a3d64e4-ce66-49f4-b552-19f967dad295}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -112,24 +130,6 @@
       <Filter>ソース ファイル\System</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Effect.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveEmitter.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Polyline.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="TrailEffect.cpp">
       <Filter>ソース ファイル\System</Filter>
     </ClCompile>
     <ClCompile Include="CameraEvent.cpp">
@@ -204,11 +204,29 @@
     <ClCompile Include="Can.cpp">
       <Filter>ソース ファイル\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>ソース ファイル\System\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEmitter.cpp">
+      <Filter>ソース ファイル\System\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Polyline.cpp">
+      <Filter>ソース ファイル\System\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="TrailEffect.cpp">
+      <Filter>ソース ファイル\System\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemUI.cpp">
+      <Filter>ソース ファイル\System\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreUI.cpp">
+      <Filter>ソース ファイル\System\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Defines.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>ヘッダー ファイル\DirectX</Filter>
     </ClInclude>
@@ -237,24 +255,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemUI.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Effect.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveEmitter.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Polyline.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="TrailEffect.h">
       <Filter>ヘッダー ファイル\System</Filter>
     </ClInclude>
     <ClInclude Include="CameraEvent.h">
@@ -328,6 +328,30 @@
     </ClInclude>
     <ClInclude Include="Can.h">
       <Filter>ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Defines.h">
+      <Filter>ヘッダー ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>ヘッダー ファイル\System\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEmitter.h">
+      <Filter>ヘッダー ファイル\System\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Polyline.h">
+      <Filter>ヘッダー ファイル\System\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="TrailEffect.h">
+      <Filter>ヘッダー ファイル\System\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemUI.h">
+      <Filter>ヘッダー ファイル\System\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreUI.h">
+      <Filter>ヘッダー ファイル\System\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

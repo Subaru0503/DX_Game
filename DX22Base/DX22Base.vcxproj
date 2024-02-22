@@ -209,6 +209,7 @@
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="TrailEffect.cpp" />
     <ClCompile Include="Tree.cpp" />
+    <ClCompile Include="ScoreUI.cpp" />
     <ClCompile Include="WaterMelon.cpp" />
     <ClCompile Include="_geometory.cpp" />
     <ClCompile Include="_model.cpp" />
@@ -254,6 +255,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TrailEffect.h" />
     <ClInclude Include="Tree.h" />
+    <ClInclude Include="ScoreUI.h" />
     <ClInclude Include="WaterMelon.h" />
   </ItemGroup>
   <ItemGroup>
