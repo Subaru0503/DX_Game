@@ -11,17 +11,15 @@
 
 // ========== コンストラクタ ==========
 CSceneResult::CSceneResult(CSceneMng* pSceneMng, int ResetNo, int StageClear)
-	: m_pushEsc(false)
-	, m_select(true)
-	, m_pSceneMng(pSceneMng)
+	: m_pSceneMng(pSceneMng)
 {
-
+	m_pResultBackGround = new CResultBackGround();
 }
 
 // ========== デストラクタ ==========
 CSceneResult::~CSceneResult()
 {
-
+	SAFE_DELETE(m_pResultBackGround);
 }
 
 // ========== Update関数 ==========
@@ -39,5 +37,9 @@ void CSceneResult::Update()
 // ========== Draw関数 ==========
 void CSceneResult::Draw()
 {
-
+	RenderTarget* pRTV = GetDefaultRTV();
+	pRTV = GetDefaultRTV();
+	SetRenderTargets(1, &pRTV, nullptr);
+	//----背景描画----
+	m_pResultBackGround->Draw();
 }

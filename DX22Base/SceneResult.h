@@ -9,6 +9,7 @@
 
 // ========== インクルード部 ==========
 #include "SceneManager.h"		// シーン遷移処理用
+#include "ResultBackGround.h"	// リザルト背景
 
 // ========== クラス ==========
 class CSceneResult
@@ -20,9 +21,8 @@ public:
 	void Draw();
 
 private:
-	bool m_pushEsc, m_select;
-
 	CSceneMng* m_pSceneMng;
+	CResultBackGround* m_pResultBackGround;
 };
 
 #endif // !__SCENE_RESULT_H__

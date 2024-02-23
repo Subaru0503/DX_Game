@@ -91,6 +91,24 @@
     <Filter Include="ソース ファイル\System\UI">
       <UniqueIdentifier>{2a3d64e4-ce66-49f4-b552-19f967dad295}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\System\UI\Title">
+      <UniqueIdentifier>{f8d7b209-1dcd-41de-b02d-fa0fa643a9e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System\UI\Game">
+      <UniqueIdentifier>{54a48e6d-1069-46fb-8b64-13bbf1e57629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\System\UI\Game">
+      <UniqueIdentifier>{48e98ce0-79c1-4681-801c-833ee05ad2c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\System\UI\Title">
+      <UniqueIdentifier>{92d2eefa-1231-45e8-94ca-53c121694574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\System\UI\Result">
+      <UniqueIdentifier>{2292c013-4697-44f3-89f5-a85289c2e2f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System\UI\Result">
+      <UniqueIdentifier>{9410cde1-dcf7-4919-95a9-3d1f2190a1fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -220,13 +238,19 @@
       <Filter>ソース ファイル\System\Effect</Filter>
     </ClCompile>
     <ClCompile Include="ItemUI.cpp">
-      <Filter>ソース ファイル\System\UI</Filter>
+      <Filter>ソース ファイル\System\UI\Game</Filter>
     </ClCompile>
     <ClCompile Include="ScoreUI.cpp">
-      <Filter>ソース ファイル\System\UI</Filter>
+      <Filter>ソース ファイル\System\UI\Game</Filter>
     </ClCompile>
     <ClCompile Include="TimeUI.cpp">
-      <Filter>ソース ファイル\System\UI</Filter>
+      <Filter>ソース ファイル\System\UI\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleBackGround.cpp">
+      <Filter>ソース ファイル\System\UI\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultBackGround.cpp">
+      <Filter>ソース ファイル\System\UI\Result</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -350,14 +374,20 @@
     <ClInclude Include="TrailEffect.h">
       <Filter>ヘッダー ファイル\System\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="TimeUI.h">
+      <Filter>ヘッダー ファイル\System\UI\Game</Filter>
+    </ClInclude>
     <ClInclude Include="ItemUI.h">
-      <Filter>ヘッダー ファイル\System\UI</Filter>
+      <Filter>ヘッダー ファイル\System\UI\Game</Filter>
     </ClInclude>
     <ClInclude Include="ScoreUI.h">
-      <Filter>ヘッダー ファイル\System\UI</Filter>
+      <Filter>ヘッダー ファイル\System\UI\Game</Filter>
     </ClInclude>
-    <ClInclude Include="TimeUI.h">
-      <Filter>ヘッダー ファイル\System\UI</Filter>
+    <ClInclude Include="TitleBackGround.h">
+      <Filter>ヘッダー ファイル\System\UI\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultBackGround.h">
+      <Filter>ヘッダー ファイル\System\UI\Result</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

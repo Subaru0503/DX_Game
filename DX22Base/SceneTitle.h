@@ -9,6 +9,7 @@
 
 // ========== インクルード部 ==========
 #include "SceneManager.h"		// シーン遷移処理用
+#include "TitleBackGround.h"	// タイトル背景
 
 // ========== クラス ==========
 class CSceneTitle
@@ -20,9 +21,8 @@ public:
 	void Draw();
 
 private:
-	bool m_pushEsc, m_select;
-
 	CSceneMng* m_pSceneMng;
+	CTitleBackGround* m_pTitleBackGround;
 };
 
 #endif // !__SCENE_TITLE_H__
