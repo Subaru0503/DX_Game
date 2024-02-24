@@ -13,7 +13,8 @@
 
 // 相互インクルード防止
 class CSceneTitle;			// タイトル
-class CSceneGame;		// ゲームシーン
+class CSceneGame;			// ゲームシーン
+class CSceneStageBase;		// ゲーム
 class CSceneResult;			// リザルト
 
 // ========== クラス ==========
@@ -37,8 +38,10 @@ public:
 	void SetNextScene(SceneKind scene, int Deth);	// 次のシーンを設定し、遷移する
 
 private:
-	void SceneSwap();					// シーンを切り替える\
+	void SceneSwap();					// シーンを切り替える
 
+	// ----- 次のシーンで必要な情報を引き継ぐ -----
+	void PassData(CSceneStageBase* game, CSceneResult* result);		// Game  → Result
 
 private:
 	// ----- シーン管理 -----
@@ -48,7 +51,8 @@ private:
 
 	// ----- シーンデータ -----
 	CSceneTitle*		m_pTitle;		// タイトル
-	CSceneGame*		m_pSceneGame;		// ゲームシーン
+	CSceneStageBase*	m_pSceneGame;	// ゲームシーン
+	//CSceneGame*			m_pSceneGame;	// ゲームシーン
 	CSceneResult*		m_pResult;		// リザルト
 
 	Fade*		m_pFade;				// フェード

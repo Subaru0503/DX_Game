@@ -14,12 +14,14 @@ CSceneTitle::CSceneTitle(CSceneMng* pSceneMng)
 	: m_pSceneMng(pSceneMng)
 {
 	m_pTitleBackGround = new CTitleBackGround();
+	m_pTitleMozi = new CTitleMozi();
 }
 
 // ========== ƒfƒXƒgƒ‰ƒNƒ^ ==========
 CSceneTitle::~CSceneTitle()
 {
 	SAFE_DELETE(m_pTitleBackGround);
+	SAFE_DELETE(m_pTitleMozi);
 }
 
 // ========== UpdateŠÖ” ==========
@@ -37,6 +39,7 @@ void CSceneTitle::Update()
 			m_pSceneMng->SetNextScene(CSceneMng::SceneKind::SCENE_GAME, 1);
 		}
 	}
+	m_pTitleMozi->Update();	// •¶Žš‚Ìˆ—XV
 
 }
 
@@ -48,4 +51,6 @@ void CSceneTitle::Draw()
 	SetRenderTargets(1, &pRTV, nullptr);
 	//----”wŒi•`‰æ----
 	m_pTitleBackGround->Draw();
+	//----•¶Žš•`‰æ----
+	m_pTitleMozi->Draw();
 }

@@ -44,3 +44,13 @@ CSceneStageBase::~CSceneStageBase()
 	SAFE_DELETE(m_pCollision);
 
 }
+
+int CSceneStageBase::GetTotalScore()	// 合計スコア情報ゲット
+{
+	return m_nTotalScore;
+}
+
+int CSceneStageBase::GetMinusScore()	// ー合計スコア情報ゲット
+{
+	return m_nMinusScore;
+}

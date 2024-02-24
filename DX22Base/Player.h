@@ -53,6 +53,8 @@ public:
 	DirectX::XMFLOAT3 GetSize();
 	// スコア取得
 	int GetScore();
+	// 引かれたスコア取得
+	int GetMinusScore();
 
 private:
 	Model* m_pModel;
@@ -84,5 +86,6 @@ private:
 	int m_nLastScore;		// 最後に手に入れたアイテム(フルーツ)のスコア情報
 	int m_nPrevColor;		// ひとつ目に手に入れたアイテムの色
 	int m_nScore;			// スコア
+	int m_nMinusScore;		// 引かれたスコアの合計
 };
 #endif		// __PLAYER_H__

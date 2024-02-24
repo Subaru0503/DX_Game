@@ -133,6 +133,13 @@ void CSceneMng::SceneSwap()
 		break;
 	}
 
+	// =-=-= 必要情報引継ぎ =-=-=
+	switch (m_scene)
+	{
+	case SCENE_TITLE:	break;
+	case SCENE_GAME:	if (m_nextScene == SCENE_RESULT)PassData(m_pSceneGame, m_pResult);	break;	// リザルトへ
+	case SCENE_RESULT:	break;
+	}
 
 	// =-=-= 現在のシーン削除 =-=-=
 	switch (m_scene)
@@ -156,4 +163,19 @@ void CSceneMng::SceneSwap()
 
 	// ゲームシーンへの遷移でなければフェードイン
 	m_scene = m_nextScene;	// シーン情報上書き
+}
+
+// ========== シーン間データ引継ぎ:Select → Stage==========
+// 引　数：
+// CSceneSelect* 
+// CSceneStageBase* 
+// 戻り値：なし
+// ～関数概要～
+// セレクトからステージシーンへ必要なデータを引き継ぐ
+// ========================================================
+void CSceneMng::PassData(CSceneStageBase* game, CSceneResult* result)	// Select → Stage
+{
+	// ----- 受け渡し -----
+	result->SetTotalScore(game->GetTotalScore());	// 合計スコア情報セット
+	result->SetMinusScore(game->GetMinusScore());	// ー合計スコア情報セット
 }

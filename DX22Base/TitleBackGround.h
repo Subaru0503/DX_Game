@@ -12,9 +12,6 @@
 #include "Sprite.h"
 #include "Texture.h"
 
-//----定数・マクロ定義----
-#define MAX_TITLE_TEXTURE (3)	// テクスチャ最大数
-
 // ========== クラス ==========
 class CTitleBackGround
 {
@@ -34,7 +31,7 @@ private:
 	}ST_TITLE_BACKGROUND_PARAM;		//パラメータの構造体
 private:
 	ST_TITLE_BACKGROUND_PARAM m_TitleBackGround;
-	Texture* m_pTexture[MAX_TITLE_TEXTURE];	// テクスチャの数
+	Texture* m_pTexture;	// テクスチャの数
 	float m_Left, m_Right, m_Bottom, m_Top, m_near, m_far;
 };
 

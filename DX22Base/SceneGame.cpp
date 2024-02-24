@@ -75,6 +75,8 @@ void CSceneGame::Update(float tick)
 	// 経過時間が制限時間を超えていたら
 	if (m_pTimeUI->GetElapsedTime() >= m_pTimeUI->GetTimeLimit())
 	{
+		m_nTotalScore = m_pPlayer->GetScore();		// 合計スコア
+		m_nMinusScore = m_pPlayer->GetMinusScore();	// ー合計スコア
 		m_pSceneMng->SetNextScene(CSceneMng::SceneKind::SCENE_RESULT, 1);	// リザルトシーンへ
 		return;	// 以降のシートを処理しない
 	}

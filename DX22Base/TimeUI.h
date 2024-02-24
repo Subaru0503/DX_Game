@@ -35,6 +35,7 @@ public:
 		DirectX::XMFLOAT2 size;			//横縦サイズ
 		DirectX::XMFLOAT2 posTexCoord;	//テクスチャ座標（左上）
 		DirectX::XMFLOAT2 sizeTexCoord;	//テクスチャサイズ（右下）
+		float alpha;					// 透明度
 	}ST_TIMER_PARAM;		//パラメータの構造体
 
 public:
@@ -48,7 +49,7 @@ public:
 
 private:
 	ST_TIME_PARAM m_time[DIGIT_TIME + 1];
-	ST_TIMER_PARAM m_Timer;		// 時計
+	ST_TIMER_PARAM m_Timer[2];		// 時計
 	unsigned int m_TextureTime;
 	float m_fTimeLimit;			// 制限時間
 	float m_fElapsedTime;			// 経過時間

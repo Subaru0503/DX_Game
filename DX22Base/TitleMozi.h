@@ -1,11 +1,11 @@
 //=================================================================
 //
-//	ResultBackGround.cpp
-//	リザルト背景
+//	TitleMozi.cpp
+//	タイトル背景
 //
 //=================================================================
-#ifndef __RESULT_BACKGROUND_H__
-#define __RESULT_BACKGROUND_H__
+#ifndef __TITLE_MOZI_H__
+#define __TITLE_MOZI_H__
 
 // ========== インクルード部 ==========
 #include <DirectXMath.h>
@@ -13,14 +13,14 @@
 #include "Texture.h"
 
 //----定数・マクロ定義----
-#define MAX_RESULT_TEXTURE (2)	// テクスチャ最大数
+#define MAX_TEXTURE (2)	// テクスチャ最大数
 
 // ========== クラス ==========
-class CResultBackGround
+class CTitleMozi
 {
 public:
-	CResultBackGround();
-	~CResultBackGround();
+	CTitleMozi();
+	~CTitleMozi();
 	void Update();
 	void Draw();
 
@@ -32,11 +32,12 @@ private:
 		DirectX::XMFLOAT2 posTexCoord;	//テクスチャ座標（左上）
 		DirectX::XMFLOAT2 sizeTexCoord;	//テクスチャサイズ（右下）
 		float alpha;					// 透明度
-	}ST_RESULT_BACKGROUND_PARAM;		//パラメータの構造体
+	}ST_TITLE_MOZI_PARAM;		//パラメータの構造体
 private:
-	ST_RESULT_BACKGROUND_PARAM m_ResultBackGround[MAX_RESULT_TEXTURE];
-	Texture* m_pTexture[MAX_RESULT_TEXTURE];	// テクスチャの数
+	ST_TITLE_MOZI_PARAM m_TitleMozi[MAX_TEXTURE];
+	Texture* m_pTexture[MAX_TEXTURE];	// テクスチャの数
 	float m_Left, m_Right, m_Bottom, m_Top, m_near, m_far;
+	int m_nAlfhaFlg;	// 透明フラグ
 };
 
-#endif // !__RESULT_BACKGROUND_H__
+#endif // !__TITLE_MOZI_H__

@@ -10,6 +10,7 @@
 // ========== インクルード部 ==========
 #include "SceneManager.h"		// シーン遷移処理用
 #include "TitleBackGround.h"	// タイトル背景
+#include "TitleMozi.h"			// タイトル文字
 
 // ========== クラス ==========
 class CSceneTitle
@@ -23,6 +24,7 @@ public:
 private:
 	CSceneMng* m_pSceneMng;
 	CTitleBackGround* m_pTitleBackGround;
+	CTitleMozi* m_pTitleMozi;
 };
 
 #endif // !__SCENE_TITLE_H__

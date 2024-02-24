@@ -197,6 +197,8 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Polyline.cpp" />
     <ClCompile Include="ResultBackGround.cpp" />
+    <ClCompile Include="ResultMozi.cpp" />
+    <ClCompile Include="ResultScore.cpp" />
     <ClCompile Include="SceneChangeArea.cpp" />
     <ClCompile Include="SceneStageBase.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -210,6 +212,7 @@
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="TimeUI.cpp" />
     <ClCompile Include="TitleBackGround.cpp" />
+    <ClCompile Include="TitleMozi.cpp" />
     <ClCompile Include="TrailEffect.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="ScoreUI.cpp" />
@@ -247,6 +250,8 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Polyline.h" />
     <ClInclude Include="ResultBackGround.h" />
+    <ClInclude Include="ResultMozi.h" />
+    <ClInclude Include="ResultScore.h" />
     <ClInclude Include="SceneChangeArea.h" />
     <ClInclude Include="SceneStageBase.h" />
     <ClInclude Include="SceneGame.h" />
@@ -259,6 +264,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeUI.h" />
     <ClInclude Include="TitleBackGround.h" />
+    <ClInclude Include="TitleMozi.h" />
     <ClInclude Include="TrailEffect.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="ScoreUI.h" />

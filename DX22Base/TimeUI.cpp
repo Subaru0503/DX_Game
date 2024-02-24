@@ -10,7 +10,7 @@
 #include "Input.h"
 #include "Defines.h"
 
-#define TIME_LIMIT (5.0f)	// 制限時間(秒)
+#define TIME_LIMIT (1.0f)	// 制限時間(秒)
 
 CTimeUI::CTimeUI()	// コンストラクタ
 	: m_Left(0.0f)
@@ -39,7 +39,10 @@ CTimeUI::CTimeUI()	// コンストラクタ
 	{
 		MessageBox(NULL, "UI Timer.png", "Error", MB_OK);
 	}
-
+	if (FAILED(m_pTexture[2]->Create("Assets/Texture/TimerBackGround.png")))
+	{
+		MessageBox(NULL, "UI TimerBackGround.png", "Error", MB_OK);
+	}
 
 	m_basePosX = 1150.0f;
 	m_basePosY = 50.0f;
@@ -57,10 +60,19 @@ CTimeUI::CTimeUI()	// コンストラクタ
 	}
 
 	// 時計
-	m_Timer.size = DirectX::XMFLOAT2(m_pTexture[1]->GetWidth() * 0.04f, m_pTexture[1]->GetHeight() * 0.04f);
-	m_Timer.pos = DirectX::XMFLOAT3(1090.0f , 45.0f, 0.0f);
-	m_Timer.posTexCoord = DirectX::XMFLOAT2(0.0f, 0.0f);
-	m_Timer.sizeTexCoord = DirectX::XMFLOAT2(1.0f, 1.0f);
+	m_Timer[0].size = DirectX::XMFLOAT2(m_pTexture[1]->GetWidth() * 0.04f, m_pTexture[1]->GetHeight() * 0.04f);
+	m_Timer[0].pos = DirectX::XMFLOAT3(1090.0f , 45.0f, 0.0f);
+	m_Timer[0].alpha = 1.0f;
+
+	// 時計と数字の背景
+	m_Timer[1].size = DirectX::XMFLOAT2(m_pTexture[2]->GetWidth() * 0.45f, m_pTexture[2]->GetHeight() * 0.35f);
+	m_Timer[1].pos = DirectX::XMFLOAT3(1160.0f, 45.0f, 0.0f);
+	m_Timer[1].alpha = 0.51f;
+	for (int i = 0; i < 2; i++)
+	{
+		m_Timer[i].posTexCoord = DirectX::XMFLOAT2(0.0f, 0.0f);
+		m_Timer[i].sizeTexCoord = DirectX::XMFLOAT2(1.0f, 1.0f);
+	}
 
 	UpdateTimetexCoord();
 }
@@ -116,9 +128,12 @@ void CTimeUI::Draw()
 	}
 
 	// 時計
-	//ワールド行列はX,Yのみを考慮して作成
-	world[2] = DirectX::XMMatrixTranslation(m_Timer.pos.x, m_Timer.pos.y, m_Timer.pos.z);
-	DirectX::XMStoreFloat4x4(&mat[0][2], DirectX::XMMatrixTranspose(world[2]));
+	for (int i = 0; i < 2; i++)
+	{
+		//ワールド行列はX,Yのみを考慮して作成
+		world[i + 2] = DirectX::XMMatrixTranslation(m_Timer[i].pos.x, m_Timer[i].pos.y, m_Timer[i].pos.z);
+		DirectX::XMStoreFloat4x4(&mat[0][i + 2], DirectX::XMMatrixTranspose(world[i + 2]));
+	}
 
 	//ビュー行列は2dだとカメラの位置があまり関係ないので、単位行列を設定する
 	DirectX::XMStoreFloat4x4(&mat[1][0], DirectX::XMMatrixIdentity());
@@ -127,6 +142,20 @@ void CTimeUI::Draw()
 	//この行列で2dスクリーンの大きさが決まる
 	DirectX::XMMATRIX proj = DirectX::XMMatrixOrthographicOffCenterLH(m_Left, m_Right, m_Bottom, m_Top, m_near, m_far);
 	DirectX::XMStoreFloat4x4(&mat[2][0], DirectX::XMMatrixTranspose(proj));
+
+	// 時計と背景
+	for (int i = 1; i >= 0; i--)
+	{
+		Sprite::SetWorld(mat[0][i + 2]);
+		Sprite::SetView(mat[1][0]);
+		Sprite::SetProjection(mat[2][0]);
+		Sprite::SetSize(DirectX::XMFLOAT2(m_Timer[i].size.x, -m_Timer[i].size.y));
+		Sprite::SetUVPos(DirectX::XMFLOAT2(m_Timer[i].posTexCoord.x, m_Timer[i].posTexCoord.y));
+		Sprite::SetUVScale(DirectX::XMFLOAT2(m_Timer[i].sizeTexCoord.x, m_Timer[i].sizeTexCoord.y));
+		Sprite::SetColor(DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, m_Timer[i].alpha));
+		Sprite::SetTexture(m_pTexture[i + 1]);
+		Sprite::Draw();
+	}
 
 	// 数字
 	for (int i = Digit; i < DIGIT_TIME; ++i)
@@ -137,19 +166,10 @@ void CTimeUI::Draw()
 		Sprite::SetSize(DirectX::XMFLOAT2(m_time[i].size.x, -m_time[i].size.y));
 		Sprite::SetUVPos(DirectX::XMFLOAT2(m_time[i].posTexCoord.x, m_time[i].posTexCoord.y));
 		Sprite::SetUVScale(DirectX::XMFLOAT2(m_time[i].sizeTexCoord.x, m_time[i].sizeTexCoord.y));
+		Sprite::SetColor(DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
 		Sprite::SetTexture(m_pTexture[0]);
 		Sprite::Draw();
 	}
-
-	// 時計
-	Sprite::SetWorld(mat[0][2]);
-	Sprite::SetView(mat[1][0]);
-	Sprite::SetProjection(mat[2][0]);
-	Sprite::SetSize(DirectX::XMFLOAT2(m_Timer.size.x, -m_Timer.size.y));
-	Sprite::SetUVPos(DirectX::XMFLOAT2(m_Timer.posTexCoord.x, m_Timer.posTexCoord.y));
-	Sprite::SetUVScale(DirectX::XMFLOAT2(m_Timer.sizeTexCoord.x, m_Timer.sizeTexCoord.y));
-	Sprite::SetTexture(m_pTexture[1]);
-	Sprite::Draw();
 }
 
 void CTimeUI::UpdateTimetexCoord()

@@ -128,6 +128,7 @@ void CScoreUI::Draw()
 		Sprite::SetSize(DirectX::XMFLOAT2(m_score[i].size.x, -m_score[i].size.y));
 		Sprite::SetUVPos(DirectX::XMFLOAT2(m_score[i].posTexCoord.x, m_score[i].posTexCoord.y));
 		Sprite::SetUVScale(DirectX::XMFLOAT2(m_score[i].sizeTexCoord.x, m_score[i].sizeTexCoord.y));
+		Sprite::SetColor(DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
 		Sprite::SetTexture(m_pTexture[0]);
 		Sprite::Draw();
 	}

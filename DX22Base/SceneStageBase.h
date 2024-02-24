@@ -47,7 +47,8 @@ public:
 	virtual void Update(float tick) = 0;
 	virtual void Draw() = 0;
 
-	//virtual void ItemCheck(int* item);			// アイテム使用の確認関数
+	int GetTotalScore();	// 合計スコア情報ゲット
+	int GetMinusScore();	// ー合計スコア情報ゲット
 
 protected:
 	virtual void DrawStage(DirectX::XMFLOAT4X4 * mat, VertexShader * vs) = 0;	// 陸描画
@@ -67,7 +68,8 @@ protected:
 	Model* m_pStageModel[MAX_STADE_MODEL];		// ステージモデル
 
 	int m_nMainCamera;	// 現在のカメラ
-
+	int m_nTotalScore;	// 合計スコア
+	int m_nMinusScore;	// －合計スコア
 };
 
 #endif // !__SCENE_STAGE_BASE_H__

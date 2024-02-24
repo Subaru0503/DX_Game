@@ -252,6 +252,15 @@
     <ClCompile Include="ResultBackGround.cpp">
       <Filter>ソース ファイル\System\UI\Result</Filter>
     </ClCompile>
+    <ClCompile Include="TitleMozi.cpp">
+      <Filter>ソース ファイル\System\UI\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultMozi.cpp">
+      <Filter>ソース ファイル\System\UI\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultScore.cpp">
+      <Filter>ソース ファイル\System\UI\Result</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -387,6 +396,15 @@
       <Filter>ヘッダー ファイル\System\UI\Title</Filter>
     </ClInclude>
     <ClInclude Include="ResultBackGround.h">
+      <Filter>ヘッダー ファイル\System\UI\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleMozi.h">
+      <Filter>ヘッダー ファイル\System\UI\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultMozi.h">
+      <Filter>ヘッダー ファイル\System\UI\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultScore.h">
       <Filter>ヘッダー ファイル\System\UI\Result</Filter>
     </ClInclude>
   </ItemGroup>

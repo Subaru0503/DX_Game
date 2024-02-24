@@ -47,8 +47,7 @@ public:
 	void SetScore(int score);	// スコアセット
 
 private:
-	ST_SCORE_PARAM m_score[DIGIT_SCORE + 1];
-	unsigned int m_TextureScore;
+	ST_SCORE_PARAM m_score[DIGIT_SCORE];
 	int m_nScore;
 	//int m_nAddMoney;
 	float m_Left, m_Right, m_Bottom, m_Top, m_near, m_far;

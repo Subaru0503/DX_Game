@@ -17,15 +17,13 @@ CTitleBackGround::CTitleBackGround()
 	, m_Top(0.0f)
 	, m_near(1.0f)
 	, m_far(10.0f)
-	, m_pTexture{ nullptr, nullptr, nullptr }
+	, m_pTexture{ nullptr }
 {
-	for (int i = 0; i < MAX_TITLE_TEXTURE; ++i)
-	{
-		m_pTexture[i] = new Texture();
-	}
+
+	m_pTexture = new Texture();
 
 	// タイトル背景
-	if (FAILED(m_pTexture[0]->Create("Assets/Texture/TitleBackGround.jpg")))
+	if (FAILED(m_pTexture->Create("Assets/Texture/TitleBackGround.jpg")))
 	{
 		MessageBox(NULL, "UI TitleBackGround.jpg", "Error", MB_OK);
 	}
@@ -39,13 +37,7 @@ CTitleBackGround::CTitleBackGround()
 // ========== デストラクタ ==========
 CTitleBackGround::~CTitleBackGround()
 {
-	for (int i = 0; i < MAX_TITLE_TEXTURE; ++i)
-	{
-		if (m_pTexture[i])
-		{
-			SAFE_DELETE(m_pTexture[i]);
-		}
-	}
+	SAFE_DELETE(m_pTexture);
 }
 
 // ========== Update関数 ==========
@@ -83,6 +75,6 @@ void CTitleBackGround::Draw()
 	Sprite::SetUVPos(DirectX::XMFLOAT2(m_TitleBackGround.posTexCoord.x, m_TitleBackGround.posTexCoord.y));
 	Sprite::SetUVScale(DirectX::XMFLOAT2(m_TitleBackGround.sizeTexCoord.x, m_TitleBackGround.sizeTexCoord.y));
 	Sprite::SetColor(DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
-	Sprite::SetTexture(m_pTexture[0]);
+	Sprite::SetTexture(m_pTexture);
 	Sprite::Draw();
 }

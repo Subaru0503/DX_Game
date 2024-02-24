@@ -10,6 +10,8 @@
 // ========== インクルード部 ==========
 #include "SceneManager.h"		// シーン遷移処理用
 #include "ResultBackGround.h"	// リザルト背景
+#include "ResultMozi.h"			// リザルト文字
+#include "ResultScore.h"		// リザルトスコア
 
 // ========== クラス ==========
 class CSceneResult
@@ -20,9 +22,22 @@ public:
 	void Update();
 	void Draw();
 
+	void SetTotalScore(int score);			// 合計スコアセット
+	void SetMinusScore(int minusScore);		// ー合計スコアセット
+
+private:
+	void ScoreSet();	// スコアセット
 private:
 	CSceneMng* m_pSceneMng;
 	CResultBackGround* m_pResultBackGround;
+	CResultMozi* m_pResultMozi;
+	CResultScore* m_pResultScore;
+
+	int m_nTotalScore;	// 合計スコア
+	int m_nPlusScore;	// ＋合計スコア
+	int m_nMinusScore;	// ー合計スコア
+
+	int m_nInitFlg;	// 初期化フラグ
 };
 
 #endif // !__SCENE_RESULT_H__

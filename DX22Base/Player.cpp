@@ -29,6 +29,7 @@ Player::Player(DirectX::XMFLOAT3 PlayerPos)	// コンストラクタ
 	, m_nLastScore(0)
 	, m_nPrevColor((int)Object::Color::NO)
 	, m_nScore(0)
+	, m_nMinusScore(0)
 {
 	m_pModel = new Model();
 	if (!m_pModel->Load("Assets/Model/3Dモデルデータ/もこ田めめめ/MokotaMememe.pmx", 1.0f, Model::XFlip))
@@ -384,11 +385,13 @@ void Player::AddScore(int kind, int color, int add)	// スコア加算
 		if (m_nPrevItem == kind)	// 二つともゴミだったら最後に
 		{
 			m_nScore -= m_nLastScore * add;	// スコア減算
+			m_nMinusScore += m_nLastScore * add;	// 引かれたスコアのデータを取っておく
 		}
 		// 一つだけゴミなら直前に取った物のスコア分引く
 		else if(m_nPrevItem == (int)Object::Kind::CAN)
 		{
 			m_nScore -= m_nPrevScore;	// スコア減算
+			m_nMinusScore += m_nPrevScore;	// 引かれたスコアのデータを取っておく
 		}
 		else
 		{
@@ -443,7 +446,12 @@ DirectX::XMFLOAT3 Player::GetSize()
 	return m_size;
 }
 
-int Player::GetScore()
+int Player::GetScore()		// スコア取得
 {
 	return m_nScore;
+}
+
+int Player::GetMinusScore()	// 引かれたスコア取得
+{
+	return m_nMinusScore;
 }
