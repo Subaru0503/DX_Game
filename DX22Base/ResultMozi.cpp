@@ -70,7 +70,7 @@ CResultMozi::CResultMozi()
 
 	// あつめたフルーツ
 	m_ResultMozi[1].size = DirectX::XMFLOAT2(m_pTexture[1]->GetWidth(), m_pTexture[1]->GetHeight());
-	m_ResultMozi[1].pos = DirectX::XMFLOAT3(370.0f, 270.0f, 0.0f);
+	m_ResultMozi[1].pos = DirectX::XMFLOAT3(310.0f, 270.0f, 0.0f);
 
 	// 合計＋ポイント
 	m_ResultMozi[2].size = DirectX::XMFLOAT2(m_pTexture[2]->GetWidth(), m_pTexture[2]->GetHeight());
@@ -78,7 +78,7 @@ CResultMozi::CResultMozi()
 
 	// あつめたカン
 	m_ResultMozi[3].size = DirectX::XMFLOAT2(m_pTexture[3]->GetWidth(), m_pTexture[3]->GetHeight());
-	m_ResultMozi[3].pos = DirectX::XMFLOAT3(370.0f, 360.0f, 0.0f);
+	m_ResultMozi[3].pos = DirectX::XMFLOAT3(310.0f, 360.0f, 0.0f);
 
 	// 合計ーポイント
 	m_ResultMozi[4].size = DirectX::XMFLOAT2(m_pTexture[4]->GetWidth(), m_pTexture[4]->GetHeight());

@@ -54,3 +54,13 @@ int CSceneStageBase::GetMinusScore()	// ー合計スコア情報ゲット
 {
 	return m_nMinusScore;
 }
+
+int CSceneStageBase::GetFruitsNum()		// あつめたフルーツの数情報ゲット
+{
+	return m_nFruitsNum;
+}
+
+int CSceneStageBase::GetCanNum()		// あつめたカンの数
+{
+	return m_nCanNum;
+}

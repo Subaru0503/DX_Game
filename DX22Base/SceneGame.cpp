@@ -77,6 +77,8 @@ void CSceneGame::Update(float tick)
 	{
 		m_nTotalScore = m_pPlayer->GetScore();		// 合計スコア
 		m_nMinusScore = m_pPlayer->GetMinusScore();	// ー合計スコア
+		m_nFruitsNum = m_pPlayer->GetFruitsNum();	// あつめたフルーツの数
+		m_nCanNum = m_pPlayer->GetCanNum();			// あつめたカンの数
 		m_pSceneMng->SetNextScene(CSceneMng::SceneKind::SCENE_RESULT, 1);	// リザルトシーンへ
 		return;	// 以降のシートを処理しない
 	}

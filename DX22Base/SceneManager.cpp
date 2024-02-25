@@ -178,4 +178,6 @@ void CSceneMng::PassData(CSceneStageBase* game, CSceneResult* result)	// Select 
 	// ----- 受け渡し -----
 	result->SetTotalScore(game->GetTotalScore());	// 合計スコア情報セット
 	result->SetMinusScore(game->GetMinusScore());	// ー合計スコア情報セット
+	result->SetFruitsNum(game->GetFruitsNum());		// あつめたフルーツの数
+	result->SetCanNum(game->GetCanNum());			// あつめたカンの数
 }

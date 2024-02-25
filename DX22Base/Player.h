@@ -55,6 +55,10 @@ public:
 	int GetScore();
 	// 引かれたスコア取得
 	int GetMinusScore();
+	// あつめたフルーツの数取得
+	int GetFruitsNum();
+	// あつめたカンの数取得
+	int GetCanNum();
 
 private:
 	Model* m_pModel;
@@ -87,5 +91,7 @@ private:
 	int m_nPrevColor;		// ひとつ目に手に入れたアイテムの色
 	int m_nScore;			// スコア
 	int m_nMinusScore;		// 引かれたスコアの合計
+	int m_nFruitsNum;		// あつめたフルーツの数
+	int m_nCanNum;			// あつめたカンの数
 };
 #endif		// __PLAYER_H__

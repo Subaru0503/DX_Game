@@ -8,7 +8,8 @@
 #include "Texture.h"
 
 //----定数・マクロ定義----
-#define MAX_RESULT_SCORE   (2)				// リザルト数字
+#define MAX_RESULT_SCORE_TEXTURE   (2)		// リザルト数字テクスチャ最大数
+#define MAX_SCORE					(5)		// スコア種類最大数
 #define DIGIT_RESULT_SCORE			(5)		//エフェクトの数（配列の数）
 #define ANIM_RESULT_SCORE_FRAME	(2)			//アニメーション一コマフレーム数
 #define ANIM_RESULT_SCORE_SPLIT_X	(5)		//画像分割数（横）
@@ -38,13 +39,12 @@ public:
 	void SetScore(int score, int index);	// スコアセット
 
 private:
-	ST_SCORE_PARAM m_score[MAX_RESULT_SCORE][DIGIT_RESULT_SCORE];
-	int m_nScore;			// スコア
-	//int m_nAddMoney;
+	ST_SCORE_PARAM m_score[MAX_SCORE][DIGIT_RESULT_SCORE];
+	int m_nScore[MAX_SCORE];			// スコア
 	float m_Left, m_Right, m_Bottom, m_Top, m_near, m_far;
 	float m_basePosX, m_basePosY;
 	float m_fAlpha;
-	Texture* m_pTexture[MAX_RESULT_SCORE];
+	Texture* m_pTexture[MAX_RESULT_SCORE_TEXTURE];
 
 };
 

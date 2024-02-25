@@ -69,9 +69,22 @@ void CSceneResult::SetMinusScore(int minusScore)	// ー合計スコアセット
 	m_nMinusScore = minusScore;
 }
 
+void CSceneResult::SetFruitsNum(int FruitsNum)		// あつめたフルーツの数
+{
+	m_nFruitsNum = FruitsNum;
+}
+
+void CSceneResult::SetCanNum(int CanNum)			// あつめたカンの数
+{
+	m_nCanNum = CanNum;
+}
+
 void CSceneResult::ScoreSet()	// スコアセット
 {
 	m_nPlusScore = m_nTotalScore + m_nMinusScore;	// プラスだけのスコアを計算
-	m_pResultScore->SetScore(m_nPlusScore, 0);
-	m_pResultScore->SetScore(m_nMinusScore, 1);
+	m_pResultScore->SetScore(m_nFruitsNum, 0);
+	m_pResultScore->SetScore(m_nCanNum, 1);
+	m_pResultScore->SetScore(m_nPlusScore, 2);
+	m_pResultScore->SetScore(m_nMinusScore, 3);
+	m_pResultScore->SetScore(m_nTotalScore, 4);
 }

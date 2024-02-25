@@ -30,6 +30,8 @@ Player::Player(DirectX::XMFLOAT3 PlayerPos)	// コンストラクタ
 	, m_nPrevColor((int)Object::Color::NO)
 	, m_nScore(0)
 	, m_nMinusScore(0)
+	, m_nFruitsNum(0)
+	, m_nCanNum(0)
 {
 	m_pModel = new Model();
 	if (!m_pModel->Load("Assets/Model/3Dモデルデータ/もこ田めめめ/MokotaMememe.pmx", 1.0f, Model::XFlip))
@@ -365,6 +367,7 @@ void Player::AddScore(int kind, int color, int add)	// スコア加算
 	{
 		m_nScore += add;	// スコア加算
 		m_nLastScore = add;	// スコアのデータを取っておく
+		m_nFruitsNum += 2;	// 個数加算
 	}
 	// 色が揃っていたら
 	else if (m_nPrevColor == color)
@@ -378,6 +381,7 @@ void Player::AddScore(int kind, int color, int add)	// スコア加算
 		}
 		m_nScore += ScoreAdd;		// スコア加算
 		m_nLastScore = ScoreAdd;	// スコアのデータを取っておく
+		m_nFruitsNum += 2;			// 個数加算
 	}
 	// ゴミを拾ってしまっていたら
 	else if(m_nPrevItem == (int)Object::Kind::CAN || kind == (int)Object::Kind::CAN)
@@ -386,16 +390,24 @@ void Player::AddScore(int kind, int color, int add)	// スコア加算
 		{
 			m_nScore -= m_nLastScore * add;	// スコア減算
 			m_nMinusScore += m_nLastScore * add;	// 引かれたスコアのデータを取っておく
+			m_nCanNum += 2;					// 個数加算
 		}
 		// 一つだけゴミなら直前に取った物のスコア分引く
 		else if(m_nPrevItem == (int)Object::Kind::CAN)
 		{
-			m_nScore -= m_nPrevScore;	// スコア減算
-			m_nMinusScore += m_nPrevScore;	// 引かれたスコアのデータを取っておく
+			m_nScore -= add;// スコア減算
+			m_nMinusScore += add;	// 引かれたスコアのデータを取っておく
+			// 個数加算
+			m_nCanNum++;
+			m_nFruitsNum++;
 		}
 		else
 		{
-			m_nScore -= add;// スコア減算
+			m_nScore -= m_nPrevScore;	// スコア減算
+			m_nMinusScore += m_nPrevScore;	// 引かれたスコアのデータを取っておく
+			// 個数加算
+			m_nCanNum++;
+			m_nFruitsNum++;
 		}
 		if (m_nScore < 0)	// スコアが0より低くなってたら
 		{
@@ -454,4 +466,14 @@ int Player::GetScore()		// スコア取得
 int Player::GetMinusScore()	// 引かれたスコア取得
 {
 	return m_nMinusScore;
+}
+
+int Player::GetFruitsNum()	// あつめたフルーツの数取得
+{
+	return m_nFruitsNum;
+}
+
+int Player::GetCanNum()	// あつめたカンの数取得
+{
+	return m_nCanNum;
 }

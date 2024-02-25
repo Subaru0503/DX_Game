@@ -49,6 +49,8 @@ public:
 
 	int GetTotalScore();	// 合計スコア情報ゲット
 	int GetMinusScore();	// ー合計スコア情報ゲット
+	int GetFruitsNum();		// あつめたフルーツの数情報ゲット
+	int GetCanNum();		// あつめたカンの数
 
 protected:
 	virtual void DrawStage(DirectX::XMFLOAT4X4 * mat, VertexShader * vs) = 0;	// 陸描画
@@ -70,6 +72,8 @@ protected:
 	int m_nMainCamera;	// 現在のカメラ
 	int m_nTotalScore;	// 合計スコア
 	int m_nMinusScore;	// －合計スコア
+	int m_nFruitsNum;	// あつめたフルーツの数
+	int m_nCanNum;		// あつめたカンの数
 };
 
 #endif // !__SCENE_STAGE_BASE_H__

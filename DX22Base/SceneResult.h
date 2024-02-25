@@ -24,6 +24,8 @@ public:
 
 	void SetTotalScore(int score);			// 合計スコアセット
 	void SetMinusScore(int minusScore);		// ー合計スコアセット
+	void SetFruitsNum(int FruitsNum);		// あつめたフルーツの数
+	void SetCanNum(int CanNum);				// あつめたカンの数
 
 private:
 	void ScoreSet();	// スコアセット
@@ -36,6 +38,8 @@ private:
 	int m_nTotalScore;	// 合計スコア
 	int m_nPlusScore;	// ＋合計スコア
 	int m_nMinusScore;	// ー合計スコア
+	int m_nFruitsNum;	// あつめたフルーツの数
+	int m_nCanNum;		// あつめたカンの数
 
 	int m_nInitFlg;	// 初期化フラグ
 };
