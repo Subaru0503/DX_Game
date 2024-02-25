@@ -28,7 +28,7 @@
 using namespace std;
 
 //----定数・マクロ定義----
-#define MAX_STADE_MODEL (3)
+#define MAX_STADE_MODEL (18)
 
 // ========== クラス ==========
 class CSceneStageBase

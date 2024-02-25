@@ -80,14 +80,10 @@ void CCollisionAreaMng::SetCollision(int stage)	// 当たり判定セット
 	{
 	case CSceneMng::SceneKind::SCENE_GAME:
 		m_areaList.push_back(new CAreaGround(0.0f, -1.0f, 0.0f, 60.0f, 1.0f, 60.0f));	// 床
-		//m_areaList.push_back(new CAreaWall(11.0f, 5.0f, 0.0f, 2.0f, 10.0f, 40.0f));		// 長い壁
-		//m_areaList.push_back(new CAreaWall(-11.0f, 5.0f, 0.0f, 2.0f, 10.0f, 40.0f));	// 長い壁
-		//m_areaList.push_back(new CAreaWall(-9.0f, 5.0f, 18.0f, 0.5f, 10.0f, 12.0f));	// ステージ1通路の壁
-		//m_areaList.push_back(new CAreaWall(-3.4f, 5.0f, 18.0f, 0.5f, 10.0f, 12.0f));	// ステージ1通路の壁
-		//m_areaList.push_back(new CAreaWall(0.8f, 5.0f, 11.0f, 8.6f, 10.0f, 2.0f));		// 通路が2つある方の真ん中の壁
-		//m_areaList.push_back(new CAreaWall(-9.5f, 5.0f, 11.0f, 0.5f, 10.0f, 2.0f));		// 通路が2つある方の端っこの壁
-		//m_areaList.push_back(new CAreaWall(-6.2f, 5.0f, -11.0f, 7.0f, 10.0f, 2.0f));	// 通路が1つある方のステージ1側の壁
-		//m_areaList.push_back(new CAreaWall(6.2f, 5.0f, -11.0f, 7.0f, 10.0f, 2.0f));		// 通路が1つある方のステージ3側の壁
+		m_areaList.push_back(new CAreaWall(0.0f, 5.0f, -11.5f, 40.0f, 10.0f, 1.0f));	// 横壁
+		m_areaList.push_back(new CAreaWall(0.0f, 5.0f, 11.5f, 40.0f, 10.0f, 1.0f));		// 横壁
+		m_areaList.push_back(new CAreaWall(16.0f, 5.0f, 0.0f, 1.0f, 10.0f, 40.0f));	// 縦壁
+		m_areaList.push_back(new CAreaWall(-16.0f, 5.0f, 0.0f, 1.0f, 10.0f, 40.0f));		// 縦壁
 		break;
 	}
 

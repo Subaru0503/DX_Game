@@ -44,6 +44,120 @@ CSceneGame::CSceneGame(CSceneMng* pSceneMng, int Stage)
 		//----エラーメッセージ表示----
 		MessageBox(NULL, "川モデル読み込み失敗", "Error", MB_OK);
 	}
+
+	// 空
+	m_pStageModel[3] = new Model();
+	if (!m_pStageModel[3]->Load("Assets/Model/Sky/Sky.fbx", 1.8f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "空モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	// 背景
+	m_pStageModel[4] = new Model();
+	if (!m_pStageModel[4]->Load("Assets/Model/StageBackGround/BackGround.fbx", 1.8f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	// 背景
+	m_pStageModel[5] = new Model();
+	if (!m_pStageModel[5]->Load("Assets/Model/StageBackGround/BackGround.fbx", 1.3f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	// 背景
+	m_pStageModel[6] = new Model();
+	if (!m_pStageModel[6]->Load("Assets/Model/StageBackGround/BackGround.fbx", 1.5f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	// 岩
+	m_pStageModel[7] = new Model();
+	if (!m_pStageModel[7]->Load("Assets/Model/Rock/Rock.fbx", 2.6f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	m_pStageModel[8] = new Model();
+	if (!m_pStageModel[8]->Load("Assets/Model/Rock/Rock.fbx", 1.6f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	m_pStageModel[9] = new Model();
+	if (!m_pStageModel[9]->Load("Assets/Model/Rock/Rock.fbx", 1.6f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	m_pStageModel[10] = new Model();
+	if (!m_pStageModel[10]->Load("Assets/Model/Rock/Rock.fbx", 2.6f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	// 背景
+	m_pStageModel[11] = new Model();
+	if (!m_pStageModel[11]->Load("Assets/Model/StageBackGround/BackGround.fbx", 1.8f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	// 背景
+	m_pStageModel[12] = new Model();
+	if (!m_pStageModel[12]->Load("Assets/Model/StageBackGround/BackGround.fbx", 1.3f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	// 背景
+	m_pStageModel[13] = new Model();
+	if (!m_pStageModel[13]->Load("Assets/Model/StageBackGround/BackGround.fbx", 1.5f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	// 岩
+	m_pStageModel[14] = new Model();
+	if (!m_pStageModel[14]->Load("Assets/Model/Rock/Rock.fbx", 2.6f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	m_pStageModel[15] = new Model();
+	if (!m_pStageModel[15]->Load("Assets/Model/Rock/Rock.fbx", 1.6f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	m_pStageModel[16] = new Model();
+	if (!m_pStageModel[16]->Load("Assets/Model/Rock/Rock.fbx", 1.6f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
+	}
+
+	m_pStageModel[17] = new Model();
+	if (!m_pStageModel[17]->Load("Assets/Model/Rock/Rock.fbx", 2.6f, Model::XFlip))
+	{
+		//----エラーメッセージ表示----
+		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
+	}
 	m_pPlayer->SetEventFlg(false);	// イベントフラグ下げ
 	m_pCamera[CAM_PLAYER] = new CameraPlayer(m_pPlayer, 90.0f, 40.0f, 12.0f);
 	m_pCamera[CAM_DEBUG] = new CameraDebug();
@@ -203,19 +317,139 @@ void CSceneGame::DrawStage(DirectX::XMFLOAT4X4 *mat, VertexShader* vs)
 			break;
 		case 1:
 			//---Geometory用の変換行列を計算
-			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
+			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.6f) *
 				DirectX::XMMatrixRotationX(0.0f) *
 				DirectX::XMMatrixRotationY(0.0f) *
 				DirectX::XMMatrixRotationZ(0.0f) *
-				DirectX::XMMatrixTranslation(0.0f, -1.5f, 16.8f);
+				DirectX::XMMatrixTranslation(0.0f, -1.5f, 18.8f);
 			break;
 		case 2:
 			//---Geometory用の変換行列を計算
-			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
+			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.6f) *
 				DirectX::XMMatrixRotationX(0.0f) *
 				DirectX::XMMatrixRotationY(0.0f) *
 				DirectX::XMMatrixRotationZ(0.0f) *
-				DirectX::XMMatrixTranslation(0.0f, -1.5f, -16.8f);
+				DirectX::XMMatrixTranslation(0.0f, -1.5f, -18.8f);
+			break;
+		case 3:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(0.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(0.0f, 0.0f, 0.0f);
+			break;
+		case 4:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(0.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(-21.5f, -2.0f, 0.0f);
+			break;
+		case 5:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(0.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(-20.0f, -2.0f, 10.0f);
+			break;
+		case 6:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(0.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(-21.0f, -2.0f, -9.0f);
+			break;
+		case 7:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(90.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(-20.0f, -0.0f, 18.5f);
+			break;
+		case 8:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.3f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(90.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(-17.0f, 0.0f, 6.0f);
+			break;
+		case 9:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.3f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(90.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(-17.0f, 0.0f, -6.0f);
+			break;
+		case 10:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.3f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(90.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(-20.0f, 0.0f, -18.5f);
+			break;
+		case 11:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(0.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(21.5f, -2.0f, 0.0f);
+			break;
+		case 12:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(0.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(20.0f, -2.0f, 10.0f);
+			break;
+		case 13:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(0.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(21.0f, -2.0f, -9.0f);
+			break;
+		case 14:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(90.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(20.0f, -0.0f, 18.5f);
+			break;
+		case 15:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.3f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(90.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(17.0f, 0.0f, 6.0f);
+			break;
+		case 16:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.3f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(90.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(17.0f, 0.0f, -6.0f);
+			break;
+		case 17:
+			//---Geometory用の変換行列を計算
+			world = DirectX::XMMatrixScaling(1.3f, 1.0f, 1.0f) *
+				DirectX::XMMatrixRotationX(0.0f) *
+				DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(90.0f)) *
+				DirectX::XMMatrixRotationZ(0.0f) *
+				DirectX::XMMatrixTranslation(20.0f, 0.0f, -18.5f);
 			break;
 		}
 
