@@ -16,9 +16,11 @@
 //----定数・マクロ定義----
 #define SCREEN_WIDTH (1280)
 #define SCREEN_HEIGHT (720)
+#define FRAME (1)
 
 CSceneGame::CSceneGame(CSceneMng* pSceneMng, int Stage)
 	: CSceneStageBase(pSceneMng, Stage, DirectX::XMFLOAT3(-5.0f, 0.0f, 0.0f))
+	, m_fFrameCnt(0.0f)
 {
 	m_nMainCamera = CAM_PLAYER;
 	// モデル読み込み
@@ -214,10 +216,20 @@ void CSceneGame::Update(float tick)
 		m_nMainCamera = CAM_EVENT;
 	}
 
+	// カウントが立ってたらパネルの中のフルーツの描画フラグをリセットする
+	if (m_fFrameCnt / 60.0f > FRAME)
+	{
+		// フラグリセット
+		m_pPlayer->SetResetFlg(false);
+		m_pUI->ResetDrawFlg();
+		m_fFrameCnt = 0.0f;	// カウントリセット
+	}
+
 	// レイの作成
 	//Collision::Ray ray;
 	m_pPlayer->Update();							// プレイヤー更新
 	m_pObjectMng->Update(tick);						// オブジェクトマネージャー更新
+	m_pUI->Update();								// アイテムUI描画
 	m_pScoreUI->SetScore(m_pPlayer->GetScore());	// スコア更新
 	//ray.start = m_pPlayer->GetPos();
 	//ray.start.y += 1.0f;
@@ -259,6 +271,12 @@ void CSceneGame::Update(float tick)
 	//----UI----
 	//m_pUI->Update();
 	m_pTimeUI->Update();	// 時間更新
+
+	// フラグが立ってたら
+	if (m_pPlayer->GetResetFlg())
+	{
+		m_fFrameCnt++;	// カウントアップ
+	}
 }
 
 void CSceneGame::Draw()
@@ -295,6 +313,7 @@ void CSceneGame::Draw()
 	SetRenderTargets(1, &pRTV, nullptr);
 	//m_pUI->Draw();
 	m_pScoreUI->Draw();	// スコア描画
+	m_pUI->Draw();		// アイテム描画
 	m_pTimeUI->Draw();	// 時間描画
 }
 

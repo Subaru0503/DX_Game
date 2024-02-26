@@ -16,6 +16,7 @@ Player::Player(DirectX::XMFLOAT3 PlayerPos)	// コンストラクタ
 	, m_size(0.5f, 2.0f, 0.5f)
 	, m_pCamera(nullptr)
 	, m_pTexture{ nullptr, nullptr }
+	, m_pUI(nullptr)
 	, m_fGravity(0.0f)
 	, m_Move{ 0.0f, 0.0f, 0.0f }	// 移動情報
 	, m_OldMove{ 0.0f, 0.0f, 0.0f }	// 前の移動情報
@@ -32,6 +33,7 @@ Player::Player(DirectX::XMFLOAT3 PlayerPos)	// コンストラクタ
 	, m_nMinusScore(0)
 	, m_nFruitsNum(0)
 	, m_nCanNum(0)
+	, m_nResetFlg(0)
 {
 	m_pModel = new Model();
 	if (!m_pModel->Load("Assets/Model/3Dモデルデータ/もこ田めめめ/MokotaMememe.pmx", 1.0f, Model::XFlip))
@@ -360,6 +362,8 @@ void Player::AddScore(int kind, int color, int add)	// スコア加算
 		m_nPrevItem = kind;		// 種類
 		m_nPrevScore = add;		// スコア
 		m_nPrevColor = color;	// 色
+		// 1個目のパネルにはめる
+		m_pUI->SetUP(DirectX::XMFLOAT3(580.0f, 80.0f, 0.0f), kind, true);
 		return;	// 以降の処理をしない
 	}
 	// 種類が揃っていたら
@@ -415,8 +419,12 @@ void Player::AddScore(int kind, int color, int add)	// スコア加算
 		}
 	}
 
+	// 2個目のパネルにはめる
+	m_pUI->SetUP(DirectX::XMFLOAT3(680.0f, 80.0f, 0.0f), kind, true);
 	// 前に取ったアイテム情報を初期化
 	m_nPrevItem = (int)Object::Kind::NONE;
+	// リセットフラグを上げる
+	m_nResetFlg = true;
 }
 
 void Player::SetPos(DirectX::XMFLOAT3 pos)
@@ -427,6 +435,16 @@ void Player::SetPos(DirectX::XMFLOAT3 pos)
 void Player::SetEventFlg(int event)
 {
 	m_nEventFlg = event;
+}
+
+void Player::SetItemUI(ItemUI * ItemUI)	// アイテムUIセット
+{
+	m_pUI = ItemUI;
+}
+
+void Player::SetResetFlg(int flg)		// リセットフラグセット
+{
+	m_nResetFlg = flg;
 }
 
 void Player::SetPosY(float height)			// 過去座標セット
@@ -476,4 +494,9 @@ int Player::GetFruitsNum()	// あつめたフルーツの数取得
 int Player::GetCanNum()	// あつめたカンの数取得
 {
 	return m_nCanNum;
+}
+
+int Player::GetResetFlg()	// リセットフラグ情報ゲット
+{
+	return m_nResetFlg;
 }

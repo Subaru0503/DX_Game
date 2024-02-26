@@ -19,6 +19,7 @@ private:
 
 private:
 	//CameraEvent* pEvent;
+	float m_fFrameCnt;	// フレームカウント
 };
 
 #endif // __CSCENE_GAME_H__

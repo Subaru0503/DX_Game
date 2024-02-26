@@ -9,6 +9,8 @@
 #include "CameraBase.h"
 #include "Model.h"
 #include "Texture.h"
+//----UI----
+#include "ItemUI.h"
 //----エフェクト----
 #include "MoveEmitter.h"
 #include "Effect.h"
@@ -42,6 +44,8 @@ public:
 	void SetPos(DirectX::XMFLOAT3 pos);
 	void SetPosY(float height);				// 高さ補正
 	void SetEventFlg(int event);	// イベントフラグ設定
+	void SetItemUI(ItemUI* ItemUI);	// アイテムUIセット
+	void SetResetFlg(int flg);		// リセットフラグセット
 
 	// 現在地の取得
 	DirectX::XMFLOAT3 GetPos();
@@ -59,6 +63,8 @@ public:
 	int GetFruitsNum();
 	// あつめたカンの数取得
 	int GetCanNum();
+	// リセットフラグ情報ゲット
+	int GetResetFlg();
 
 private:
 	Model* m_pModel;
@@ -68,6 +74,8 @@ private:
 	DirectX::XMFLOAT3 m_oldpos;	// プレイヤーの位置
 	DirectX::XMFLOAT3 m_size;	// プレイヤーのサイズ
 	Texture* m_pTexture[3];
+
+	ItemUI* m_pUI;	// UI
 
 	Effect* m_pEffect;
 	MoveEmitter* m_pMoveEmitter;
@@ -93,5 +101,6 @@ private:
 	int m_nMinusScore;		// 引かれたスコアの合計
 	int m_nFruitsNum;		// あつめたフルーツの数
 	int m_nCanNum;			// あつめたカンの数
+	int m_nResetFlg;		// リセットを呼び出すフラグ
 };
 #endif		// __PLAYER_H__

@@ -26,6 +26,7 @@ CSceneStageBase::CSceneStageBase(CSceneMng* pSceneMng, int Stage, DirectX::XMFLO
 	m_pCollision->SetPlayer(m_pPlayer);
 	m_pCollision->SetObjectManager(m_pObjectMng);
 	m_pUI = new ItemUI;
+	m_pPlayer->SetItemUI(m_pUI);
 	m_pScoreUI = new CScoreUI(m_pPlayer->GetScore());
 	m_pTimeUI = new CTimeUI();
 
