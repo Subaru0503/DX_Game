@@ -82,7 +82,7 @@ void CCollisionAreaMng::SetCollision(int stage)	// ìñÇΩÇËîªíËÉZÉbÉg
 		m_areaList.push_back(new CAreaGround(0.0f, -1.0f, 0.0f, 60.0f, 1.0f, 60.0f));	// è∞
 		m_areaList.push_back(new CAreaWall(0.0f, 5.0f, -11.5f, 40.0f, 10.0f, 1.0f));	// â°ï«
 		m_areaList.push_back(new CAreaWall(0.0f, 5.0f, 11.5f, 40.0f, 10.0f, 1.0f));		// â°ï«
-		m_areaList.push_back(new CAreaWall(16.0f, 5.0f, 0.0f, 1.0f, 10.0f, 40.0f));	// ècï«
+		m_areaList.push_back(new CAreaWall(16.0f, 5.0f, 0.0f, 1.0f, 10.0f, 40.0f));		// ècï«
 		m_areaList.push_back(new CAreaWall(-16.0f, 5.0f, 0.0f, 1.0f, 10.0f, 40.0f));		// ècï«
 		break;
 	}

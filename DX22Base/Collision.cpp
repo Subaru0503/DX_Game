@@ -27,9 +27,11 @@ void Collision::Update()
 			}
 			break;
 		case Object::APPLE:
+		case Object::STRAWBERRY:
 		case Object::BANANA:
 		case Object::LEMON:
 		case Object::WATER_MELON:
+		case Object::MELON:
 		case Object::CAN:
 
 			//---“–‚½‚è”»’è‚ðŽæ‚é----

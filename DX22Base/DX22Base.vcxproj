@@ -187,6 +187,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="ItemUI.cpp" />
     <ClCompile Include="Lemon.cpp" />
+    <ClCompile Include="Melon.cpp" />
     <ClCompile Include="MeshBuffer.cpp" />
     <ClCompile Include="Geometory.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -208,6 +209,7 @@
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Startup.cpp" />
+    <ClCompile Include="Strawberry.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="TimeUI.cpp" />
@@ -240,6 +242,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="ItemUI.h" />
     <ClInclude Include="Lemon.h" />
+    <ClInclude Include="Melon.h" />
     <ClInclude Include="MeshBuffer.h" />
     <ClInclude Include="Geometory.h" />
     <ClInclude Include="Main.h" />
@@ -261,6 +264,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Strawberry.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeUI.h" />
     <ClInclude Include="TitleBackGround.h" />

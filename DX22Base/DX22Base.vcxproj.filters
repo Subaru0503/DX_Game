@@ -261,6 +261,12 @@
     <ClCompile Include="ResultScore.cpp">
       <Filter>ソース ファイル\System\UI\Result</Filter>
     </ClCompile>
+    <ClCompile Include="Strawberry.cpp">
+      <Filter>ソース ファイル\Object\Fruits</Filter>
+    </ClCompile>
+    <ClCompile Include="Melon.cpp">
+      <Filter>ソース ファイル\Object\Fruits</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -406,6 +412,12 @@
     </ClInclude>
     <ClInclude Include="ResultScore.h">
       <Filter>ヘッダー ファイル\System\UI\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Strawberry.h">
+      <Filter>ヘッダー ファイル\Object\Fruits</Filter>
+    </ClInclude>
+    <ClInclude Include="Melon.h">
+      <Filter>ヘッダー ファイル\Object\Fruits</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -146,6 +146,9 @@ void CObjectMng::SetObject()			// 初期オブジェクトセット
 		case Object::Kind::APPLE:	// リンゴ
 			m_ObjectList.push_back(new CApple(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
 			break;
+		case Object::Kind::STRAWBERRY:	// イチゴ
+			m_ObjectList.push_back(new CStrawberry(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
+			break;
 		case Object::Kind::BANANA:	// バナナ
 			m_ObjectList.push_back(new CBanana(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
 			break;
@@ -154,6 +157,9 @@ void CObjectMng::SetObject()			// 初期オブジェクトセット
 			break;
 		case Object::Kind::WATER_MELON:		// スイカ
 			m_ObjectList.push_back(new CWaterMelon(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
+			break;
+		case Object::Kind::MELON:		// メロン
+			m_ObjectList.push_back(new CMelon(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
 			break;
 		default:
 			i--;
@@ -182,6 +188,9 @@ void CObjectMng::FruitsObjectSet(DirectX::XMFLOAT3 pos)		// 新しくフルーツオブジ
 	case Object::Kind::APPLE:	// リンゴ
 		m_ObjectList.push_back(new CApple(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
 		break;
+	case Object::Kind::STRAWBERRY:	// イチゴ
+		m_ObjectList.push_back(new CStrawberry(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
+		break;
 	case Object::Kind::BANANA:	// バナナ
 		m_ObjectList.push_back(new CBanana(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
 		break;
@@ -190,6 +199,9 @@ void CObjectMng::FruitsObjectSet(DirectX::XMFLOAT3 pos)		// 新しくフルーツオブジ
 		break;
 	case Object::Kind::WATER_MELON:		// スイカ
 		m_ObjectList.push_back(new CWaterMelon(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
+		break;
+	case Object::Kind::MELON:		// メロン
+		m_ObjectList.push_back(new CMelon(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
 		break;
 	case Object::Kind::CAN:		// 空き缶
 		m_ObjectList.push_back(new CCan(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));

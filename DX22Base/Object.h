@@ -24,9 +24,11 @@ public:
 		// 木から落ちる物
 		// フルーツ
 		APPLE,			// リンゴ
+		STRAWBERRY,		// いちご
 		BANANA,			// バナナ
 		LEMON,			// レモン
 		WATER_MELON,	// スイカ
+		MELON,			// メロン
 		// ゴミ
 		CAN,			// 空き缶
 		MAX_FALL,		// 落下物最大数

@@ -12,9 +12,11 @@
 #include "Tree.h"				// 木
 // フルーツ
 #include "Apple.h"				// リンゴ
+#include "Strawberry.h"			// イチゴ
 #include "Banana.h"				// バナナ
 #include "Lemon.h"				// レモン
 #include "WaterMelon.h"			// スイカ
+#include "Melon.h"				// メロン
 #include "Can.h"				// 空き缶
 
 // オブジェクトリスト用
