@@ -45,6 +45,11 @@ ItemUI::ItemUI()	// コンストラクタ
 	{
 		MessageBox(NULL, "ItemUI Melon.png", "Error", MB_OK);
 	}
+	// 空き缶
+	if (FAILED(m_pTexture[7]->Create("Assets/Texture/Can.png")))
+	{
+		MessageBox(NULL, "ItemUI Can.png", "Error", MB_OK);
+	}
 
 	for (int i = 0; i < MAX_ITEM_UI; i++)
 	{
@@ -107,6 +112,13 @@ ItemUI::ItemUI()	// コンストラクタ
 
 	m_Item[13].size = DirectX::XMFLOAT2(m_pTexture[6]->GetWidth() * 0.25f, m_pTexture[6]->GetHeight() * 0.25f);
 	m_Item[13].kind = Object::MELON;
+
+	// 空き缶
+	m_Item[14].size = DirectX::XMFLOAT2(m_pTexture[7]->GetWidth() * 0.25f, m_pTexture[7]->GetHeight() * 0.25f);
+	m_Item[14].kind = Object::CAN;
+
+	m_Item[15].size = DirectX::XMFLOAT2(m_pTexture[7]->GetWidth() * 0.25f, m_pTexture[7]->GetHeight() * 0.25f);
+	m_Item[15].kind = Object::CAN;
 }
 
 ItemUI::~ItemUI()	// デストラクタ	

@@ -9,6 +9,7 @@
 
 //----定数・マクロ定義----
 #define MAX_TREE (4)	// 木最大数
+#define FALL_FRUITS_POSY (7.0f)	// フルーツ落下位置
 using namespace std;
 
 CObjectMng::CObjectMng()	// コンストラクタ
@@ -120,13 +121,14 @@ list<Object*>* CObjectMng::GetObjectList()
 void CObjectMng::SetObject()			// 初期オブジェクトセット
 {
 	DirectX::XMFLOAT3 Deltapos = DirectX::XMFLOAT3(7.0f, 0.0f, -1.0f);		// 座標変化量
-	DirectX::XMFLOAT3 TreePos = DirectX::XMFLOAT3(-10.0f, 3.0f, -5.0f);		// 木座標
-	DirectX::XMFLOAT3 FruitsPos = DirectX::XMFLOAT3(-10.0f, 6.0f, -3.0f);	// フルーツ座標
+	DirectX::XMFLOAT3 TreePos = DirectX::XMFLOAT3(-10.0f, 6.0f, -5.0f);		// 木座標
+	DirectX::XMFLOAT3 FruitsPos = DirectX::XMFLOAT3(-10.0f, FALL_FRUITS_POSY, -3.0f);	// フルーツ座標
+	DirectX::XMFLOAT3 FruitsSize = DirectX::XMFLOAT3(2.0f, 2.0f, 2.0f);		// フルーツサイズ
 	// 木
 	for (int i = 0; i < MAX_TREE; i++)
 	{
 		// 木生成
-		m_ObjectList.push_back(new CTree(TreePos.x, TreePos.y, TreePos.z, 1.0f, 6.0f, 1.0f));
+		m_ObjectList.push_back(new CTree(TreePos.x, TreePos.y, TreePos.z, 1.0f, 21.0f, 1.0f));
 		// 座標変化
 		TreePos.x += Deltapos.x;
 		TreePos.z *= Deltapos.z;
@@ -144,22 +146,22 @@ void CObjectMng::SetObject()			// 初期オブジェクトセット
 		switch (random)
 		{
 		case Object::Kind::APPLE:	// リンゴ
-			m_ObjectList.push_back(new CApple(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
+			m_ObjectList.push_back(new CApple(FruitsPos.x, FruitsPos.y, FruitsPos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 			break;
 		case Object::Kind::STRAWBERRY:	// イチゴ
-			m_ObjectList.push_back(new CStrawberry(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
+			m_ObjectList.push_back(new CStrawberry(FruitsPos.x, FruitsPos.y, FruitsPos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 			break;
 		case Object::Kind::BANANA:	// バナナ
-			m_ObjectList.push_back(new CBanana(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
+			m_ObjectList.push_back(new CBanana(FruitsPos.x, FruitsPos.y, FruitsPos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 			break;
 		case Object::Kind::LEMON:	// レモン
-			m_ObjectList.push_back(new CLemon(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
+			m_ObjectList.push_back(new CLemon(FruitsPos.x, FruitsPos.y, FruitsPos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 			break;
 		case Object::Kind::WATER_MELON:		// スイカ
-			m_ObjectList.push_back(new CWaterMelon(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
+			m_ObjectList.push_back(new CWaterMelon(FruitsPos.x, FruitsPos.y, FruitsPos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 			break;
 		case Object::Kind::MELON:		// メロン
-			m_ObjectList.push_back(new CMelon(FruitsPos.x, FruitsPos.y, FruitsPos.z, 1.0f, 1.0f, 1.0f));
+			m_ObjectList.push_back(new CMelon(FruitsPos.x, FruitsPos.y, FruitsPos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 			break;
 		default:
 			i--;
@@ -177,6 +179,8 @@ void CObjectMng::SetObject()			// 初期オブジェクトセット
 
 void CObjectMng::FruitsObjectSet(DirectX::XMFLOAT3 pos)		// 新しくフルーツオブジェクト生成
 {
+	DirectX::XMFLOAT3 FruitsSize = DirectX::XMFLOAT3(2.0f, 2.0f, 2.0f);		// フルーツサイズ
+
 	// 乱数初期化
 	srand((unsigned int)time(NULL));
 	int	random;	// 乱数格納用
@@ -186,25 +190,25 @@ void CObjectMng::FruitsObjectSet(DirectX::XMFLOAT3 pos)		// 新しくフルーツオブジ
 	switch (random)
 	{
 	case Object::Kind::APPLE:	// リンゴ
-		m_ObjectList.push_back(new CApple(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
+		m_ObjectList.push_back(new CApple(pos.x, FALL_FRUITS_POSY, pos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 		break;
 	case Object::Kind::STRAWBERRY:	// イチゴ
-		m_ObjectList.push_back(new CStrawberry(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
+		m_ObjectList.push_back(new CStrawberry(pos.x, FALL_FRUITS_POSY, pos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 		break;
 	case Object::Kind::BANANA:	// バナナ
-		m_ObjectList.push_back(new CBanana(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
+		m_ObjectList.push_back(new CBanana(pos.x, FALL_FRUITS_POSY, pos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 		break;
 	case Object::Kind::LEMON:	// レモン
-		m_ObjectList.push_back(new CLemon(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
+		m_ObjectList.push_back(new CLemon(pos.x, FALL_FRUITS_POSY, pos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 		break;
 	case Object::Kind::WATER_MELON:		// スイカ
-		m_ObjectList.push_back(new CWaterMelon(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
+		m_ObjectList.push_back(new CWaterMelon(pos.x, FALL_FRUITS_POSY, pos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 		break;
 	case Object::Kind::MELON:		// メロン
-		m_ObjectList.push_back(new CMelon(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
+		m_ObjectList.push_back(new CMelon(pos.x, FALL_FRUITS_POSY, pos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 		break;
 	case Object::Kind::CAN:		// 空き缶
-		m_ObjectList.push_back(new CCan(pos.x, 6.0f, pos.z, 1.0f, 1.0f, 1.0f));
+		m_ObjectList.push_back(new CCan(pos.x, FALL_FRUITS_POSY, pos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 		break;
 	}
 }

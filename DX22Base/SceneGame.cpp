@@ -161,7 +161,7 @@ CSceneGame::CSceneGame(CSceneMng* pSceneMng, int Stage)
 		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
 	}
 	m_pPlayer->SetEventFlg(false);	// イベントフラグ下げ
-	m_pCamera[CAM_PLAYER] = new CameraPlayer(m_pPlayer, 90.0f, 40.0f, 12.0f);
+	m_pCamera[CAM_PLAYER] = new CameraPlayer(m_pPlayer, 90.0f, 40.0f, 15.0f);
 	m_pCamera[CAM_DEBUG] = new CameraDebug();
 	m_pCamera[CAM_EVENT] = nullptr;
 	//CameraEvent *pEvent = new CameraEvent();

@@ -9,8 +9,8 @@
 #include "Texture.h"
 
 //----定数・マクロ定義----
-#define MAX_ITEM_UI (14)	// UI最大数
-#define MAX_ITEM_TEXTURE (7)	// テクスチャ最大数
+#define MAX_ITEM_UI (16)	// UI最大数
+#define MAX_ITEM_TEXTURE (8)	// テクスチャ最大数
 
 //----クラス定義----
 class ItemUI
