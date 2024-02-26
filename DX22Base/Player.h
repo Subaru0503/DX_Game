@@ -73,7 +73,7 @@ private:
 	DirectX::XMFLOAT3 m_pos;	// プレイヤーの位置
 	DirectX::XMFLOAT3 m_oldpos;	// プレイヤーの位置
 	DirectX::XMFLOAT3 m_size;	// プレイヤーのサイズ
-	Texture* m_pTexture[3];
+	Texture* m_pTexture[2];
 
 	ItemUI* m_pUI;	// UI
 

@@ -31,7 +31,7 @@ CTimeUI::CTimeUI()	// コンストラクタ
 		m_pTexture[i] = new Texture();
 	}
 
-	if (FAILED(m_pTexture[0]->Create("Assets/Texture/TimerNumber2.png")))
+	if (FAILED(m_pTexture[0]->Create("Assets/Texture/TimerNumber.png")))
 	{
 		MessageBox(NULL, "UI TimerNumber.png", "Error", MB_OK);
 	}

@@ -179,7 +179,7 @@ void CObjectMng::SetObject()			// 初期オブジェクトセット
 
 void CObjectMng::FruitsObjectSet(DirectX::XMFLOAT3 pos)		// 新しくフルーツオブジェクト生成
 {
-	DirectX::XMFLOAT3 FruitsSize = DirectX::XMFLOAT3(2.0f, 2.0f, 2.0f);		// フルーツサイズ
+	DirectX::XMFLOAT3 FruitsSize = DirectX::XMFLOAT3(1.5f, 2.0f, 1.5f);		// フルーツサイズ
 
 	// 乱数初期化
 	srand((unsigned int)time(NULL));

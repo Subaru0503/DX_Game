@@ -13,7 +13,7 @@
 Player::Player(DirectX::XMFLOAT3 PlayerPos)	// コンストラクタ
 	: m_pos(PlayerPos)
 	, m_oldpos(PlayerPos)
-	, m_size(0.5f, 2.0f, 0.5f)
+	, m_size(2.0f, 2.0f, 2.0f)
 	, m_pCamera(nullptr)
 	, m_pTexture{ nullptr, nullptr }
 	, m_pUI(nullptr)
@@ -36,7 +36,7 @@ Player::Player(DirectX::XMFLOAT3 PlayerPos)	// コンストラクタ
 	, m_nResetFlg(0)
 {
 	m_pModel = new Model();
-	if (!m_pModel->Load("Assets/Model/3Dモデルデータ/もこ田めめめ/MokotaMememe.pmx", 1.0f, Model::XFlip))
+	if (!m_pModel->Load("Assets/Model/Player/Player.fbx", 3.0f, Model::XFlip))
 	{
 		//----エラーメッセージ表示----
 		MessageBox(NULL, "Playerモデル読み込み失敗", "Error", MB_OK);
@@ -56,18 +56,13 @@ Player::Player(DirectX::XMFLOAT3 PlayerPos)	// コンストラクタ
 
 	m_pTexture[0] = new Texture();
 	m_pTexture[1] = new Texture();
-	m_pTexture[2] = new Texture();
 	if (FAILED(m_pTexture[0]->Create("Assets/Texture/Shadow.png")))
 	{
 		MessageBox(NULL, "Player Shadow.png", "Error", MB_OK);
 	}
-	if (FAILED(m_pTexture[1]->Create("Assets/Texture/Marker.png")))
+	if (FAILED(m_pTexture[1]->Create("Assets/Texture/Smoke.png")))
 	{
-		MessageBox(NULL, "Player Marker.png", "Error", MB_OK);
-	}
-	if (FAILED(m_pTexture[2]->Create("Assets/Texture/warp.png")))
-	{
-		MessageBox(NULL, "Player warp.png", "Error", MB_OK);
+		MessageBox(NULL, "Player Smoke.png", "Error", MB_OK);
 	}
 
 	m_pTrail = new TrailEffect(this);
@@ -83,7 +78,7 @@ Player::~Player()
 	delete m_pVS;
 	delete m_pModel;
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		if (m_pTexture)
 		{
@@ -210,11 +205,11 @@ void Player::Draw()
 	// 行列の計算
 	DirectX::XMFLOAT4X4 mat[3];
 	DirectX::XMFLOAT3 centerRotation = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);	//原点
-	DirectX::XMMATRIX world = DirectX::XMMatrixScaling(0.1f, 0.1f, 0.1f) *
+	DirectX::XMMATRIX world = DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
 							  DirectX::XMMatrixRotationX(0.0f) *
 							  DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(180.0f)) *
 							  DirectX::XMMatrixRotationZ(0.0f) *
-							  DirectX::XMMatrixTranslation(m_pos.x, m_pos.y, m_pos.z);
+							  DirectX::XMMatrixTranslation(m_pos.x, m_pos.y + 0.4f, m_pos.z);
 
 	//---中心点の変換
 	DirectX::XMMATRIX centerTranslationMatrix =
@@ -235,18 +230,21 @@ void Player::Draw()
 	m_pModel->Draw();
 
 	// 影
-	DirectX::XMMATRIX Shadowworld = /*DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) **/
-		DirectX::XMMatrixRotationX(-80.0f) *
+	DirectX::XMMATRIX Shadowworld = DirectX::XMMatrixScaling(3.0f, 3.0f, 3.0f) *
+		DirectX::XMMatrixRotationX(DirectX::XMConvertToRadians(90.0f)) *
 		DirectX::XMMatrixRotationY(0.0f) *
 		DirectX::XMMatrixRotationZ(0.0f) *
-		DirectX::XMMatrixTranslation(m_pos.x, m_pos.y + 0.01f, m_pos.z);
+		DirectX::XMMatrixTranslation(m_pos.x, -0.5f, m_pos.z);
 
 	DirectX::XMFLOAT4X4 Shadowmat;
 	DirectX::XMStoreFloat4x4(&Shadowmat, DirectX::XMMatrixTranspose(Shadowworld));
 	Sprite::SetWorld(Shadowmat);					// ワールド行列の設定
 	Sprite::SetView(m_pCamera->GetViewMatrix());	// ビュー行列の設定
 	Sprite::SetProjection(m_pCamera->GetProjectionMatrix());	// プロジェクション行列の設定
-	Sprite::SetSize(DirectX::XMFLOAT2(0.5f, 0.5f));		// サイズを設定
+	Sprite::SetSize(DirectX::XMFLOAT2(1.0f, 1.0f));		// サイズを設定
+	Sprite::SetUVPos(DirectX::XMFLOAT2(0.0f, 0.0f));
+	Sprite::SetUVScale(DirectX::XMFLOAT2(1.0f, 1.0f));
+	Sprite::SetColor(DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
 	Sprite::SetTexture(m_pTexture[0]);					// テクスチャを設定
 	Sprite::Draw();
 
@@ -272,15 +270,6 @@ void Player::Draw()
 	DirectX::XMFLOAT4X4 matBill;
 	DirectX::XMStoreFloat4x4(&matBill, matInv);
 
-	// marker
-	DirectX::XMMATRIX invworld = matInv * DirectX::XMMatrixScaling(1.0f, 1.0f, 1.0f) *
-		DirectX::XMMatrixTranslation(m_pos.x, m_pos.y + 2.3f, m_pos.z);
-
-	DirectX::XMStoreFloat4x4(&mat[0], DirectX::XMMatrixTranspose(invworld));
-	Sprite::SetWorld(mat[0]);
-	Sprite::SetTexture(m_pTexture[1]);
-	Sprite::Draw();
-
 	m_pEffect->SetBillboardMatrix(matBill);
 	//----エフェクト----
 	m_pEffect->Draw(
@@ -291,7 +280,7 @@ void Player::Draw()
 	// 軌跡の表示
 	m_pTrail->SetView(m_pCamera->GetViewMatrix());
 	m_pTrail->SetProjection(m_pCamera->GetProjectionMatrix());
-	m_pTrail->SetTexture(m_pTexture[2]);
+	m_pTrail->SetTexture(m_pTexture[1]);
 	m_pTrail->Draw();
 }
 

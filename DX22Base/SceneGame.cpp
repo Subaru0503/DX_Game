@@ -19,7 +19,7 @@
 #define FRAME (1)
 
 CSceneGame::CSceneGame(CSceneMng* pSceneMng, int Stage)
-	: CSceneStageBase(pSceneMng, Stage, DirectX::XMFLOAT3(-5.0f, 0.0f, 0.0f))
+	: CSceneStageBase(pSceneMng, Stage, DirectX::XMFLOAT3(8.0f, 0.0f, 0.0f))
 	, m_fFrameCnt(0.0f)
 {
 	m_nMainCamera = CAM_PLAYER;

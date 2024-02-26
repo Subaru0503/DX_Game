@@ -25,5 +25,5 @@ void MoveEmitter::Spawn(Particle * particle, const DirectX::XMFLOAT3 & rootPos)
 	particle->size.add.x = 0.01f;
 	particle->size.add.y = 0.01f;
 	particle->alpha.add.x = -0.05f;
-	particle->life = 0.3f;			// ¶‘¶ŠÔ
+	particle->life = 0.9f;			// ¶‘¶ŠÔ
 }

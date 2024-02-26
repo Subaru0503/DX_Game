@@ -31,7 +31,7 @@ CScoreUI::CScoreUI(int Score)	// コンストラクタ
 
 	if (FAILED(m_pTexture[0]->Create("Assets/Texture/number.png")))
 	{
-		MessageBox(NULL, "UI number2.png", "Error", MB_OK);
+		MessageBox(NULL, "UI number.png", "Error", MB_OK);
 	}
 
 

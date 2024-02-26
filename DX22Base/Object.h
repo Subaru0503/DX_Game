@@ -144,6 +144,7 @@ public:
 protected:
 	DirectX::XMFLOAT4X4* m_mat;
 	DirectX::XMFLOAT3 m_pos, m_scale, m_rotate;
+	Texture* m_pTexture;				// テクスチャ
 	float m_PlayerPosY;					// プレイヤーの座標Y
 	DirectX::XMFLOAT3 m_oldPos;
 	DirectX::XMFLOAT3 m_oldSize;		// Boxサイズ退避用変数
@@ -165,18 +166,11 @@ protected:
 	float m_modelRatio;	// モデルの拡縮率
 	int m_noldTime;		// 30秒経ったか計算するための値退避
 	int m_nTime;		// 現在の時間
-	//float m_time;				// サイン用タイマー
-	//float m_weight;				// 移動速度増減用
-	//float m_radius;				// 移動可能範囲の半径
-	//float m_suctionDis;			// ギミック吸い込み限界座標との比率
 	float m_fallTime;			// 落下時間
 	DirectX::XMFLOAT3 m_playerPos;
 	DirectX::XMFLOAT3 m_endPos;	// 移動先座標
 
 	DirectX::XMFLOAT3 m_shakePos;	// 揺れアクション時の座標情報
-	//CSoundMng* m_pSoundMng;
-	//TrailEffect* m_pTrail;	// 軌跡エフェクト
-	//bool m_bTrailSet;			// 
 	int m_nMaxRatio;
 	float m_fRatio;
 };
