@@ -18,7 +18,6 @@ private:
 	void DrawStage(DirectX::XMFLOAT4X4 * mat, VertexShader * vs);	// 陸描画
 
 private:
-	//CameraEvent* pEvent;
 	float m_fFrameCnt;	// フレームカウント
 };
 

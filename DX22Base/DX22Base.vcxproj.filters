@@ -109,6 +109,12 @@
     <Filter Include="ソース ファイル\System\UI\Result">
       <UniqueIdentifier>{9410cde1-dcf7-4919-95a9-3d1f2190a1fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\System\Tutorial">
+      <UniqueIdentifier>{ca0b2149-ac36-446d-8a11-1911a4f1d3d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\System\Tutorial">
+      <UniqueIdentifier>{d55f2b39-910f-4ed2-9160-69db34bf3852}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -267,6 +273,12 @@
     <ClCompile Include="Melon.cpp">
       <Filter>ソース ファイル\Object\Fruits</Filter>
     </ClCompile>
+    <ClCompile Include="EasingFunction.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Tutorial.cpp">
+      <Filter>ソース ファイル\System\Tutorial</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -418,6 +430,12 @@
     </ClInclude>
     <ClInclude Include="Melon.h">
       <Filter>ヘッダー ファイル\Object\Fruits</Filter>
+    </ClInclude>
+    <ClInclude Include="EasingFunction.h">
+      <Filter>ヘッダー ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Tutorial.h">
+      <Filter>ヘッダー ファイル\System\Tutorial</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

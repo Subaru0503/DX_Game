@@ -17,12 +17,13 @@
 #define SCREEN_WIDTH (1280)
 #define SCREEN_HEIGHT (720)
 #define FRAME (1)
+#define TUTORIAL_FRAME (1)
 
 CSceneGame::CSceneGame(CSceneMng* pSceneMng, int Stage)
 	: CSceneStageBase(pSceneMng, Stage, DirectX::XMFLOAT3(8.0f, 0.0f, 0.0f))
 	, m_fFrameCnt(0.0f)
 {
-	m_nMainCamera = CAM_PLAYER;
+	m_nMainCamera = CAM_EVENT;
 	// モデル読み込み
 	// 地面
 	m_pStageModel[0] = new Model();
@@ -160,14 +161,14 @@ CSceneGame::CSceneGame(CSceneMng* pSceneMng, int Stage)
 		//----エラーメッセージ表示----
 		MessageBox(NULL, "背景モデル読み込み失敗", "Error", MB_OK);
 	}
-	m_pPlayer->SetEventFlg(false);	// イベントフラグ下げ
+	//m_pPlayer->SetEventFlg(false);	// イベントフラグ下げ
 	m_pCamera[CAM_PLAYER] = new CameraPlayer(m_pPlayer, 90.0f, 40.0f, 15.0f);
 	m_pCamera[CAM_DEBUG] = new CameraDebug();
-	m_pCamera[CAM_EVENT] = nullptr;
-	//CameraEvent *pEvent = new CameraEvent();
-	m_pPlayer->SetCamera(m_pCamera[CAM_PLAYER]);
-	//pEvent->SetEvent(DirectX::XMFLOAT3(0.0f, 1.0f, 6.0f), DirectX::XMFLOAT3(0.0f, 3.0f, 0.0f), 4.0f);
-	//m_pCamera[CAM_EVENT] = pEvent;
+	CameraEvent *pEvent = new CameraEvent(90.0f, 40.0f, 15.0f);
+	m_pPlayer->SetCamera(pEvent);
+	m_pTutorial->SetCamera(pEvent);
+	pEvent->SetEvent(m_pPlayer->GetPos(), DirectX::XMFLOAT3(-10.0f, 0.0f, -3.0f), 1.0f, 9.0f);
+	m_pCamera[CAM_EVENT] = pEvent;
 }
 
 CSceneGame::~CSceneGame()
@@ -202,19 +203,41 @@ void CSceneGame::Update(float tick)
 	{
 		m_pCamera[CAM_EVENT]->Update();
 		CameraEvent* pEvent = reinterpret_cast<CameraEvent*>(m_pCamera[m_nMainCamera]);
+		if (pEvent->GetMoveFlg())
+		{
+			m_pObjectMng->SetMoveFlg(pEvent->GetMoveFlg());
+			m_pObjectMng->TutorialUpdate(tick);
+			m_pCollision->Update();
+			// カウントが立ってたらパネルの中のフルーツの描画フラグをリセットする
+			if (m_fFrameCnt / 60.0f > FRAME)
+			{
+				// フラグリセット
+				m_pTutorial->SetResetFlg(false);
+				m_pUI->ResetDrawFlg();
+				m_fFrameCnt = 0.0f;	// カウントリセット
+			}
+			// フラグが立ってたら
+			if (m_pTutorial->GetResetFlg())
+			{
+				m_fFrameCnt++;	// カウントアップ
+			}
+		}
 		if (!pEvent->IsEvent())
 		{
+			// フラグリセット
+			m_pTutorial->SetResetFlg(false);
+			m_pUI->ResetDrawFlg();
+			m_fFrameCnt = 0.0f;	// カウントリセット
+			m_pCollision->SetTutorialFlg(false);
 			m_nMainCamera = CAM_PLAYER;
 			m_pPlayer->SetCamera(m_pCamera[m_nMainCamera]);
 			m_pPlayer->SetEventFlg(false);
+			m_pObjectMng->SetObject();	// 初期オブジェクトをセット
 		}
+
 	}
-	if (IsKeyTrigger('3'))
-	{
-		CameraEvent* pEvent = reinterpret_cast<CameraEvent*>(m_pCamera[CAM_EVENT]);
-		pEvent->SetEvent(DirectX::XMFLOAT3(0.0f, 1.0f, 6.0f), DirectX::XMFLOAT3(0.0f, 3.0f, 0.0f), 4.0f);
-		m_nMainCamera = CAM_EVENT;
-	}
+
+	if (m_nMainCamera != CAM_PLAYER) return;
 
 	// カウントが立ってたらパネルの中のフルーツの描画フラグをリセットする
 	if (m_fFrameCnt / 60.0f > FRAME)
@@ -225,51 +248,17 @@ void CSceneGame::Update(float tick)
 		m_fFrameCnt = 0.0f;	// カウントリセット
 	}
 
-	// レイの作成
-	//Collision::Ray ray;
 	m_pPlayer->Update();							// プレイヤー更新
 	m_pObjectMng->Update(tick);						// オブジェクトマネージャー更新
 	m_pUI->Update();								// アイテムUI描画
 	m_pScoreUI->SetScore(m_pPlayer->GetScore());	// スコア更新
-	//ray.start = m_pPlayer->GetPos();
-	//ray.start.y += 1.0f;
-	//ray.direction = DirectX::XMFLOAT3(0.0f, -1.0f, 0.0f);
-
-	//// すべてのフィールドとレイの当たり判定を実行
-	//for (int i = 0; i < m_pField->GetDataNum(); i++)
-	//{
-	//	Collision::Result collision = Collision::CheckRayPlane(ray, m_pField->GetPlaneInfo(i));
-	//	if (collision.hit)
-	//	{
-	//		for (int j = 0; j < 2; j++)
-	//		{
-	//			Collision::Result triCollision = Collision::CheckPointTriangle(collision.point, m_pField->GetTriangleInfo(i, j));
-	//			if (triCollision.hit)
-	//			{
-	//				// プレイヤーを地面に立てる(下方向の移動量も0にできるといい)
-	//				m_pPlayer->SetPos(collision.point);
-	//				m_pPlayer->ResetGravity();	// 重力リセット
-	//				m_pPlayer->ResetJumpFlg();	// ジャンプフラグ下げ
-	//			}
-	//		}
-	//	}
-	//}
 
 	// エリアに当たり判定
 	m_pCollisionAreaMng->Update();
 	m_pCollision->Update();
-	//// 床に当たっているか
-	//if (Collision::AreaCheckCollision(m_pPlayer->GetCenterPos(), m_StagePos, m_pPlayer->GetSize(), m_StageSize))
-	//{
-	//	m_pPlayer->SetPosY(m_StagePos.y + 0.5f);	// 床の上に戻す
-	//	m_pPlayer->ResetGravity();	// 重力リセット
-	//	m_pPlayer->ResetJumpFlg();	// 着地フラグ上げ
-	//}
 
-	if (m_nMainCamera != CAM_PLAYER) return;
 	m_pCamera[CAM_PLAYER]->Update();
 	//----UI----
-	//m_pUI->Update();
 	m_pTimeUI->Update();	// 時間更新
 
 	// フラグが立ってたら
@@ -303,11 +292,18 @@ void CSceneGame::Draw()
 
 	//----オブジェクトの描画----
 	m_pObjectMng->Draw(mat);
-	//----フィールドの描画----
-	//m_pField->Draw();
 
 	// イベント中だったら描画しない
-	if (m_nMainCamera == CAM_EVENT) return;
+	if (m_nMainCamera == CAM_EVENT)
+	{
+		//----チュートリアル描画----
+		m_pTutorial->Draw();
+		//----UI描画----
+		pRTV = GetDefaultRTV();
+		SetRenderTargets(1, &pRTV, nullptr);
+		m_pUI->Draw();		// アイテム描画
+		return;
+	}
 	//----UI描画----
 	pRTV = GetDefaultRTV();
 	SetRenderTargets(1, &pRTV, nullptr);

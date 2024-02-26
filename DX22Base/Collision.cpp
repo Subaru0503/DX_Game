@@ -42,6 +42,14 @@ void Collision::Update()
 				pObj->SetCreate();	// 生成フラグを立てる
 				m_pPlayer->AddScore(pObj->GetKind(), pObj->GetColor(), pObj->GetScore());	// スコアの処理
 			}
+			//---当たり判定を取る----
+			if (m_nTutorialFlg && InsideCheckPoint(m_pTutorial->GetPos(),
+				pObj->GetPos(), m_pTutorial->GetSize(), pObj->GetScale()))
+			{
+				pObj->SetDelete();	// 削除フラグを立てる
+				pObj->SetCreate();	// 生成フラグを立てる
+				m_pTutorial->AddScore(pObj->GetKind(), pObj->GetColor(), pObj->GetScore());	// チュートリアルの処理
+			}
 			break;
 		}
 	}
@@ -195,4 +203,14 @@ void Collision::SetPlayer(Player* player)
 void Collision::SetObjectManager(CObjectMng* objMng)
 {
 	m_pObjMng = objMng;
+}
+
+void Collision::SetTutorial(Tutorial * tutorial)	// Tutorial情報設定
+{
+	m_pTutorial = tutorial;
+}
+
+void Collision::SetTutorialFlg(int flg)	// チュートリアルフラグセット
+{
+	m_nTutorialFlg = flg;
 }

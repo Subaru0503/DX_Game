@@ -25,10 +25,14 @@ CSceneStageBase::CSceneStageBase(CSceneMng* pSceneMng, int Stage, DirectX::XMFLO
 	m_pCollision = new Collision();
 	m_pCollision->SetPlayer(m_pPlayer);
 	m_pCollision->SetObjectManager(m_pObjectMng);
+	m_pCollision->SetTutorialFlg(true);
 	m_pUI = new ItemUI;
 	m_pPlayer->SetItemUI(m_pUI);
 	m_pScoreUI = new CScoreUI(m_pPlayer->GetScore());
 	m_pTimeUI = new CTimeUI();
+	m_pTutorial = new Tutorial(DirectX::XMFLOAT3(-10.0f, 0.0f, -3.0f));
+	m_pTutorial->SetItemUI(m_pUI);
+	m_pCollision->SetTutorial(m_pTutorial);
 
 }
 
@@ -37,6 +41,7 @@ CSceneStageBase::~CSceneStageBase()
 	// ----- ÉfÅ[É^Ç™ë∂ç›ÇµÇΩÇÁçÌèú -----
 	SAFE_DELETE(m_pVS);
 	SAFE_DELETE(m_pUI);
+	SAFE_DELETE(m_pTutorial);
 	SAFE_DELETE(m_pScoreUI);
 	SAFE_DELETE(m_pTimeUI);
 	SAFE_DELETE(m_pObjectMng);

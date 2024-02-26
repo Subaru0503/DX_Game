@@ -33,29 +33,28 @@ public:
 	CObjectMng();							// コンストラクタ	
 	~CObjectMng();							// デストラクタ
 
+	void TutorialUpdate(float tick);		// チュートリアル更新
 	void Update(float tick);				// 更新
 	void Draw(DirectX::XMFLOAT4X4 *mat);	// 描画
 
 	list<Object*>* GetObjectList();			// オブジェクトリストのポインタを渡す
 
-	//void SetTotalObjNum(int totalObjNum);	// 吸い込めるオブジェクトの総数を設定
-	//void ModelSetting();					// オブジェクトにモデルをセットする
-	//void SetSuction(Suction* suction);
-	//void SetSound(CSoundMng* sound);
+	void SetTutorialFruits();				// チュートリアル用のオブジェクトをセット
 	void SetObject();						// 初期オブジェクトセット
 	void FruitsObjectSet(DirectX::XMFLOAT3 pos);		// 新しくフルーツオブジェクト生成
 	void SetTime(int time);					// 時間セット
 	void SetPlayer(Player* pPlayer);
+	void SetMoveFlg(int flg);				// 移動完了フラグセット
 private:
 	list<Object*> m_ObjectList;				// オブジェクトリスト
 
-	//CSoundMng* m_pSoundMng;
-	//ModelManager* m_pModelManager;			// モデルマネージャー
 	VertexShader* m_pVS;
 
 	Model* m_pModel;
 	Player* m_pPlayer;
 	int m_nTime;							// 制限時間
+	int m_nCnt;								// フルーツカウント
+	int m_nMoveFlg;							// 移動完了フラグ
 };
 
 #endif

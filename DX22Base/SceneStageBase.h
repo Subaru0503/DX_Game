@@ -20,6 +20,7 @@
 #include "Player.h"
 #include "Collision.h"
 #include "CollisionAreaManager.h"
+#include "Tutorial.h"
 // ----- UI -----
 #include "ItemUI.h"
 #include "ScoreUI.h"
@@ -66,6 +67,7 @@ protected:
 	ItemUI* m_pUI;
 	CScoreUI* m_pScoreUI;
 	CTimeUI* m_pTimeUI;
+	Tutorial* m_pTutorial;
 
 	Model* m_pStageModel[MAX_STADE_MODEL];		// ステージモデル
 

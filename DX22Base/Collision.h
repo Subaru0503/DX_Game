@@ -6,13 +6,7 @@
 #include <DirectXMath.h>
 #include "Player.h"
 #include "ObjectManager.h"
-//#include "Shader.h"
-//#include "CameraBase.h"
-//#include "Model.h"
-//#include "Texture.h"
-//#include "MoveEmitter.h"
-//#include "Effect.h"
-//#include "TrailEffect.h"
+#include "Tutorial.h"
 
 //----クラス定義----
 class Collision
@@ -61,9 +55,13 @@ public:
 
 	void SetPlayer(Player* player);			// Player情報設定
 	void SetObjectManager(CObjectMng* objMng);	// ObjectMng設定
+	void SetTutorial(Tutorial* tutorial);	// Tutorial情報設定
+	void SetTutorialFlg(int flg);			// チュートリアルフラグセット
 
 private:
 	Player* m_pPlayer;							// Playerポインタ格納用
 	CObjectMng* m_pObjMng;						// ObjectMngポインタ格納用
+	Tutorial* m_pTutorial;						// Tutorialポインタ格納用
+	int m_nTutorialFlg;							// チュートリアルフラグ
 };
 #endif			// __COLLISION_H__

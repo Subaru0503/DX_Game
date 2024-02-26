@@ -3,9 +3,8 @@
 #define __PLAYER_H__
 
 //----インクルード部----
-//#include <DirectXMath.h>
+#include <DirectXMath.h>
 #include "Shader.h"
-//#include "MeshBuffer.h"
 #include "CameraBase.h"
 #include "Model.h"
 #include "Texture.h"

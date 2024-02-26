@@ -13,7 +13,8 @@
 using namespace std;
 
 CObjectMng::CObjectMng()	// コンストラクタ
-	//: m_pModelManager(nullptr)
+	: m_nMoveFlg(false)
+	, m_nCnt(0)
 {
 	m_pVS = new VertexShader();
 	if (FAILED(m_pVS->Load("Assets/Shader/VS_Model.cso")))	// シェーダ読み込み
@@ -21,9 +22,20 @@ CObjectMng::CObjectMng()	// コンストラクタ
 		MessageBox(nullptr, "VS_Model.cso", "Error", MB_OK);
 	}
 
-	SetObject();	// オブジェクトのセット
-	// オブジェクトにモデルを割り当てる用
-	//m_pModelManager = new ModelManager();
+	DirectX::XMFLOAT3 Deltapos = DirectX::XMFLOAT3(7.0f, 0.0f, -1.0f);		// 座標変化量
+	DirectX::XMFLOAT3 TreePos = DirectX::XMFLOAT3(-10.0f, 6.0f, -5.0f);		// 木座標
+
+	// 木
+	for (int i = 0; i < MAX_TREE; i++)
+	{
+		// 木生成
+		m_ObjectList.push_back(new CTree(TreePos.x, TreePos.y, TreePos.z, 1.0f, 21.0f, 1.0f));
+		// 座標変化
+		TreePos.x += Deltapos.x;
+		TreePos.z *= Deltapos.z;
+	}
+
+	SetTutorialFruits();	// チュートリアルフルーツセット
 }
 
 CObjectMng::~CObjectMng()	// デストラクタ
@@ -49,6 +61,37 @@ CObjectMng::~CObjectMng()	// デストラクタ
 	//	delete m_pModelManager;
 	//	m_pModelManager = nullptr;
 	//}
+}
+
+void CObjectMng::TutorialUpdate(float tick)	// チュートリアル更新
+{
+	if (!m_nMoveFlg) return;
+
+	//--吸い込まれるor破壊されるオブジェクトの処理
+	for (auto it = m_ObjectList.begin(); it != m_ObjectList.end();)
+	{
+		Object* pObj = *it;			// オブジェクトの関数を呼び出せるように変換
+		(*it)->SetPlayerPos(m_pPlayer->GetPos());	// プレイヤーの座標情報をオブジェクトに設定
+
+		if (pObj->GetCreate())	// 生成フラグが立っていら
+		{
+			SetTutorialFruits();	// 新しくフルーツをセットする
+		}
+		if (pObj->GetDelete()) {	// 削除フラグが立っていたら
+			delete pObj;					// メモリを解放
+			it = m_ObjectList.erase(it);	// リストから削除してイテレータを更新→次の要素へ
+		}
+		else {			// 削除しないので
+			++it;		// イテレータを進める
+		}
+	}
+	int i = 0;
+	// オブジェクト更新処理
+	for (Object* pObj : m_ObjectList)
+	{
+		pObj->Update(tick);
+		i++;
+	}
 }
 
 void CObjectMng::Update(float tick)	// 更新
@@ -100,39 +143,32 @@ list<Object*>* CObjectMng::GetObjectList()
 	return &m_ObjectList;
 }
 
-//void CObjectMng::SetTotalObjNum(int totalObjNum)
-//{
-//	m_totalObjNum = totalObjNum;
-//}
+void CObjectMng::SetTutorialFruits()	// チュートリアル用のオブジェクトをセット
+{
+	DirectX::XMFLOAT3 FruitsPos = DirectX::XMFLOAT3(-10.0f, FALL_FRUITS_POSY, -3.0f);	// フルーツ座標
+	DirectX::XMFLOAT3 FruitsSize = DirectX::XMFLOAT3(2.0f, 2.0f, 2.0f);		// フルーツサイズ
 
-//void CObjectMng::ModelSetting()
-//{
-//	for (Object* pObj : m_ObjectList) {
-//		pObj->SetModelManager(m_pModelManager);	// モデルマネージャーをオブジェクトにセット
-//		pObj->SetModelData();					// オブジェクトにモデルをセット
-//	}
-//}
-
-//void CObjectMng::SetSound(CSoundMng * sound)
-//{
-//	m_pSoundMng = sound;
-//}
+	switch (m_nCnt)
+	{
+	case 0:
+	case 1:
+	case 2:
+		// メロン
+		m_ObjectList.push_back(new CMelon(FruitsPos.x, FALL_FRUITS_POSY, FruitsPos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
+		break;
+	case 3:
+		// 空き缶
+		m_ObjectList.push_back(new CCan(FruitsPos.x, FALL_FRUITS_POSY, FruitsPos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
+		break;
+	}
+	m_nCnt++;
+}
 
 void CObjectMng::SetObject()			// 初期オブジェクトセット
 {
 	DirectX::XMFLOAT3 Deltapos = DirectX::XMFLOAT3(7.0f, 0.0f, -1.0f);		// 座標変化量
-	DirectX::XMFLOAT3 TreePos = DirectX::XMFLOAT3(-10.0f, 6.0f, -5.0f);		// 木座標
 	DirectX::XMFLOAT3 FruitsPos = DirectX::XMFLOAT3(-10.0f, FALL_FRUITS_POSY, -3.0f);	// フルーツ座標
 	DirectX::XMFLOAT3 FruitsSize = DirectX::XMFLOAT3(2.0f, 2.0f, 2.0f);		// フルーツサイズ
-	// 木
-	for (int i = 0; i < MAX_TREE; i++)
-	{
-		// 木生成
-		m_ObjectList.push_back(new CTree(TreePos.x, TreePos.y, TreePos.z, 1.0f, 21.0f, 1.0f));
-		// 座標変化
-		TreePos.x += Deltapos.x;
-		TreePos.z *= Deltapos.z;
-	}
 
 	// 乱数初期化
 	srand((unsigned int)time(NULL));
@@ -221,4 +257,9 @@ void CObjectMng::SetTime(int time)
 void CObjectMng::SetPlayer(Player * pPlayer)
 {
 	m_pPlayer = pPlayer;
+}
+
+void CObjectMng::SetMoveFlg(int flg)	// 移動完了フラグセット
+{
+	m_nMoveFlg = flg;
 }
