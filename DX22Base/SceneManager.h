@@ -9,6 +9,7 @@
 #define __SCENE_MANAGER_H__
 
 // ========== インクルード部 ==========
+#include "SoundManager.h"
 #include "Fade.h"
 
 // 相互インクルード防止
@@ -55,6 +56,7 @@ private:
 	//CSceneGame*			m_pSceneGame;	// ゲームシーン
 	CSceneResult*		m_pResult;		// リザルト
 
+	CSoundMng*	m_pSoundMng;			// サウンド
 	Fade*		m_pFade;				// フェード
 
 	int m_nResetNo;						// リセット回数

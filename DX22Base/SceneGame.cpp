@@ -19,8 +19,8 @@
 #define FRAME (1)
 #define TUTORIAL_FRAME (1)
 
-CSceneGame::CSceneGame(CSceneMng* pSceneMng, int Stage)
-	: CSceneStageBase(pSceneMng, Stage, DirectX::XMFLOAT3(8.0f, 0.0f, 0.0f))
+CSceneGame::CSceneGame(CSceneMng* pSceneMng, int Stage, CSoundMng* pSoundMng)
+	: CSceneStageBase(pSceneMng, Stage, DirectX::XMFLOAT3(8.0f, 0.0f, 0.0f), pSoundMng)
 	, m_fFrameCnt(0.0f)
 {
 	m_nMainCamera = CAM_EVENT;
@@ -167,7 +167,7 @@ CSceneGame::CSceneGame(CSceneMng* pSceneMng, int Stage)
 	CameraEvent *pEvent = new CameraEvent(90.0f, 40.0f, 15.0f);
 	m_pPlayer->SetCamera(pEvent);
 	m_pTutorial->SetCamera(pEvent);
-	pEvent->SetEvent(m_pPlayer->GetPos(), DirectX::XMFLOAT3(-10.0f, 0.0f, -3.0f), 1.0f, 9.0f);
+	pEvent->SetEvent(m_pPlayer->GetPos(), DirectX::XMFLOAT3(-10.0f, 0.0f, -3.0f), 1.0f, 9.8f);
 	m_pCamera[CAM_EVENT] = pEvent;
 }
 
@@ -214,6 +214,7 @@ void CSceneGame::Update(float tick)
 				// フラグリセット
 				m_pTutorial->SetResetFlg(false);
 				m_pUI->ResetDrawFlg();
+				m_pUI->SetJudge(false, false, false);
 				m_fFrameCnt = 0.0f;	// カウントリセット
 			}
 			// フラグが立ってたら
@@ -228,6 +229,7 @@ void CSceneGame::Update(float tick)
 			m_pTutorial->SetResetFlg(false);
 			m_pUI->ResetDrawFlg();
 			m_fFrameCnt = 0.0f;	// カウントリセット
+			m_pUI->SetJudge(false, false, false);
 			m_pCollision->SetTutorialFlg(false);
 			m_nMainCamera = CAM_PLAYER;
 			m_pPlayer->SetCamera(m_pCamera[m_nMainCamera]);

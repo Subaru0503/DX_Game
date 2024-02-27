@@ -8,6 +8,8 @@
 #include "CameraBase.h"
 #include "Model.h"
 #include "Texture.h"
+//----システム----
+#include "SoundManager.h"
 //----UI----
 #include "ItemUI.h"
 //----エフェクト----
@@ -46,6 +48,8 @@ public:
 	void SetItemUI(ItemUI* ItemUI);	// アイテムUIセット
 	void SetResetFlg(int flg);		// リセットフラグセット
 
+	void SetSoundMng(CSoundMng* soundMng);								// サウンド実体受け取り
+
 	// 現在地の取得
 	DirectX::XMFLOAT3 GetPos();
 	// 過去座標の取得
@@ -81,6 +85,9 @@ private:
 
 	// ポリライン
 	TrailEffect* m_pTrail;
+
+	CSoundMng* m_pSoundMng;					// サウンド操作用
+
 	float m_fGravity;
 
 	DirectX::XMFLOAT3 m_Move;		// 計算した移動ベクトルの格納先

@@ -50,6 +50,21 @@ ItemUI::ItemUI()	// コンストラクタ
 	{
 		MessageBox(NULL, "ItemUI Can.png", "Error", MB_OK);
 	}
+	// ◎
+	if (FAILED(m_pTexture[8]->Create("Assets/Texture/2Maru.png")))
+	{
+		MessageBox(NULL, "ItemUI 2Maru.png", "Error", MB_OK);
+	}
+	// 〇
+	if (FAILED(m_pTexture[9]->Create("Assets/Texture/Maru.png")))
+	{
+		MessageBox(NULL, "ItemUI Maru.png", "Error", MB_OK);
+	}
+	// ×
+	if (FAILED(m_pTexture[10]->Create("Assets/Texture/Batu.png")))
+	{
+		MessageBox(NULL, "ItemUI Batu.png", "Error", MB_OK);
+	}
 
 	for (int i = 0; i < MAX_ITEM_UI; i++)
 	{
@@ -119,6 +134,15 @@ ItemUI::ItemUI()	// コンストラクタ
 
 	m_Item[15].size = DirectX::XMFLOAT2(m_pTexture[7]->GetWidth() * 0.25f, m_pTexture[7]->GetHeight() * 0.25f);
 	m_Item[15].kind = Object::CAN;
+
+	// ◎
+	m_Item[16].size = DirectX::XMFLOAT2(m_pTexture[8]->GetWidth() * 0.2f, m_pTexture[8]->GetHeight() * 0.2f);
+
+	// 〇
+	m_Item[17].size = DirectX::XMFLOAT2(m_pTexture[9]->GetWidth() * 0.25f, m_pTexture[9]->GetHeight() * 0.25f);
+
+	// ×
+	m_Item[18].size = DirectX::XMFLOAT2(m_pTexture[10]->GetWidth() * 0.4f, m_pTexture[10]->GetHeight() * 0.4f);
 }
 
 ItemUI::~ItemUI()	// デストラクタ	
@@ -162,6 +186,15 @@ void ItemUI::Draw()		// 描画
 		if (!m_Item[i].drawFlg) continue;
 
 		texture = i / 2.0f;
+		// 〇と×は直接指定
+		if (i == 17)
+		{
+			texture = 9;
+		}
+		else if (i == 18)
+		{
+			texture = 10;
+		}
 
 		// ワールド行列はXとYのみを考慮して作成
 		world =
@@ -209,5 +242,20 @@ void ItemUI::ResetDrawFlg()	// 描画のフラグを下げる
 
 		// フラグを下げる
 		m_Item[i].drawFlg = false;
+	}
+}
+
+void ItemUI::SetJudge(int flg, int flg2, int flg3)	// 判定UI描画フラグセット
+{
+	// フラグセット
+	m_Item[16].drawFlg = flg;
+	m_Item[17].drawFlg = flg2;
+	m_Item[18].drawFlg = flg3;
+
+	for (int i = 16; i < MAX_ITEM_UI; i++)
+	{
+		if (!m_Item[i].drawFlg) continue;
+
+		m_Item[i].pos = DirectX::XMFLOAT3(630.0f, 80.0f, 0.0f);
 	}
 }

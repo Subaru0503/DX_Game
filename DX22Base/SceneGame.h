@@ -9,7 +9,7 @@
 class CSceneGame : public CSceneStageBase
 {
 public:
-	CSceneGame(CSceneMng* pSceneMng, int Stage);
+	CSceneGame(CSceneMng* pSceneMng, int Stage, CSoundMng* pSoundMng);
 	~CSceneGame();
 	void Update(float tick);
 	void Draw();

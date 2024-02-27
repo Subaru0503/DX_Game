@@ -119,9 +119,25 @@ void Tutorial::AddScore(int kind, int color, int add)	// チュートリアル処理
 		m_pUI->SetUP(DirectX::XMFLOAT3(580.0f, 80.0f, 0.0f), kind, true);
 		return;	// 以降の処理をしない
 	}
+	
 
 	// 2個目のパネルにはめる
 	m_pUI->SetUP(DirectX::XMFLOAT3(680.0f, 80.0f, 0.0f), kind, true);
+	if (m_nPrevItem == kind)
+	{
+		// 判定UIセット
+		m_pUI->SetJudge(true, false, false);
+	}
+	else if (kind == (int)Object::Kind::CAN)
+	{
+		// 判定UIセット
+		m_pUI->SetJudge(false, false, true);
+	}
+	else
+	{
+		// 判定UIセット
+		m_pUI->SetJudge(false, true, false);
+	}
 	// 前に取ったアイテム情報を初期化
 	m_nPrevItem = (int)Object::Kind::NONE;
 	// リセットフラグを上げる

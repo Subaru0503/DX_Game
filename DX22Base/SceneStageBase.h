@@ -14,6 +14,7 @@
 #include "CameraBase.h"
 #include "Model.h"
 #include "Shader.h"
+#include "SoundManager.h"
 // ----- オブジェクト -----
 #include "ObjectManager.h"
 //#include "Object.h"
@@ -43,7 +44,7 @@ public:
 		MAX_CAMERA // カメラ最大数
 	};
 public:
-	CSceneStageBase(CSceneMng* pSceneMng, int Stage, DirectX::XMFLOAT3 PlayerPos);
+	CSceneStageBase(CSceneMng* pSceneMng, int Stage, DirectX::XMFLOAT3 PlayerPos, CSoundMng* pSoundMng);
 	virtual ~CSceneStageBase();
 	virtual void Update(float tick) = 0;
 	virtual void Draw() = 0;
@@ -61,6 +62,7 @@ protected:
 	CameraBase* m_pCamera[MAX_CAMERA];
 	Player* m_pPlayer;
 	CObjectMng* m_pObjectMng;
+	CSoundMng* m_pSoundMng;
 	CSceneMng* m_pSceneMng;
 	CCollisionAreaMng* m_pCollisionAreaMng;
 	Collision* m_pCollision;

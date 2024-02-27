@@ -115,6 +115,12 @@
     <Filter Include="ヘッダー ファイル\System\Tutorial">
       <UniqueIdentifier>{d55f2b39-910f-4ed2-9160-69db34bf3852}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\System\Sound">
+      <UniqueIdentifier>{faf88680-0a7b-483b-8ee8-4a65d65312a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\System\Sound">
+      <UniqueIdentifier>{889ea212-bb44-4164-ba7b-78c234cbdadd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -146,9 +152,6 @@
     </ClCompile>
     <ClCompile Include="Startup.cpp">
       <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="_model.cpp">
       <Filter>ソース ファイル\System</Filter>
@@ -279,6 +282,12 @@
     <ClCompile Include="Tutorial.cpp">
       <Filter>ソース ファイル\System\Tutorial</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>ソース ファイル\System\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>ソース ファイル\System\Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -304,9 +313,6 @@
     </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>ヘッダー ファイル\System</Filter>
@@ -436,6 +442,12 @@
     </ClInclude>
     <ClInclude Include="Tutorial.h">
       <Filter>ヘッダー ファイル\System\Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>ヘッダー ファイル\System\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>ヘッダー ファイル\System\Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

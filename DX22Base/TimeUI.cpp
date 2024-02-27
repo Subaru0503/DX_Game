@@ -10,7 +10,7 @@
 #include "Input.h"
 #include "Defines.h"
 
-#define TIME_LIMIT (120.0f)	// 制限時間(秒)
+#define TIME_LIMIT (1.0f)	// 制限時間(秒)
 
 CTimeUI::CTimeUI()	// コンストラクタ
 	: m_Left(0.0f)

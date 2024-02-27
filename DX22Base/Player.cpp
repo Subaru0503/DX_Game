@@ -353,17 +353,28 @@ void Player::AddScore(int kind, int color, int add)	// スコア加算
 		m_nPrevColor = color;	// 色
 		// 1個目のパネルにはめる
 		m_pUI->SetUP(DirectX::XMFLOAT3(580.0f, 80.0f, 0.0f), kind, true);
+		// 入手音再生
+		if (kind != (int)Object::Kind::CAN)
+		{
+			m_pSoundMng->playSound(CSoundMng::GetSE::fruits);
+		}
+		else
+		{
+
+		}
 		return;	// 以降の処理をしない
 	}
 	// 種類が揃っていたら
-	else if (m_nPrevItem == kind)
+	else if (m_nPrevItem == kind && m_nPrevItem != (int)Object::Kind::CAN)
 	{
 		m_nScore += add;	// スコア加算
 		m_nLastScore = add;	// スコアのデータを取っておく
 		m_nFruitsNum += 2;	// 個数加算
+		// 判定音再生
+		m_pSoundMng->playSound(CSoundMng::JudgeSE::excellent);
 	}
 	// 色が揃っていたら
-	else if (m_nPrevColor == color)
+	else if (m_nPrevColor == color && m_nPrevItem != (int)Object::Kind::CAN)
 	{
 		// 加算するスコアを計算
 		int ScoreAdd;
@@ -375,6 +386,8 @@ void Player::AddScore(int kind, int color, int add)	// スコア加算
 		m_nScore += ScoreAdd;		// スコア加算
 		m_nLastScore = ScoreAdd;	// スコアのデータを取っておく
 		m_nFruitsNum += 2;			// 個数加算
+		// 判定音再生
+		m_pSoundMng->playSound(CSoundMng::JudgeSE::good);
 	}
 	// ゴミを拾ってしまっていたら
 	else if(m_nPrevItem == (int)Object::Kind::CAN || kind == (int)Object::Kind::CAN)
@@ -406,6 +419,8 @@ void Player::AddScore(int kind, int color, int add)	// スコア加算
 		{
 			m_nScore = 0;
 		}
+		// 判定音再生
+		m_pSoundMng->playSound(CSoundMng::JudgeSE::bad);
 	}
 
 	// 2個目のパネルにはめる
@@ -434,6 +449,11 @@ void Player::SetItemUI(ItemUI * ItemUI)	// アイテムUIセット
 void Player::SetResetFlg(int flg)		// リセットフラグセット
 {
 	m_nResetFlg = flg;
+}
+
+void Player::SetSoundMng(CSoundMng * soundMng)		// サウンド実体受け取り
+{
+	m_pSoundMng = soundMng;
 }
 
 void Player::SetPosY(float height)			// 過去座標セット

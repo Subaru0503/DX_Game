@@ -6,7 +6,7 @@
 #include "Input.h"
 #include "SceneManager.h"
 #include "Defines.h"
-//#include "Sound.h"
+#include "Sound.h"
 
 //--- ƒOƒ[ƒoƒ‹•Ï”
 CSceneMng* g_pSceneManager;
@@ -25,6 +25,7 @@ HRESULT Init(HWND hWnd, UINT width, UINT height)
 	hr = InitDirectX(hWnd, width, height, false);
 	if (FAILED(hr)) { return hr; }
 
+	InitSound();
 	Geometory::Init();
 	Sprite::Init();
 	InitInput();
@@ -57,6 +58,7 @@ void Uninit()
 	UninitInput();
 	Sprite::Uninit();
 	Geometory::Uninit();
+	UninitSound();
 	UninitDirectX();
 	//// BGM‚ÌÄ¶‚ğ’â~
 	//if (g_pSpeaker)

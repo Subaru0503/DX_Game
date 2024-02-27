@@ -26,8 +26,10 @@ CSceneMng::CSceneMng()
 	, m_nClear(0)
 {
 	//m_pTitle = new CSceneTitle(this);
-	m_pSceneGame = new CSceneGame(this, SCENE_GAME);
+	m_pSoundMng = new CSoundMng();		// サウンド
 	m_pFade = new Fade();				// フェード
+	m_pSceneGame = new CSceneGame(this, SCENE_GAME, m_pSoundMng);
+	m_pSoundMng->playSound(CSoundMng::BGM::game);	// 次のシーンのBGMを再生
 }
 
 // ========== デストラクタ ==========
@@ -42,6 +44,7 @@ CSceneMng::~CSceneMng()
 	case SCENE_RESULT:	SAFE_DELETE(m_pResult); break;
 	default: break;
 	}
+	SAFE_DELETE(m_pSoundMng);
 	SAFE_DELETE(m_pFade);
 }
 
@@ -64,6 +67,7 @@ void CSceneMng::Update(float tick)
 	}
 
 	// ----- 各種更新 -----
+	m_pSoundMng->DeleteSpeaker();	// 再生終了したスピーカーを破棄
 	m_pFade->Update();
 }
 
@@ -122,14 +126,20 @@ void CSceneMng::SceneSwap()
 	//}
 
 	// =-=-= 新しいシーンの読み込み =-=-=
+	m_pSoundMng->AllDeleteSpeaker();
 	switch (m_nextScene)
 	{
 	case SCENE_TITLE:
 		m_pTitle = new CSceneTitle(this);	// シーン遷移処理呼び出しのためSceneMng*受け渡し
+		m_pSoundMng->playSound(CSoundMng::BGM::title);	// 次のシーンのBGMを再生
 		break;
-	case SCENE_GAME: m_pSceneGame = new CSceneGame(this, SCENE_GAME);  break;
+	case SCENE_GAME: m_pSceneGame = new CSceneGame(this, SCENE_GAME, m_pSoundMng);
+		m_pSoundMng->playSound(CSoundMng::BGM::game);	// 次のシーンのBGMを再生
+		break;
+
 	case SCENE_RESULT:
 		m_pResult = new CSceneResult(this, m_nResetNo, m_nClear);
+		m_pSoundMng->playSound(CSoundMng::BGM::result);	// 次のシーンのBGMを再生
 		break;
 	}
 

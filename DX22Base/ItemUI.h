@@ -9,8 +9,8 @@
 #include "Texture.h"
 
 //----定数・マクロ定義----
-#define MAX_ITEM_UI (16)	// UI最大数
-#define MAX_ITEM_TEXTURE (8)	// テクスチャ最大数
+#define MAX_ITEM_UI (19)	// UI最大数
+#define MAX_ITEM_TEXTURE (11)	// テクスチャ最大数
 
 //----クラス定義----
 class ItemUI
@@ -34,6 +34,8 @@ public:
 
 	void SetUP(DirectX::XMFLOAT3 pos, int kind, int draw);	// 描画に必要なパラメータをセット Pos, kind, drawFlg
 	void ResetDrawFlg();		// 描画のフラグを下げる
+
+	void SetJudge(int flg, int flg2, int flg3);	// 判定UI描画フラグセット
 private:
 	ST_ITEM_PARAM m_Item[MAX_ITEM_UI];
 	Texture* m_pTexture[MAX_ITEM_TEXTURE];

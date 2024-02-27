@@ -157,6 +157,11 @@ void CObjectMng::SetTutorialFruits()	// チュートリアル用のオブジェクトをセット
 		m_ObjectList.push_back(new CMelon(FruitsPos.x, FALL_FRUITS_POSY, FruitsPos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 		break;
 	case 3:
+	case 4:
+		// スイカ
+		m_ObjectList.push_back(new CWaterMelon(FruitsPos.x, FALL_FRUITS_POSY, FruitsPos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
+		break;
+	case 5:
 		// 空き缶
 		m_ObjectList.push_back(new CCan(FruitsPos.x, FALL_FRUITS_POSY, FruitsPos.z, FruitsSize.x, FruitsSize.y, FruitsSize.z));
 		break;
